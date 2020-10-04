@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 int binaryTransfer( int number)
 {
 	int element = 0;
@@ -47,4 +51,9 @@ int decimalTransfer(int element)
 		element /= 10;
 	}
 	return number;
+}
+
+bool test()
+{
+	
 }
