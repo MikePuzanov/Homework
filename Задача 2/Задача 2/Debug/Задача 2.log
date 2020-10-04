@@ -1,5 +1,0 @@
-﻿  Задача 2.c
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 3\Задача 2\Задача 2\Задача 2.c(47,17): warning C4098: quickSort: функция типа "void", возвращающая значение
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 3\Задача 2\Задача 2\Задача 2.c(133,14): warning C4550: вычисление выражения дает функцию, в которой отсутствует список аргументов
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 3\Задача 2\Задача 2\Задача 2.c(141,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  Задача 2.vcxproj -> D:\Спбгу МатМех\Програмирование\Homework\Домашка 3\Задача 2\Debug\Задача 2.exe
