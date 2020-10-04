@@ -57,3 +57,10 @@ bool test()
 {
 	
 }
+
+int sum(int first, int second)
+{
+	int sum = 0;
+	sum = first + second;
+	return sum;
+}
