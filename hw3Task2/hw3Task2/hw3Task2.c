@@ -5,13 +5,11 @@
 
 void swap(int* first, int* second)
 {
-    int add = 0;
-    add = *first;
+    int third = 0;
+    third = *first;
     *first = *second;
-    *second = add;
+    *second = third;
 }
-
-
 
 int partition(int array[], int low, int high)
 {
