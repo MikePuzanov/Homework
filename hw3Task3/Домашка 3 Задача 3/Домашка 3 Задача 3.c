@@ -3,12 +3,12 @@
 #include <locale.h>
 #include <stdbool.h>
 
-void swap(int* first, int* second)
+void swap(int* firstElement, int* secondElement)
 {
-    int third = 0;
-    third = *first;
-    *first = *second;
-    *second = third;
+    int additionalElement = 0;
+    additionalElement = *firstElement;
+    *firstElement = *secondElement;
+    *secondElement = additionalElement;
 }
 
 void arraySame(int array[], int size)
@@ -30,7 +30,7 @@ void arrayRandom(int array[], int size)
 
 int partition(int array[], int low, int high)
 {
-    int pivot = array[high];
+    const int pivot = array[high];
     int wall = low;
     for (int j = low; j < high; ++j)
     {
@@ -104,23 +104,17 @@ int search(int array[], int size)
 
 bool test()
 {
-    int element = 0;
     int array[100] = { 5, 5, 5, 1, 2, 12, 41, 12, 12, 1 };
-    int size = 0;
     quickSort(array, 0, 9);
-    search(array, 10, element);
-    if (!(search(array, 10, element) == 5 || search(array, 10, element) == 12))
+    search(array, 10, 0);
+    if (!(search(array, 10, 0) == 5 || search(array, 10, 0) == 12))
     {
         return false;
     }
     arraySame(array, 10);
     quickSort(array, 0, 9);
-    search(array, 10, element);
-    if (search(array, 10, element) != array[0])
-    {
-        return false;
-    }
-    return true;
+    search(array, 10, 0);
+    return search(array, 10, 0) == array[0];
 }
 
 int main()
