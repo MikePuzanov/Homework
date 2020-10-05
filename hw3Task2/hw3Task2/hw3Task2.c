@@ -5,8 +5,7 @@
 
 void swap(int* firstElement, int* secondElement)
 {
-    int additionalElement = 0;
-    additionalElement = *firstElement;
+    int additionalElement = *firstElement;
     *firstElement = *secondElement;
     *secondElement = additionalElement;
 }
@@ -46,8 +45,9 @@ int quickSort(int array[], int low, int high)
     }
     if (low < high)
     {
-        quickSort(array, low, partition(array, low, high) - 1);
-        quickSort(array, partition(array, low, high) + 1, high);
+        int partitionForQsurt = partition(array, low, high);
+        quickSort(array, low, partitionForQsurt - 1);
+        quickSort(array, partitionForQsurt + 1, high);
     }
 }
 
@@ -103,7 +103,10 @@ bool test()
     int arrayK[5] = { 3, 12, 2, -34, -11 };
     int size = 10;
     quickSort(arrayN, 0, 9);
-    return compare(arrayK, arrayN, 5, 10) == 2;
+    if (compare(arrayK, arrayN, 5, 10) != 2)
+    { 
+        return compare(arrayK, arrayN, 5, 10) == 2;
+    }
     arraySame(arrayN, 10, arrayK, 5);
     quickSort(arrayN, 0, 9);
     return compare(arrayK, arrayN, 5, 10) == 5;
@@ -112,7 +115,7 @@ bool test()
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    if (!test)
+    if (!test())
     {
         printf("Тест не пройден!");
         return 1;
