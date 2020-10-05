@@ -20,7 +20,7 @@ void sameArray(int array[], int size)
     }
 }
 
-bool compare(int array[],int size)
+bool compare(int array[], int size)
 {
     for (int index = 0; index < size - 1; ++index)
     {
@@ -32,17 +32,17 @@ bool compare(int array[],int size)
     return true;
 }
 
-void swap(int* first, int* second)
+void swap(int* firstElement, int* secondElement)
 {
-    int third = 0;
-    third = *first;
-    *first = *second;
-    *second = third;
+    int additional = 0;
+    additional = *firstElement;
+    *firstElement = *secondElement;
+    *secondElement = additional;
 }
 
 int partition(int array[], int low, int high)
 {
-    int pivot = array[high];
+    const int pivot = array[high];
     int wall = low;
     for (int j = low; j < high; ++j)
     {
@@ -82,28 +82,27 @@ void insertionSort(int array[], int low, int high)
 
 void quickSort(int array[], int low, int high)
 {
-    if ((high - low) < 1) 
-    {
-        return 0;
-    }
-    if ((high - low + 1) < 10)
-    {
-        insertionSort(array, low, high);
-        return 0;
-    }
-    int section = 0;
-    if (low < high)
-    {
-        section = partition(array, low, high);
-        quickSort(array, low, section - 1);
-        quickSort(array, section + 1, high);
+    if ((high - low) >= 1) 
+    {    
+        if (low < high)
+        {
+            quickSort(array, low, partition(array, low, high) - 1);
+            if ((partition(array, low, high) - low + 1) < 10)
+            {
+                insertionSort(array, low, high);
+            }
+            quickSort(array, partition(array, low, high) + 1, high);
+            if ((high - partition(array, low, high) + 1) < 10)
+            {
+                insertionSort(array, low, high);
+            }
+        } 
     }
 }
 
 bool test()
 {
     int array[100] = { 0 };
-    int size = 0;
     randomArray(array, 30);
     quickSort(array, 0, 29);
     if (!compare(array, 30))
@@ -136,7 +135,7 @@ int main()
     printf("Тест пройден!\n");
     int array[100] = {0};
     int size = 0;
-    printf("Введите данные: ");
+    printf("Введите размер массива: ");
     scanf("%i", &size);
     if (size < 1)
     {
