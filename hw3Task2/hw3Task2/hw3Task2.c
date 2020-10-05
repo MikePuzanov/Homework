@@ -13,7 +13,7 @@ void swap(int* firstElement, int* secondElement)
 
 int partition(int array[], int low, int high)
 {
-    int pivot = array[high];
+    const int pivot = array[high];
     int wall = low;
     for (int j = low; j < high; ++j)
     {
