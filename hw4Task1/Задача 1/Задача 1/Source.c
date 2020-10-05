@@ -2,53 +2,68 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int binaryTransfer( int number)
+void binaryTransfer( int number, bool array[], int size)
 {
 	int element = 0;
-	int power = 1;
-	int remainder = 0;
-	while (number > 0)
+	for (int index = 0; index < size; ++index)
 	{
-		remainder = number % 2;
-		element = element + power * remainder;
-		power *= 10;
+
+		if (number % 2 == 1)
+		{
+			array[index] = true;
+		}
+		else
+		{
+			array[index] = false;
+		}
 		number = number / 2;
 	}
-	return element;
 }
 
-int addition(int firstElement, int secondElement)
+void addition(bool arrayFirst[], bool arraySecond[], bool arraySum[], int size)
 {
 	int sum = 0;
-	int power = 1;
 	int add = 0;
-	while (firstElement > 0 || secondElement > 0)
+	for (int index = 0; index < size; ++index)
 	{
-		sum += (firstElement % 2 + secondElement % 2 + add) % 2 * power;
-		power *= 10;
-		if ((firstElement % 2 + secondElement % 2) > 1)
+		if ((arrayFirst[index]) & (arraySecond[index]))
 		{
+			arraySum[index] = false;
 			add = 1;
 		}
 		else
 		{
-			add = 0;
+			if ((arrayFirst[index]) | (arraySecond[index]))
+			{
+				if (add == 1)
+				{
+					arraySum[index] = false;
+					add = 0;
+				}
+				else
+				{
+					arraySum[index] = true;
+				}
+			}
+			else
+			{
+				arraySum[index] = false;
+			}
 		}
-		secondElement /= 10;
-		firstElement /= 10;
 	}
-	return sum;
 }
 
-int decimalTransfer(int element)
+int decimalTransfer(bool arraySum[], int size)
 {
 	int number = 0;
 	int power = 1;
-	while (element > 0)
+	for (int index = 0; index < size; ++index)
 	{
-		number += element % 2 * power;
+		if (arraySum[index])
+		{
+			number += 1 * power;
+		}
 		power *= 2;
-		element /= 10;
 	}
 	return number;
 }

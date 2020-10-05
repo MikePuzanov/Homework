@@ -2,13 +2,13 @@
 #include <stdbool.h>
 
 // Перевод десятичных чисел в двоичную систему
-int binaryTransfer(int number);
+void binaryTransfer(int number, bool array[], int size);
 
 // Сложение в двоичном представлении
-int addition(int firstElement, int secondElement);
+void addition(bool firstElement[], bool secondElement[], bool arraySum[], int size);
 
 // Перевод из двоичного представления в десятичное
-int decimalTransfer(int element);
+int decimalTransfer(bool arraySum[], int size);
 
 //
 bool test();
