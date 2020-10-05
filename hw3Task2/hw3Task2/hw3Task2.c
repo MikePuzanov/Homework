@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <locale.h>
 
-void swap(int* first, int* second)
+void swap(int* firstElement, int* secondElement)
 {
-    int third = 0;
-    third = *first;
-    *first = *second;
-    *second = third;
+    int additionalElement = 0;
+    additionalElement = *firstElement;
+    *firstElement = *secondElement;
+    *secondElement = additionalElement;
 }
 
 int partition(int array[], int low, int high)
@@ -44,16 +44,14 @@ int quickSort(int array[], int low, int high)
     {
         return 0;
     }
-    int section = 0;
     if (low < high)
     {
-        section = partition(array, low, high);
-        quickSort(array, low, section - 1);
-        quickSort(array, section + 1, high);
+        quickSort(array, low, partition(array, low, high) - 1);
+        quickSort(array, partition(array, low, high) + 1, high);
     }
 }
 
-int check(int array[], int number, int low, int high)
+int numberInArray(int array[], int number, int low, int high)
 {
     if (high - low <= 1)
     {
@@ -61,31 +59,25 @@ int check(int array[], int number, int low, int high)
         {
             return number;
         }
-        else
-        {
-            return number + 1;
-        }
+        return number + 1;
     }
     if (number <= array[(low + high) / 2])
     {
         high = (low + high) / 2;
-        return check(array, number, low, high);
     }
     else
     {
         low = (low + high) / 2 + 1;
-        return check(array, number, low, high);
     }
+    return numberInArray(array, number, low, high);
 }
 
 int compare(int arrayK[], int arrayN[], int sizeK, int sizeN)
 {
-    int number = 0;
     int answer = 0;
     for (int i = 0; i < sizeK; ++i)
     {
-        number = arrayK[i];
-        if (number == check(arrayN, number, 0, sizeN))
+        if (arrayK[i] == numberInArray(arrayN, arrayK[i], 0, sizeN))
         {
             ++answer;
         }
@@ -111,18 +103,10 @@ bool test()
     int arrayK[5] = { 3, 12, 2, -34, -11 };
     int size = 10;
     quickSort(arrayN, 0, 9);
-    compare(arrayK, arrayN, 5, 10);
-    if (compare(arrayK, arrayN, 5, 10) != 2)
-    {
-        return false;
-    }
+    return compare(arrayK, arrayN, 5, 10) == 2;
     arraySame(arrayN, 10, arrayK, 5);
     quickSort(arrayN, 0, 9);
-    if (compare(arrayK, arrayN, 5, 10) != 5)
-    {
-        return false;
-    }
-    return true;
+    return compare(arrayK, arrayN, 5, 10) == 5;
 }
 
 int main()
@@ -131,6 +115,7 @@ int main()
     if (!test)
     {
         printf("Тест не пройден!");
+        return 1;
     }
     printf("Тест пройден!\n");
     int sizeN = 0;
@@ -145,14 +130,13 @@ int main()
         printf("%i ", array[i]);
     }
     quickSort(array, 0, sizeN - 1);
-    int number = 0;
     printf("\n");
     for (int i = 0; i < sizeK; ++i)
     {
-        number = -50 + (rand() % 100);
+        int number = -50 + (rand() % 100);
         if ((number >= array[0]) && (number <= array[sizeN - 1]))
         {
-            if (number == check(array, number, 0, sizeN - 1))
+            if (number == numberInArray(array, number, 0, sizeN - 1))
             {
                 printf("Число %i содержится!\n", number);
             }
