@@ -5,8 +5,7 @@
 
 void swap(int* firstElement, int* secondElement)
 {
-    int additionalElement = 0;
-    additionalElement = *firstElement;
+    int additionalElement = *firstElement;
     *firstElement = *secondElement;
     *secondElement = additionalElement;
 }
@@ -59,15 +58,11 @@ void quickSort(int array[], int low, int high)
 {
     if ((high - low) < 1)
     {
-        return 0;
+        return;
     }
-    int section = 0;
-    if (low < high)
-    {
-        section = partition(array, low, high);
-        quickSort(array, low, section - 1);
-        quickSort(array, section + 1, high);
-    }
+    const int section = partition(array, low, high);
+    quickSort(array, low, section - 1);
+    quickSort(array, section + 1, high);
 }
 
 int search(int array[], int size)
