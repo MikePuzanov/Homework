@@ -43,9 +43,9 @@ int quickSort(int array[], int low, int high)
     {
         return;
     }
-    const int partitionForQsurt = partition(array, low, high);
-    quickSort(array, low, partitionForQsurt - 1);
-    quickSort(array, partitionForQsurt + 1, high);
+    const int partitionForQsort = partition(array, low, high);
+    quickSort(array, low, partitionForQsort - 1);
+    quickSort(array, partitionForQsort + 1, high);
 }
 
 int numberInArray(int array[], int number, int low, int high)
@@ -102,7 +102,7 @@ bool test()
     quickSort(arrayN, 0, 9);
     if (compare(arrayK, arrayN, 5, 10) != 2)
     { 
-        return compare(arrayK, arrayN, 5, 10) == 2;
+        return false;
     }
     arraySame(arrayN, 10, arrayK, 5);
     quickSort(arrayN, 0, 9);
