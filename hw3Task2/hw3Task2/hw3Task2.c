@@ -41,14 +41,11 @@ int quickSort(int array[], int low, int high)
 {
     if ((high - low) < 1)
     {
-        return 0;
+        return;
     }
-    if (low < high)
-    {
-        int partitionForQsurt = partition(array, low, high);
-        quickSort(array, low, partitionForQsurt - 1);
-        quickSort(array, partitionForQsurt + 1, high);
-    }
+    const int partitionForQsurt = partition(array, low, high);
+    quickSort(array, low, partitionForQsurt - 1);
+    quickSort(array, partitionForQsurt + 1, high);
 }
 
 int numberInArray(int array[], int number, int low, int high)
