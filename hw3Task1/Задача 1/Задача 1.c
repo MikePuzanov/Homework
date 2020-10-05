@@ -34,8 +34,7 @@ bool compare(int array[], int size)
 
 void swap(int* firstElement, int* secondElement)
 {
-    int additional = 0;
-    additional = *firstElement;
+    int additional = *firstElement;
     *firstElement = *secondElement;
     *secondElement = additional;
 }
@@ -82,21 +81,20 @@ void insertionSort(int array[], int low, int high)
 
 void quickSort(int array[], int low, int high)
 {
-    if ((high - low) >= 1) 
-    {    
-        if (low < high)
-        {
-            quickSort(array, low, partition(array, low, high) - 1);
-            if ((partition(array, low, high) - low + 1) < 10)
-            {
-                insertionSort(array, low, high);
-            }
-            quickSort(array, partition(array, low, high) + 1, high);
-            if ((high - partition(array, low, high) + 1) < 10)
-            {
-                insertionSort(array, low, high);
-            }
-        } 
+    if (high - low < 1)
+    {
+        return;
+    }
+    int partitionForQsort = partition(array, low, high);
+    quickSort(array, low, partitionForQsort - 1);
+    if (partitionForQsort < 10)
+    {
+        insertionSort(array, low, high);
+    }
+    quickSort(array, partitionForQsort + 1, high);
+    if (high - partitionForQsort < 10)
+    {
+        insertionSort(array, low, high);
     }
 }
 
