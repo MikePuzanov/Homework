@@ -1,3 +1,0 @@
-﻿  задача1.c
-D:\Спбгу МатМех\Програмирование\дедлайн 22.09\задача1\задача1\задача1.c(11,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  задача1.vcxproj -> D:\Спбгу МатМех\Програмирование\дедлайн 22.09\задача1\Debug\задача1.exe
