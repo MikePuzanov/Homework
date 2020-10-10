@@ -1,6 +1,0 @@
-﻿  Домашка 4 Задача 2.c
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 4 Задача 2\Домашка 4 Задача 2\Header.h(22,6): error C2061: синтаксическая ошибка: идентификатор "test"
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 4 Задача 2\Домашка 4 Задача 2\Header.h(22,6): error C2059: синтаксическая ошибка: ;
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 4 Задача 2\Домашка 4 Задача 2\Header.h(22,11): error C2059: синтаксическая ошибка: <parameter-list>
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 4 Задача 2\Домашка 4 Задача 2\Домашка 4 Задача 2.c(11,14): warning C4013: test: нет определения; предполагается "extern" с возвратом типа "int"
-D:\Спбгу МатМех\Програмирование\Homework\Домашка 4 Задача 2\Домашка 4 Задача 2\Домашка 4 Задача 2.c(20,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
