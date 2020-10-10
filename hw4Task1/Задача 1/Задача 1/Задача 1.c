@@ -8,6 +8,12 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
+    if (!test())
+    {
+        printf("Тест не пройден!");
+        return 1;
+    }
+    printf("Тест пройден!\n");
     int firstElement = 0;
     int secondElement = 0;
     printf("Введите числа в десятичной сестеме: ");
