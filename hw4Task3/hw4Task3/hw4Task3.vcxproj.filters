@@ -18,7 +18,10 @@
     <ClCompile Include="hw4Task3.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.c">
+    <ClCompile Include="test.c">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
+    <ClCompile Include="phoneNumberFunction.c">
       <Filter>Файлы заголовков</Filter>
     </ClCompile>
   </ItemGroup>
@@ -31,7 +34,10 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utility.h">
+    <ClInclude Include="test.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="phoneNumberFunction.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
