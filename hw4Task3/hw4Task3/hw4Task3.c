@@ -6,23 +6,27 @@
 #include <locale.h>
 #include <string.h>
 
-/*
-Написать программу — телефонный справочник. Она должна уметь хранить имена и номера телефонов,
-в интерактивном режиме осуществлять следующие операции:
-    0 - выйти
-    1 - добавить запись (имя и телефон)
-    2 - распечатать все имеющиеся записи
-    3 - найти телефон по имени
-    4 - найти имя по телефону
-    5 - сохранить текущие данные в файл
-    При запуске программа должна читать данные из файла (того самого, в который сохраняет данные),
-    если файла нет — начинать с пустой базы номеров. Размер базы ограничен сотней записей.
-*/
-
-
 int main()
 {
     setlocale(LC_ALL, "Rus");
+    if (!testForAddPerson())
+    {
+        printf("Тест для добавление записи не пройден!");
+        return 1;
+    }
+    printf("Тест для добавление записи пройден!\n\n");
+    if (!testForSearch())
+    {
+        printf("Тест для поиска не пройден!");
+        return 1;
+    }
+    printf("Тест для поиска пройден!\n\n");
+    if (!testWriteToFile())
+    {
+        printf("Тест для записи в файл не пройден!");
+        return 1;
+    }
+    printf("Тест для записи в файл пройден!\n\n");
     printf("0 - выйти\n");
     printf("1 - добавить запись (имя и телефон)\n");
     printf("2 - распечатать все имеющиеся записи\n");
@@ -55,12 +59,12 @@ int main()
             case 3:
                 printf("Введите имя - ");
                 scanf("%s", &name);
-                phoneSearchWithName(person, &index, name);
+                phoneSearchWithName(person, index, name);
             break;
             case 4:
                 printf("Введите телефон - ");
                 scanf("%s", &phone);
-                nameSearchWithPhone(person, &index, phone);
+                nameSearchWithPhone(person, index, phone);
             break;
             case 5:
                 printInFile(person, index);

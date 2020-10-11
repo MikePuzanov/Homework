@@ -1,6 +1,12 @@
 #pragma once
 #include <stdbool.h>
 
+struct testPhoneBook
+{
+    char name[30];
+    char phone[20];
+};
+
 // структура книжки контактов
 struct phoneBook
 {
@@ -9,10 +15,13 @@ struct phoneBook
 };
 
 //поиск имени по номеру телефона
-void nameSearchWithPhone(struct phoneBook person[], int* index, char phone[]);
+void nameSearchWithPhone(struct phoneBook person[], int index, char phone[]);
 
 // поиск номера по имени
-void phoneSearchWithName(struct phoneBook person[], int* index, char name[]);
+void phoneSearchWithName(struct phoneBook person[], int index, char name[]);
+
+// вспомогательная функция для addPerson, которая проверяет есть ли введенное имя в базе
+bool searchName(struct phoneBook person[], int* index);
 
 // вспомогательная функция для addPerson, которая проверяет есть ли введенный телефон в базе
 bool searchPhone(struct phoneBook person[], int* index);
@@ -22,3 +31,13 @@ void addPerson(struct phoneBook person[], int* index);
 
 // функция для добавления номеров в файд
 void printInFile(struct phoneBook person[], int index);
+
+
+// тест для добавления нового контакта
+bool testForAddPerson();
+
+// тест для поиска телефона по имени или номеру
+bool testForSearch();
+
+//
+bool testWriteToFile();

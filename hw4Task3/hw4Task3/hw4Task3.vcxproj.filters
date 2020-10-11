@@ -26,6 +26,9 @@
     <Text Include="namePhone.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="Test.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility.h">
