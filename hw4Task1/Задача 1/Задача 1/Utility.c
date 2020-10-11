@@ -22,14 +22,11 @@ int binaryTransfer(int array[], int number)
 	return index;
 }
 
-
-
 int addition(int arrayFirst[], int sizeFirst, int arraySecond[], int sizeSecond, int arraySum[])
 {	
 	int sum = 0;
 	int add = 0;
-	int size = 0;
-	const int size = sizeFirst >= sizeSecond ? sizeFirst : sizeSecond;
+	int size = sizeFirst >= sizeSecond ? sizeFirst : sizeSecond;
 	for (int i = 0; i < size; ++i)
 	{
 		if ((arrayFirst[i] == 1) && (arraySecond[i] == 1))

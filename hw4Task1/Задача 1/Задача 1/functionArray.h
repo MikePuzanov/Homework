@@ -1,4 +1,4 @@
 #pragma once
 
 // Âûâîä ìàññèâà
-void printfÀrray(int array[], int size);
+void arrayPrint(int array[], int size);
