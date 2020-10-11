@@ -1,4 +1,5 @@
-﻿#include "Header.h"
+﻿#include "functionForSort.h"
+#include "test.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,8 +15,7 @@ int main()
         return 2;
     }
     printf("Тест пройден!\n");
-    FILE* fileWithArray;
-    fileWithArray = fopen("hw4Task2array.txt", "r");
+    FILE* fileWithArray= fopen("hw4Task2array.txt", "r");
     if (fileWithArray == NULL)
     {
         printf("Файл не найден!\n");

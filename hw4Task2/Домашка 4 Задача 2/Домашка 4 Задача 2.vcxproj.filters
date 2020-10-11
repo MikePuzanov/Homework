@@ -18,18 +18,24 @@
     <ClCompile Include="Домашка 4 Задача 2.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source.c">
+    <ClCompile Include="functionForSort.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Header.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
+    <ClCompile Include="test.c">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="hw4Task2array.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="functionForSort.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

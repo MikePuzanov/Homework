@@ -139,15 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.c">
+    <ClCompile Include="functionForSort.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
+    <ClCompile Include="test.c" />
     <ClCompile Include="Домашка 4 Задача 2.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="functionForSort.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="hw4Task2array.txt" />

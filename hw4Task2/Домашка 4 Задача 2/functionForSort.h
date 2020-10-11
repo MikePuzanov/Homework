@@ -1,5 +1,5 @@
 #pragma once
-#include <stdbool.h>
+
 
 // меняет значения переменных местами
 void swap(int* first, int* second);
@@ -18,6 +18,3 @@ void quickSort(int array[], int low, int high);
 
 // Функция поиска часто встречающегося элемента
 int search(int array[], int size);
-
-// Функция тестов
-bool test();
