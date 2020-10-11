@@ -1,4 +1,6 @@
-﻿#include "Header.h"
+﻿#include "Utility.h"
+#include "functionArray.h"
+#include "test.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +23,7 @@ int main()
     int element = 0;
     int arrayFirst[32] = { 0 };
     int sizeFirst = binaryTransfer(arrayFirst, firstElement);
-    printf("Числа в двоичной сестеме: ");
+    printf("Числа в двоичной системе: ");
     printfarray(arrayFirst, sizeFirst);
     int arraySecond[32] = { 0 };
     int sizeSecond = binaryTransfer(arraySecond, secondElement);
@@ -30,7 +32,7 @@ int main()
     int arraySum[32] = { 0 };
     int sizeSum = addition(arrayFirst, sizeFirst, arraySecond, sizeSecond, arraySum);
     printf("\nСумма в двоичном представлении: ");
-    printfarray(arraySum, sizeSum);
+    printfАrray(arraySum, sizeSum);
     int numberSum = decimalTransfer(arraySum, sizeSum);
     printf("\nСумма в десятичном представлении: %i\n", numberSum);
 }
