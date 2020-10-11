@@ -142,13 +142,15 @@
     <ClCompile Include="hw4Task3.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
-    <ClCompile Include="Source.c" />
+    <ClCompile Include="Utility.c">
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Текст.txt" />
+    <Text Include="namePhone.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
