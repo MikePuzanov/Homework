@@ -1,6 +1,9 @@
 #include "test.h"
 #include "sort.h"
+#include "searchElement.h"
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 void arraySame(int array[], int size)
