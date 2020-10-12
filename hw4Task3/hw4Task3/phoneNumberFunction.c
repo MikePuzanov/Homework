@@ -6,39 +6,46 @@
 #include <locale.h>
 #include <string.h>
 
+bool addPerson(int index)
+{
+	if (index >= 99)
+	{
+		return false;
+	}
+	return true;
+}
 
-void nameSearchWithPhone(struct phoneBook person[], int index, char phone[])
+bool nameSearchWithPhone(struct PhoneBook person[], int index, char phone[], int* indexHelp)
 {
 	for (int i = 0; i < index; ++i)
 	{
 		if (strcmp(&person[i].phone, phone) == 0)
 		{
-			printf("Имя человека, которого вы искали - %s\n", person[i].name);
-			return;
+			*indexHelp = i;
+			return true;
 		}
 	}
-	printf("Имя контакта по данному телефону не найдено.\n");
+	return false;
 }
 
-
-void phoneSearchWithName(struct phoneBook person[], int index, char name[])
+bool phoneSearchWithName(struct PhoneBook person[], int index, char name[], int* indexHelp)
 {
 	for (int i = 0; i < index; ++i)
 	{
 		if (strcmp(&person[i].name, name) == 0)
 		{
-			printf("Номер человека, которого вы искали - %s\n", person[i].phone);
-			return;
+			*indexHelp = i;
+			return true;
 		}
 	}
-	printf("Телефон по данному имени не найден.\n");
+	return false;
 }
 
-bool searchName(struct phoneBook person[], int* index)
+bool searchName(struct PhoneBook person[], int index)
 {
-	for (int i = 0; i < *index; ++i)
+	for (int i = 0; i < index; ++i)
 	{
-		if (!strcmp(&person[i].name, &person[*index].name))
+		if (!strcmp(&person[i].name, &person[index].name))
 		{
 			return false;
 		}
@@ -46,11 +53,11 @@ bool searchName(struct phoneBook person[], int* index)
 	return true;
 }
 
-bool searchPhone(struct phoneBook person[], int* index)
+bool searchPhone(struct PhoneBook person[], int index)
 {
-	for (int i = 0; i < *index; ++i)
+	for (int i = 0; i < index; ++i)
 	{
-		if (!strcmp(&person[i].phone, &person[*index].phone))
+		if (!strcmp(&person[i].phone, &person[index].phone))
 		{
 			return false;
 		}
@@ -58,37 +65,12 @@ bool searchPhone(struct phoneBook person[], int* index)
 	return true;
 }
 
-void addPerson(struct phoneBook person[], int* index)
+void printInFile(struct PhoneBook person[], int index, char* file)
 {
-	if (*index > 99)
-	{
-		printf("\nТелефонная книжка переполнена!\n");
-		return;
-	}
-	printf("\nВведите имя нового контакта: ");
-	scanf("%s", &person[*index].name);
-	if (!searchName(person, index)) 
-	{
-		printf("\nКонтакт уже существует!");
-		return;
-	}
-	printf("\nВведите номер нового контакта - ");
-	scanf("%s", &person[*index].phone);
-	if (!searchPhone(person, index))
-	{
-		printf("\nКонтакт уже существует!");
-		return;
-	}
-	(*index)++;
-}
-
-void printInFile(struct phoneBook person[], int index)
-{
-	FILE* phoneBook = fopen("namePhone.txt", "w");
+	FILE* phoneBook = fopen(file, "w");
 	for (int i = 0; i < index; ++i)
 	{
 		fprintf(phoneBook, "%s - %s\n", person[i].name, person[i].phone);
 	}
 	fclose(phoneBook);
 }
-
