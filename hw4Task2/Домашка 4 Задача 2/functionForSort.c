@@ -60,7 +60,7 @@ void quickSort(int array[], int low, int high)
 {
     if ((high - low) < 1)
     {
-        return 0;
+        return;
     }
     int section = 0;
     if (low < high)

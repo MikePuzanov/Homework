@@ -18,10 +18,10 @@
     <ClCompile Include="Домашка 4 Задача 2.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="functionForSort.c">
+    <ClCompile Include="test.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="test.c">
+    <ClCompile Include="functionForSort.c">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
