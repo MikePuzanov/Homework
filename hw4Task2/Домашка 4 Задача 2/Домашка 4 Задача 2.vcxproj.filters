@@ -18,10 +18,13 @@
     <ClCompile Include="Домашка 4 Задача 2.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="functionForSort.c">
+    <ClCompile Include="test.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="test.c">
+    <ClCompile Include="sort.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="subsidiaryFunction.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -31,10 +34,13 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functionForSort.h">
+    <ClInclude Include="test.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="test.h">
+    <ClInclude Include="sort.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="subsidiaryFunction.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,25 @@
 #include "test.h"
-#include "functionForSort.h"
+#include "sort.h"
+#include "subsidiaryFunction.h"
 
 #include <stdbool.h>
+
+void arraySame(int array[], int size)
+{
+    array[0] = -50 + (rand() % 100);
+    for (int i = 1; i < size; ++i)
+    {
+        array[i] = array[0];
+    }
+}
+
+void arrayRandom(int array[], int size)
+{
+    for (int i = 0; i < size; ++i)
+    {
+        array[i] = -50 + (rand() % 100);
+    }
+}
 
 bool test()
 {
@@ -17,5 +35,5 @@ bool test()
     arraySame(array, 10);
     quickSort(array, 0, 9);
     search(array, 10, element);
-    return search(array, 10, element) == array[0]
+    return search(array, 10, element) == array[0];
 }

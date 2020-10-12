@@ -1,4 +1,4 @@
-﻿#include "functionForSort.h"
+﻿#include "sort.h"
 #include "test.h"
 
 #include <stdio.h>
