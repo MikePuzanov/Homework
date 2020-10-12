@@ -24,7 +24,7 @@
     <ClCompile Include="sort.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="subsidiaryFunction.c">
+    <ClCompile Include="searchElement.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,7 +40,7 @@
     <ClInclude Include="sort.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="subsidiaryFunction.h">
+    <ClInclude Include="searchElement.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

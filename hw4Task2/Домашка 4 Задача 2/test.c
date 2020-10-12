@@ -1,6 +1,5 @@
 #include "test.h"
 #include "sort.h"
-#include "subsidiaryFunction.h"
 
 #include <stdbool.h>
 

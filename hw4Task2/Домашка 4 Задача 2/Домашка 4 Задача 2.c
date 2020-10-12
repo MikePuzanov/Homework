@@ -1,5 +1,6 @@
 ﻿#include "sort.h"
 #include "test.h"
+#include "searchElement.h"
 
 #include <stdio.h>
 #include <stdlib.h>

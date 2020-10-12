@@ -139,18 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="searchElement.c" />
     <ClCompile Include="sort.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
-    <ClCompile Include="subsidiaryFunction.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="Домашка 4 Задача 2.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="searchElement.h" />
     <ClInclude Include="sort.h" />
-    <ClInclude Include="subsidiaryFunction.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <ItemGroup>
