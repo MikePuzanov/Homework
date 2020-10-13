@@ -3,10 +3,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int binaryTransfer(int array[], int number)
+void arrayPrint(int array[], int size)
 {
-	int index = 0;
-	while (number > 0)
+	int check = 0;
+	while (size > 0)
+	{
+		size--;
+		if (array[size] == 1)
+		{
+			check = 1;
+		}
+		if (check == 1)
+		{
+			printf("%i ", array[size]);
+		}
+	}
+}
+
+void binaryTransfer(int array[], int number, int size)
+{
+	for (int index = 0; index < size; ++index)
 	{
 		if (number & 1)
 		{
@@ -16,17 +32,14 @@ int binaryTransfer(int array[], int number)
 		{
 			array[index] = 0;
 		}
-		index++;
 		number = number >> 1;
 	}
-	return index;
 }
 
-int addition(int arrayFirst[], int sizeFirst, int arraySecond[], int sizeSecond, int arraySum[])
+int addition(int arrayFirst[], int size, int arraySecond[], int arraySum[])
 {	
 	int sum = 0;
 	int add = 0;
-	int size = sizeFirst >= sizeSecond ? sizeFirst : sizeSecond;
 	for (int i = 0; i < size; ++i)
 	{
 		if ((arrayFirst[i] == 1) && (arraySecond[i] == 1))
@@ -64,11 +77,6 @@ int addition(int arrayFirst[], int sizeFirst, int arraySecond[], int sizeSecond,
 				arraySum[i] = 1;
 			}
 		}
-	}
-	if (add == 1)
-	{
-		arraySum[size] = 1;
-		size++;
 	}
 	return size;
 }

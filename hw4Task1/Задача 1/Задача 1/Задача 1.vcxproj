@@ -139,13 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functionArray.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="Utility.c" />
     <ClCompile Include="Задача 1.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functionArray.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿#include "functionArray.h"
-#include "Utility.h"
+﻿#include "Utility.h"
 #include "test.h"
 
 #include <stdio.h>
@@ -9,6 +8,7 @@
 
 int main()
 {
+    int size = 32;
     setlocale(LC_ALL, "Rus");
     if (!test())
     {
@@ -22,24 +22,18 @@ int main()
     scanf("%i %i", &firstElement, &secondElement);
     int element = 0;
     int arrayFirst[32] = { 0 };
-    int sizeFirst = binaryTransfer(arrayFirst, abs(firstElement));
     printf("Числа в двоичной системе: ");
-    arrayPrint(arrayFirst, sizeFirst);
+    binaryTransfer(arrayFirst, firstElement, size);
+    arrayPrint(arrayFirst, size);
+    printf("  ");
     int arraySecond[32] = { 0 };
-    int sizeSecond = binaryTransfer(arraySecond, abs(secondElement));
-    arrayPrint(arraySecond, sizeSecond);
+    binaryTransfer(arraySecond, secondElement, size);
+    arrayPrint(arraySecond, size);
     int arraySum[32] = { 0 };
     int sizeSum = 0;
-    if (firstElement >= 0 && secondElement >= 0)
-    {
-        sizeSum = addition(arrayFirst, sizeFirst, arraySecond, sizeSecond, arraySum);
-    }
-    if (firstElement <= 0 && secondElement <= 0)
-    {
-        sizeSum = -addition(arrayFirst, sizeFirst, arraySecond, sizeSecond, arraySum);
-    }
+    addition(arrayFirst, size, arraySecond, arraySum);
     printf("\nСумма в двоичном представлении: ");
-    arrayPrint(arraySum, sizeSum);
-    int numberSum = decimalTransfer(arraySum, sizeSum);
+    arrayPrint(arraySum, size);
+    int numberSum = decimalTransfer(arraySum, size);
     printf("\nСумма в десятичном представлении: %i\n", numberSum);
 }
