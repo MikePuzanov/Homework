@@ -16,7 +16,7 @@ int main()
         return 2;
     }
     printf("Тест пройден!\n");
-    FILE* fileWithArray= fopen("hw4Task2array.txt", "r");
+    FILE* fileWithArray = fopen("hw4Task2array.txt", "r");
     if (fileWithArray == NULL)
     {
         printf("Файл не найден!\n");
