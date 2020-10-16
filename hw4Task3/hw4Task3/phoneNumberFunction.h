@@ -10,19 +10,19 @@ struct PhoneBook
 };
 
 // проверяет количество номеров в базе
-bool addPerson(int index);
+bool checkNumberOFPerson(int index);
 
-//поиск имени по номеру телефона
-bool nameSearchWithPhone(struct PhoneBook person[], int index, char phone[], int* indexHelp);
+// поиск имени по номеру телефона
+bool nameSearchByPhone(struct PhoneBook person[], int index, char phone[], int* indexHelp);
 
 // поиск номера по имени
-bool phoneSearchWithName(struct PhoneBook person[], int index, char name[], int* indexHelp);
+bool phoneSearchByName(struct PhoneBook person[], int index, char name[], int* indexHelp);
 
 // Проверяет есть ли введенное имя в базе
-bool searchName(struct PhoneBook person[], int index);
+bool checkName(struct PhoneBook person[], char name[], int index);
 
 // Проверяет есть ли введенный телефон в базе
-bool searchPhone(struct PhoneBook person[], int index);
+bool checkPhone(struct PhoneBook person[], char phone[], int index);
 
 // функция для добавления номеров в файл
 void printInFile(struct PhoneBook person[], int index, char* file);

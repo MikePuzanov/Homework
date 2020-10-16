@@ -6,18 +6,14 @@
 #include <locale.h>
 #include <string.h>
 
-bool addPerson(int index)
+bool checkNumberOFPerson(int size)
 {
-	if (index >= 99)
-	{
-		return false;
-	}
-	return true;
+	return size < 99;
 }
 
-bool nameSearchWithPhone(struct PhoneBook person[], int index, char phone[], int* indexHelp)
+bool nameSearchByPhone(struct PhoneBook person[], int size, char phone[], int* indexHelp)
 {
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		if (strcmp(&person[i].phone, phone) == 0)
 		{
@@ -28,9 +24,9 @@ bool nameSearchWithPhone(struct PhoneBook person[], int index, char phone[], int
 	return false;
 }
 
-bool phoneSearchWithName(struct PhoneBook person[], int index, char name[], int* indexHelp)
+bool phoneSearchByName(struct PhoneBook person[], int size, char name[], int* indexHelp)
 {
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		if (strcmp(&person[i].name, name) == 0)
 		{
@@ -41,11 +37,11 @@ bool phoneSearchWithName(struct PhoneBook person[], int index, char name[], int*
 	return false;
 }
 
-bool searchName(struct PhoneBook person[], int index)
+bool checkName(struct PhoneBook person[], char name[], int size)
 {
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < size; ++i)
 	{
-		if (!strcmp(&person[i].name, &person[index].name))
+		if (!strcmp(&person[i].name, &name))
 		{
 			return false;
 		}
@@ -53,11 +49,11 @@ bool searchName(struct PhoneBook person[], int index)
 	return true;
 }
 
-bool searchPhone(struct PhoneBook person[], int index)
+bool checkPhone(struct PhoneBook person[], char phone[], int size)
 {
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < size; ++i)
 	{
-		if (!strcmp(&person[i].phone, &person[index].phone))
+		if (!strcmp(&person[i].phone, &phone))
 		{
 			return false;
 		}
@@ -65,10 +61,10 @@ bool searchPhone(struct PhoneBook person[], int index)
 	return true;
 }
 
-void printInFile(struct PhoneBook person[], int index, char* file)
+void printInFile(struct PhoneBook person[], int size, char* file)
 {
 	FILE* phoneBook = fopen(file, "w");
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		fprintf(phoneBook, "%s - %s\n", person[i].name, person[i].phone);
 	}

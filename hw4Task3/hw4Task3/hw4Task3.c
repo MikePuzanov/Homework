@@ -9,24 +9,26 @@
 bool test()
 {
     struct PhoneBook tests[6] = { {"Eva", "258"}, {"Adam", "147"}, {"Jesus", "369"}, {"Adam", "369"} };
-    if (!addPerson(8))
+    char name[30];
+    char phone[30];
+    if (!checkNumberOFPerson(8))
     {
         return false;
     }
-    if (addPerson(100))
+    if (checkNumberOFPerson(100))
     {
         return false;
     }
-    if (searchName(tests, 3))
+    if (!checkName(tests, "Adam", 3))
     {
         return false;
     }
-    if (searchPhone(tests, 3))
+    if (!checkPhone(tests, "369", 3))
     {
         return false;
     }
     int indexHelp = 0;
-    if (phoneSearchWithName(tests, 3, "Jesus", &indexHelp))
+    if (phoneSearchByName(tests, 3, "Jesus", &indexHelp))
     {
         if (strcmp(&tests[indexHelp].phone, "369") != 0)
         {
@@ -37,7 +39,7 @@ bool test()
     {
         return false;
     }
-    if (nameSearchWithPhone(tests, 3, "369", &indexHelp))
+    if (nameSearchByPhone(tests, 3, "369", &indexHelp))
     {
         if (strcmp(&tests[indexHelp].name, "Jesus") != 0)
         {
@@ -49,24 +51,20 @@ bool test()
         return false;
     }
     printInFile(tests, 3, "Test.txt");
-    int check = 0;
+    bool check = true;
     FILE* phoneBook1 = fopen("Test.txt", "r");
-    char hyphen;
+    char hyphen = "-";
     for (int i = 3; i < 6; ++i)
     {
         fscanf(phoneBook1, "%s %c", &tests[i].name, &hyphen);
         fscanf(phoneBook1, "%s", &tests[i].phone);
         if (((strcmp(&tests[i - 3].name, &tests[i].name) != 0) || (strcmp(&tests[i - 3].phone, &tests[i].phone) != 0)))
         {
-            check = 1;
+            check = false;
         }
     }
     fclose(phoneBook1);
-    if (check == 1)
-    {
-        return false;
-    }
-    return true;
+    return check;
 }
 
 int main()
@@ -75,7 +73,7 @@ int main()
     if (!test())
     {
         printf("Тест не пройден!");
-            return 1;
+        return 1;
     }
     printf("Тест пройден!\n\n");
     printf("0 - выйти\n");
@@ -98,27 +96,28 @@ int main()
         {
             case 0:
                 return 0;
-                break;
             case 1:
-                if (!addPerson(index))
+                if (!checkNumberOFPerson(index))
                 {
                     printf("\nТелефонная книжка переполнена!\n");
                     break;
                 }
                 printf("\nВведите имя нового контакта: ");
-                scanf("%s", &person[index].name);
-                if (!searchName(person, index))
+                scanf("%s", &name);
+                if (!checkName(person, name, index))
                 {
                     printf("\nКонтакт уже существует!");
                     break;
                 }
+                strcpy(person[index].name, name);
                 printf("\nВведите номер нового контакта - ");
-                scanf("%s", &person[index].phone);
-                if (!searchPhone(person, index))
+                scanf("%s", &phone);
+                if (!checkPhone(person, phone, index))
                 {
                     printf("\nКонтакт уже существует!");
                     break;
                 }
+                strcpy(person[index].phone, phone);
                 index++;
                 break;
             case 2:
@@ -130,7 +129,7 @@ int main()
             case 3:
                 printf("Введите имя - ");
                 scanf("%s", &name);
-                if (phoneSearchWithName(person, index, name, &indexHelp))
+                if (phoneSearchByName(person, index, name, &indexHelp))
                 {
                     printf("Номер человека, которого вы искали - %s\n", person[indexHelp].phone);
                     break;
@@ -140,7 +139,7 @@ int main()
             case 4:
                 printf("Введите телефон - ");
                 scanf("%s", &phone);
-                if (nameSearchWithPhone(person, index, phone, &indexHelp))
+                if (nameSearchByPhone(person, index, phone, &indexHelp))
                 {
                     printf("Имя человека, которого вы искали - %s\n", person[indexHelp].name);
                     break;
