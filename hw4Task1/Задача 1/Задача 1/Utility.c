@@ -24,14 +24,7 @@ void binaryTransfer(int array[], int number, int size)
 {
 	for (int index = 0; index < size; ++index)
 	{
-		if (number & 1)
-		{
-			array[index] = 1;
-		}
-		else
-		{
-			array[index] = 0;
-		}
+		array[index] = number & 1 != 0; 
 		number = number >> 1;
 	}
 }
@@ -44,14 +37,7 @@ int addition(int arrayFirst[], int size, int arraySecond[], int arraySum[])
 	{
 		if ((arrayFirst[i] == 1) && (arraySecond[i] == 1))
 		{
-			if (add == 1)
-			{
-				arraySum[i] = 1;
-			}
-			else
-			{
-				arraySum[i] = 0;
-			}
+			arraySum[i] = add & 1 != 0;
 			add = 1;
 		}
 		if ((arrayFirst[i] == 0) && (arraySecond[i] == 0))

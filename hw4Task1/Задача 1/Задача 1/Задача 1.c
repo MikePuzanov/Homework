@@ -6,9 +6,10 @@
 #include <stdbool.h>
 #include <locale.h>
 
+#define size 32
+
 int main()
 {
-    int size = 32;
     setlocale(LC_ALL, "Rus");
     if (!test())
     {
