@@ -11,11 +11,11 @@ bool test()
     struct PhoneBook tests[6] = { {"Eva", "258"}, {"Adam", "147"}, {"Jesus", "369"}, {"Adam", "369"} };
     char name[30];
     char phone[30];
-    if (!checkNumberOFPerson(8))
+    if (!checkNumberOfPerson(8))
     {
         return false;
     }
-    if (checkNumberOFPerson(100))
+    if (checkNumberOfPerson(100))
     {
         return false;
     }
@@ -97,7 +97,7 @@ int main()
             case 0:
                 return 0;
             case 1:
-                if (!checkNumberOFPerson(index))
+                if (!checkNumberOfPerson(index))
                 {
                     printf("\nТелефонная книжка переполнена!\n");
                     break;

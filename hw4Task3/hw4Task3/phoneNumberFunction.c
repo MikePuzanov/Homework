@@ -6,7 +6,7 @@
 #include <locale.h>
 #include <string.h>
 
-bool checkNumberOFPerson(int size)
+bool checkNumberOfPerson(int size)
 {
 	return size < 99;
 }

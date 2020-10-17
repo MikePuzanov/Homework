@@ -10,7 +10,7 @@ struct PhoneBook
 };
 
 // проверяет количество номеров в базе
-bool checkNumberOFPerson(int index);
+bool checkNumberOfPerson(int index);
 
 // поиск имени по номеру телефона
 bool nameSearchByPhone(struct PhoneBook person[], int index, char phone[], int* indexHelp);
