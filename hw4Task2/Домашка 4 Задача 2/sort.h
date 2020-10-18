@@ -1,4 +1,4 @@
 #pragma once
 
-// Функция поиска часто встречающегося элемента
-int search(int array[], int size);
+// Алгоритм быстрой сортировки
+void quickSort(int array[], int low, int high);

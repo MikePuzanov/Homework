@@ -3,6 +3,7 @@
 #include "searchElement.h"
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 void arraySame(int array[], int size)
 {
@@ -34,6 +35,6 @@ bool test()
     }
     arraySame(array, 10);
     quickSort(array, 0, 9);
-    search(array, 10, element);
-    return search(array, 10, element) == array[0];
+    search(array, 10);
+    return search(array, 10) == array[0];
 }
