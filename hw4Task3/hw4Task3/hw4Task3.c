@@ -8,26 +8,42 @@
 
 bool test()
 {
+    struct PhoneBook test[3];
+    FILE* phoneBook = fopen("Test.txt", "w");
+    fprintf(phoneBook, "Eva - 258\n");
+    fprintf(phoneBook, "Adam - 147\n");
+    fclose(phoneBook);
+    int indexHelp = 0;
+    readFromFile(test, &indexHelp, "Test.txt");
+    char hyphen = "-";
+    fscanf(phoneBook, "%s %c", &test[0].name, &hyphen);
+    fscanf(phoneBook, "%s", &test[0].phone);
+    fscanf(phoneBook, "%s %c", &test[1].name, &hyphen);
+    fscanf(phoneBook, "%s", &test[1].phone);
+    if (((strcmp(&test[0].name, "Eva") != 0) || (strcmp(&test[0].phone, "258") != 0)) && (((strcmp(&test[1].name, "Adam") != 0) || (strcmp(&test[1].phone, "147") != 0))))
+    {
+        return false;
+    }
     struct PhoneBook tests[6] = { {"Eva", "258"}, {"Adam", "147"}, {"Jesus", "369"}, {"Adam", "369"} };
     char name[30];
-    char phone[30];
-    if (!checkNumberOfPerson(8))
+    char phone[20];
+    if (!isPhonebookFull(8))
     {
         return false;
     }
-    if (checkNumberOfPerson(100))
+    if (isPhonebookFull(100))
     {
         return false;
     }
-    if (!checkName(tests, "Adam", 3))
+    if (!doesNameExist(tests, "Adam", 3))
     {
         return false;
     }
-    if (!checkPhone(tests, "369", 3))
+    if (!doesPhoneExist(tests, "369", 3))
     {
         return false;
     }
-    int indexHelp = 0;
+    indexHelp = 0;
     if (phoneSearchByName(tests, 3, "Jesus", &indexHelp))
     {
         if (strcmp(&tests[indexHelp].phone, "369") != 0)
@@ -53,7 +69,6 @@ bool test()
     printInFile(tests, 3, "Test.txt");
     bool check = true;
     FILE* phoneBook1 = fopen("Test.txt", "r");
-    char hyphen = "-";
     for (int i = 3; i < 6; ++i)
     {
         fscanf(phoneBook1, "%s %c", &tests[i].name, &hyphen);
@@ -75,15 +90,16 @@ int main()
         printf("Тест не пройден!");
         return 1;
     }
-    printf("Тест пройден!\n\n");
+    printf("Тест пройден!\n\n");  
     printf("0 - выйти\n");
     printf("1 - добавить запись (имя и телефон)\n");
     printf("2 - распечатать все имеющиеся записи\n");
     printf("3 - найти телефон по имени\n");
     printf("4 - найти имя по телефону\n");
     printf("5 - сохранить текущие данные в файл\n");
-    struct PhoneBook person[100];
     int index = 0;
+    struct PhoneBook person[100];
+    readFromFile(person, &index, "namePhone.txt");
     int indexHelp = -1;
     int decide = 0;
     char name[30];
@@ -97,14 +113,14 @@ int main()
             case 0:
                 return 0;
             case 1:
-                if (!checkNumberOfPerson(index))
+                if (!isPhonebookFull(index))
                 {
                     printf("\nТелефонная книжка переполнена!\n");
                     break;
                 }
                 printf("\nВведите имя нового контакта: ");
                 scanf("%s", &name);
-                if (!checkName(person, name, index))
+                if (!doesNameExist(person, name, index))
                 {
                     printf("\nКонтакт уже существует!");
                     break;
@@ -112,7 +128,7 @@ int main()
                 strcpy(person[index].name, name);
                 printf("\nВведите номер нового контакта - ");
                 scanf("%s", &phone);
-                if (!checkPhone(person, phone, index))
+                if (!doesPhoneExist(person, phone, index))
                 {
                     printf("\nКонтакт уже существует!");
                     break;
