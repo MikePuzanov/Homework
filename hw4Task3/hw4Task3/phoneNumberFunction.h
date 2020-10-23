@@ -28,4 +28,4 @@ bool doesPhoneExist(struct PhoneBook person[], char phone[], int index);
 void printInFile(struct PhoneBook person[], int index, char* file);
 
 // Загрузка из файла
-void readFromFile(struct PhoneBook person[], int index, char* file);
+void readFromFile(struct PhoneBook person[], int* index, char* file);
