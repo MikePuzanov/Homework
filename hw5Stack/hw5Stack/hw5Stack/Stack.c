@@ -1,10 +1,12 @@
 #include "Stack.h"
+#include "testStack.h"
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
-struct StackElement* push(struct StackElement* head, double element)
+
+struct StackElement* push(struct StackElement* head, int element)
 {
     struct StackElement* newElement = malloc(sizeof(struct StackElement));
     if (newElement == NULL)
@@ -17,13 +19,13 @@ struct StackElement* push(struct StackElement* head, double element)
     return head;
 }
 
-double pop(struct StackElement** head)
+int pop(struct StackElement** head)
 {
     if (*head == NULL)
     {
         return 0;
     }
-    double element = (*head)->value;
+    int element = (*head)->value;
     struct StackElement* oldElement = *head;
     *head = (*head)->next;
     free(oldElement);

@@ -2,17 +2,18 @@
 
 #include <stdbool.h>
 
+// Структура стек
 struct StackElement
 {
-    double value;
+    int value;
     struct StackElement* next;
 };
 
 // Функция добавление элемента в стек
-struct StackElement* push(struct StackElement* head, double element);
+struct StackElement* push(struct StackElement* head, int element);
 
 // Функция удаление элемента стека
-double pop(struct StackElement** head);
+int pop(struct StackElement** head);
 
 // Проверка очищенности элемента стека
 bool isEmpty(struct StackElement* head);
