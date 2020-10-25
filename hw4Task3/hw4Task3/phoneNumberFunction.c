@@ -6,15 +6,7 @@
 #include <locale.h>
 #include <string.h>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-bool checkNumberOfPerson(int size)
-=======
 bool isPhonebookFull(int size)
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
-=======
-bool isPhonebookFull(int size)
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
 {
 	return size < 99;
 }
@@ -45,15 +37,7 @@ bool phoneSearchByName(struct PhoneBook person[], int size, char name[], int* in
 	return false;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-bool checkName(struct PhoneBook person[], char name[], int size)
-=======
 bool doesNameExist(struct PhoneBook person[], char name[], int size)
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
-=======
-bool doesNameExist(struct PhoneBook person[], char name[], int size)
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
 {
 	for (int i = 0; i < size; ++i)
 	{
@@ -65,15 +49,7 @@ bool doesNameExist(struct PhoneBook person[], char name[], int size)
 	return true;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-bool checkPhone(struct PhoneBook person[], char phone[], int size)
-=======
 bool doesPhoneExist(struct PhoneBook person[], char phone[], int size)
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
-=======
-bool doesPhoneExist(struct PhoneBook person[], char phone[], int size)
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
 {
 	for (int i = 0; i < size; ++i)
 	{
@@ -93,11 +69,6 @@ void printInFile(struct PhoneBook person[], int size, char* file)
 		fprintf(phoneBook, "%s - %s\n", person[i].name, person[i].phone);
 	}
 	fclose(phoneBook);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
 }
 
 void readFromFile(struct PhoneBook person[], int* index, char* file)
@@ -109,8 +80,4 @@ void readFromFile(struct PhoneBook person[], int* index, char* file)
 		++(*index);
 	}
 	fclose(phoneBook);
-<<<<<<< HEAD
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
-=======
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
 }
