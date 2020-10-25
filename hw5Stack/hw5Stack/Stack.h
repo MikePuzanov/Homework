@@ -3,19 +3,16 @@
 #include <stdbool.h>
 
 // 
-struct Stack;
-
-//
-struct Stack* createStack(void);
+struct StackElement;
 
 // Функция добавление элемента в стек
-void push(struct Stack* stack, int value);
+struct StackElement* push(struct StackElement* head, int element);
 
 // Функция удаление элемента стека
-int pop(struct Stack* stack);
+int pop(struct StackElement** head);
 
 // Проверка очищенности элемента стека
-bool isEmpty(struct Stack* stack);
+bool isEmpty(struct StackElement* head);
 
 // Функция очистки стека
-void deleteStack(struct Stack** stack);
+void deleteStack(struct StackElement** head);

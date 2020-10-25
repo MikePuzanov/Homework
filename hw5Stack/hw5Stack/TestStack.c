@@ -5,22 +5,31 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-
-bool test()
+struct StackElement
 {
-	struct Stack* stack = createStack();
-	push(stack, 6);
-	if (pop(&stack) != 6)
+	int value;
+	struct StackElement* next;
+};
+
+bool testStack()
+{
+	struct StackElement* head = NULL;
+	push(head, 6);
+	if (push(head, 6)->value != 6)
 	{
 		return false;
 	}
-	push(stack, 5);
-	push(stack, 6);
-	push(stack, 1);
+	if (pop(&head) != 6)
+	{
+		return false;
+	}
+	push(head, 5);
+	push(head, 6);
+	push(head, 1);
 	for (int i = 0; i < 3; ++i)
 	{
-		pop(&stack);
+		pop(&head);
 	}
-	deleteStack(&stack);
-	return isEmpty(&stack);
+	deleteStack(&head);
+	return isEmpty(head);
 }
