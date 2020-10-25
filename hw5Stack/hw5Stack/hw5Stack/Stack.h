@@ -2,21 +2,20 @@
 
 #include <stdbool.h>
 
-// Структура стек
-struct StackElement
-{
-    int value;
-    struct StackElement* next;
-};
+// 
+struct Stack;
+
+//
+struct Stack* createStack(void);
 
 // Функция добавление элемента в стек
-struct StackElement* push(struct StackElement* head, int element);
+void push(struct Stack* stack, int value);
 
 // Функция удаление элемента стека
-int pop(struct StackElement** head);
+int pop(struct Stack* stack);
 
 // Проверка очищенности элемента стека
-bool isEmpty(struct StackElement* head);
+bool isEmpty(struct Stack* stack);
 
 // Функция очистки стека
-void deleteStack(struct StackElement** head);
+void deleteStack(struct Stack** stack);

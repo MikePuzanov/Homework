@@ -5,42 +5,60 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-
-struct StackElement* push(struct StackElement* head, int element)
+struct StackElement
 {
-    struct StackElement* newElement = malloc(sizeof(struct StackElement));
-    if (newElement == NULL)
-    {
-        return NULL;
-    }
-    newElement->value = element;
-    newElement->next = head;
-    head = newElement;
-    return head;
+    int number;
+    struct StackElement* next;
+};
+
+struct Stack
+{
+    struct StackElement* head;
+};
+
+struct Stack* createStack(void)
+{
+	struct Stack* newStack = malloc(sizeof(struct Stack));
+	newStack->head = NULL;
+	return newStack;
 }
 
-int pop(struct StackElement** head)
+void push(struct Stack* stack, int value)
 {
-    if (*head == NULL)
-    {
-        return 0;
-    }
-    int element = (*head)->value;
-    struct StackElement* oldElement = *head;
-    *head = (*head)->next;
-    free(oldElement);
-    return element;
+	struct StackElement* newElement = malloc(sizeof(struct StackElement));
+	if (newElement == NULL)
+	{
+		return;
+	}
+	newElement->number = value;
+	newElement->next = stack->head;
+	stack->head = newElement;
 }
 
-bool isEmpty(struct StackElement* head)
+int pop(struct Stack* stack)
 {
-    return head == NULL;
+	if (stack->head == NULL)
+	{
+		return 0;
+	}
+	int element = stack->head->number;
+	struct StackElement* oldElement = stack->head;
+	stack->head = stack->head->next;
+	free(oldElement);
+	return element;
 }
 
-void deleteStack(struct StackElement** head)
+bool isEmpty(struct Stack* stack)
 {
-    while (*head != NULL)
-    {
-        pop(head);
-    }
+	return stack->head == NULL;
+}
+
+void deleteStack(struct Stack** stack)
+{
+	while ((*stack)->head != NULL)
+	{
+		pop(*stack);
+	}
+	free(*stack);
+	*stack = NULL;
 }
