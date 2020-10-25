@@ -12,9 +12,10 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    if (!testForTask() || !testStack())
+    if (!testForTask() || !testStack)
     {
         printf("Тест не пройден!\n");
+        return 1;
     }
     printf("Тест пройден!\n");
     char line[100];
@@ -25,6 +26,11 @@ int main()
     {
         printf("\nСтрока введена некорректно!\n");
         return 1;
+    }
+    deleteStack(&head);
+    if (!isEmpty(head))
+    {
+        return 2;
     }
     printf("\nВерно!\n");
 }
