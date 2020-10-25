@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="testStack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stack.c" />
