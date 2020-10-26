@@ -5,31 +5,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int idParentheses(char symbol)
+{
+    switch (symbol)
+    {
+        case '(':
+            return 0;
+        break;
+        case ')':
+            return 1;
+        break;
+        case '[':
+            return 2;
+        break;
+        case ']':
+            return 3;
+        break;
+        case '{':
+            return 4;
+        break;
+        case '}':
+            return 5;
+        break;
+    }
+}
+
 bool checkParentheses(struct StackElement* head, char line[])
 {
     for (int i = 0; i < strlen(line); i++)
     {
-        int ascii = ("%c", line[i]);
-        if (ascii == 123 || ascii == 91 || ascii == 40)
+        int id = idParentheses(line[i]);
+        if (id == 0 || id == 2 || id == 4)
         {
-            head = push(head, ascii);
+            head = push(head, id);
         }
-        if (ascii == 41 || ascii == 93 || ascii == 125)
+        if (id == 1 || id == 3 || id == 5)
         {
-            int asciiInStack = pop(&head);
-            switch (asciiInStack)
+            int idInStack = pop(&head);
+            switch (idInStack)
             {
-            case 123:
-                asciiInStack = 125;
+            case 0:
+                idInStack = 1;
                 break;
-            case 91:
-                asciiInStack = 93;
+            case 2:
+                idInStack = 3;
                 break;
-            case 40:
-                asciiInStack = 41;
+            case 4:
+                idInStack = 5;
                 break;
             }
-            if (asciiInStack != ascii)
+            if (idInStack != id)
             {
                 return false;
             }
