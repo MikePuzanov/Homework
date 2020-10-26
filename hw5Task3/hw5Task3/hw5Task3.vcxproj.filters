@@ -18,5 +18,19 @@
     <ClCompile Include="hw5Task3.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\hw5Stack\hw5Stack\TestStack.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\hw5Stack\hw5Stack\Stack.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\hw5Stack\hw5Stack\Stack.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\hw5Stack\hw5Stack\TestStack.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

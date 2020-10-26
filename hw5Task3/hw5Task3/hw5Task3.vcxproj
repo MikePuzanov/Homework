@@ -139,9 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\hw5Stack\hw5Stack\Stack.c" />
+    <ClCompile Include="..\..\hw5Stack\hw5Stack\TestStack.c" />
     <ClCompile Include="hw5Task3.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\hw5Stack\hw5Stack\Stack.h" />
+    <ClInclude Include="..\..\hw5Stack\hw5Stack\TestStack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
