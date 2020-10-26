@@ -1,6 +1,6 @@
 ﻿#include "../../hw5Stack/hw5Stack/Stack.h"
 #include "../../hw5Stack/hw5Stack/TestStack.h"
-#include "functionForTask.h"
+#include "ReversePolishCalculator.h"
 #include "TestForTask.h"
 
 #include <stdio.h>
@@ -8,10 +8,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include <locale.h>
+#include <ctype.h>
 
 int main()
 {
-     setlocale(LC_ALL, "Rus");
+    setlocale(LC_ALL, "Rus");
     if (!testForTask() || !testStack())
     {
         printf("Тест не пройден!\n");
@@ -24,28 +25,38 @@ int main()
     scanf("%99[^\n]", element);
     for (int i = 0; i < strlen(element); ++i)
     {
-        int ascii = ("%c", element[i]);
+        if (element[i] == ' ')
+        {
+            continue;
+        }
         int low = i;
-        while (ascii != 32 && i < strlen(element) - 1 )
+        if (!isdigit(element[i]) && isdigit(element[i + 1]) && i < strlen(element) -3)
         {
             ++i;
-            ascii = ("%c", element[i]);
+            while (isdigit(element[i]))
+            {
+                ++i;
+            }
+            head = push(head, translateToInt(element, low, i));
         }
-        ascii = ("%c", element[low]);
-        if ((ascii > 47 && ascii < 58) || ((i - low) > 1 && ascii == 45) || (ascii == 46))
+        else if (isdigit(element[i]))
         {
-            head = push(head, transfer(element, low, i));
+            while (isdigit(element[i]))
+            {
+                ++i;
+            }
+            head = push(head, translateToInt(element, low, i));
         }
-        if ((i - low) <= 1 && ascii > 41 && ascii < 48 && ascii != 46)
-        { 
+        else
+        {
             int second = pop(&head);
             int first = pop(&head);
-            if (second < 1e-10 && ascii == 47)
+            if (second == 0 && element[i] == '/')
             {
                 printf("На ноль делить нельзя!");
                 return 2;
             }
-            head = push(head, calculator(element, low, first, second));
+            head = push(head, calculator(element[i], first, second));
         }
     }
     printf("\nОтвет: %i.", pop(&head));

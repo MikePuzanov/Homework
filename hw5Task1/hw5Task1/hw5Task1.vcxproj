@@ -141,7 +141,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\hw5Stack\hw5Stack\Stack.c" />
     <ClCompile Include="..\..\hw5Stack\hw5Stack\TestStack.c" />
-    <ClCompile Include="functionForTask.c" />
+    <ClCompile Include="ReversePolishCalculator.c" />
     <ClCompile Include="hw5Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
@@ -150,7 +150,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\hw5Stack\hw5Stack\Stack.h" />
     <ClInclude Include="..\..\hw5Stack\hw5Stack\TestStack.h" />
-    <ClInclude Include="functionForTask.h" />
+    <ClInclude Include="ReversePolishCalculator.h" />
     <ClInclude Include="TestForTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
