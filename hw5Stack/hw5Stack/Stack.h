@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 
-// 
+// Обьявление структуры
 struct StackElement;
 
 // Функция добавление элемента в стек
