@@ -139,10 +139,10 @@ void translateToPolishReverse(struct StackElement* head, char line[], char expre
     }
     while (!isEmpty(head))
     {
-        expression[*index] = asciiToOpertor(pop(&head));
+        expression[*index] = fromIdToOpertor(pop(&head));
         (*index)++;
         expression[*index] = ' ';
         (*index)++;
     }
-    return expression;
+    (*index)--;
 }
