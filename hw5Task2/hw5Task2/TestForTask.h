@@ -2,4 +2,5 @@
 
 #include <stdbool.h>
 
+// Функция теста для задачи
 bool testForTask();
