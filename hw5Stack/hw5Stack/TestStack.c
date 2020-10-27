@@ -14,7 +14,7 @@ struct StackElement
 bool testStack()
 {
 	struct StackElement* head = NULL;
-	push(head, 6);
+	head = push(head, 6);
 	if (push(head, 6)->value != 6)
 	{
 		return false;
@@ -23,13 +23,25 @@ bool testStack()
 	{
 		return false;
 	}
-	push(head, 5);
-	push(head, 6);
-	push(head, 1);
+	head = push(head, 5);
+	head =push(head, 6);
+	head = push(head, 1);
+	if (isEmpty(head))
+	{
+		return false;
+	}
 	for (int i = 0; i < 3; ++i)
 	{
 		pop(&head);
 	}
+	if (!isEmpty(head))
+	{
+		return false;
+	}
 	deleteStack(&head);
-	return isEmpty(head);
+	if (!isEmpty(head))
+	{
+		return false;
+	}
+	return true;
 }
