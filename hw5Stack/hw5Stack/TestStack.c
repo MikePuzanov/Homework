@@ -24,7 +24,7 @@ bool testStack()
 		return false;
 	}
 	head = push(head, 5);
-	head =push(head, 6);
+	head = push(head, 6);
 	head = push(head, 1);
 	if (isEmpty(head))
 	{
