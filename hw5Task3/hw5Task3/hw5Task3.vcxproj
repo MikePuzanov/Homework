@@ -144,10 +144,14 @@
     <ClCompile Include="hw5Task3.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
+    <ClCompile Include="TestToTranslatePolishReverse.c" />
+    <ClCompile Include="TranslateToPolishReverse.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\hw5Stack\hw5Stack\Stack.h" />
     <ClInclude Include="..\..\hw5Stack\hw5Stack\TestStack.h" />
+    <ClInclude Include="TestToTranslatePolishReverse.h" />
+    <ClInclude Include="TranslateToPolishReverse.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

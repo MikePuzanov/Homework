@@ -24,12 +24,24 @@
     <ClCompile Include="..\..\hw5Stack\hw5Stack\Stack.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="TranslateToPolishReverse.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="TestToTranslatePolishReverse.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\hw5Stack\hw5Stack\Stack.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="..\..\hw5Stack\hw5Stack\TestStack.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslateToPolishReverse.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="TestToTranslatePolishReverse.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
