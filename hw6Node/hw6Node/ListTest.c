@@ -1,12 +1,12 @@
-#include "Node.h"
-#include "NodeTest.h"
+#include "List.h"
+#include "ListTest.h"
 
 #include <stdio.h>
 #include <stdbool.h>
 
-bool testNode()
+bool testList()
 {
-	Node* head = NULL;
+	List* head = NULL;
 	push(&head, 5);
 	if (head->value != 5)
 	{

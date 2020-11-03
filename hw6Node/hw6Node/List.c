@@ -1,20 +1,20 @@
-#include "Node.h"
+#include "List.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-void push(Node** head, int element)
+void push(List** head, int element)
 {
-    Node* tmp = (Node*)malloc(sizeof(Node));
-    tmp->value = element;
-    tmp->next = (*head);
-    (*head) = tmp;
+    List* newNode = (List*)malloc(sizeof(List));
+    newNode->value = element;
+    newNode->next = (*head);
+    (*head) = newNode;
 }
 
-int pop(Node** head)
+int pop(List** head)
 {
-    Node* delete = NULL;
+    List* delete = NULL;
     if (head == NULL)
     {
         exit(-1);
@@ -26,7 +26,7 @@ int pop(Node** head)
     return element;
 }
 
-Node* getNth(Node* head, int n)
+List* getNth(List* head, int n)
 {
     int counter = 0;
     while (counter < n && head)
@@ -37,7 +37,7 @@ Node* getNth(Node* head, int n)
     return head;
 }
 
-Node* getLast(Node* head)
+List* getLast(List* head)
 {
     if (head == NULL)
     {
@@ -50,16 +50,16 @@ Node* getLast(Node* head)
     return head;
 }
 
-void pushBack(Node* head, int value)
+void pushBack(List* head, int value)
 {
-    Node* last = getLast(head);
-    Node* tmp = (Node*)malloc(sizeof(Node));
-    tmp->value = value;
-    tmp->next = NULL;
-    last->next = tmp;
+    List* last = getLast(head);
+    List* newNode = (List*)malloc(sizeof(List));
+    newNode->value = value;
+    newNode->next = NULL;
+    last->next = newNode;
 }
 
-Node* getLastButOne(Node* head)
+List* getLastButOne(List* head)
 {
     if (head == NULL)
     {
@@ -77,9 +77,9 @@ Node* getLastButOne(Node* head)
 }
 
 
-void popBack(Node** head)
+void popBack(List** head)
 {
-    Node* lastbn = NULL;
+    List* lastButOne = NULL;
     if (!head) 
     {
         exit(-1);
@@ -88,42 +88,42 @@ void popBack(Node** head)
     {
         exit(-1);
     }
-    lastbn = getLastButOne(*head);
-    if (lastbn == NULL)
+    lastButOne = getLastButOne(*head);
+    if (lastButOne == NULL)
     {
         free(*head);
         *head = NULL;
     }
     else
     {
-        free(lastbn->next);
-        lastbn->next = NULL;
+        free(lastButOne->next);
+        lastButOne->next = NULL;
     }
 }
 
-void insert(Node* head, int n, int val)
+void insert(List* head, int n, int val)
 {
     int i = 0;
-    Node* tmp = NULL;
+    List* newNode = NULL;
     while (i < n && head->next)
     {
         head = head->next;
         i++;
     }
-    tmp = (Node*)malloc(sizeof(Node));
-    tmp->value = val;
+    newNode = (List*)malloc(sizeof(List));
+    newNode->value = val;
     if (head->next)
     {
-        tmp->next = head->next;
+        newNode->next = head->next;
     }
     else
     {
-        tmp->next = NULL;
+        newNode->next = NULL;
     }
-    head->next = tmp;
+    head->next = newNode;
 }
 
-int deleteNth(Node** head, int n)
+int deleteNth(List** head, int n)
 {
     if (n == 0)
     {
@@ -131,16 +131,16 @@ int deleteNth(Node** head, int n)
     }
     else
     {
-        Node* prev = getNth(*head, n - 1);
-        Node* elm = prev->next;
-        int val = elm->value;
-        prev->next = elm->next;
-        free(elm);
+        List* prev = getNth(*head, n - 1);
+        List* element = prev->next;
+        int val = element->value;
+        prev->next = element->next;
+        free(element);
         return val;
     }
 }
 
-void deleteList(Node** head)
+void deleteList(List** head)
 {
     while ((*head)->next)
     {
@@ -150,7 +150,7 @@ void deleteList(Node** head)
     free(*head);
 }
 
-bool isEmpty(Node* head)
+bool isEmpty(List* head)
 {
     return head == NULL;
 }

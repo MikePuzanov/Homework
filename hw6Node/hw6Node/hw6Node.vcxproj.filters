@@ -18,18 +18,18 @@
     <ClCompile Include="hw6Node.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Node.c">
+    <ClCompile Include="List.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="NodeTest.c">
+    <ClCompile Include="ListTest.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="List.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="NodeTest.h">
+    <ClInclude Include="ListTest.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

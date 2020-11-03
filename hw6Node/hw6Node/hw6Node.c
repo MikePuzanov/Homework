@@ -1,4 +1,4 @@
-﻿#include "Node.h"
+﻿#include "List.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +6,7 @@
 
 int main()
 {
-    if (!testNode())
+    if (!testList())
     {
         return 1;
     }
