@@ -25,3 +25,13 @@ bool checkValue(List* head, int val)
     }
     return false;
 }
+
+void printList(List* head)
+{
+    while (head)
+    {
+        printf("%d ", head->value);
+        head = head->next;
+    }
+    printf("\n");
+}

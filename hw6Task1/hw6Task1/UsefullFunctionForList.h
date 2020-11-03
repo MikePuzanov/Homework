@@ -8,3 +8,6 @@ int findN(head, element);
 
 // Проверяет есть ли у кого-то узла в списке такое значение
 bool checkValue(List* head, int val);
+
+// Печатает список
+void printList(List* head);
