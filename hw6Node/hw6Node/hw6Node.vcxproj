@@ -142,12 +142,12 @@
     <ClCompile Include="hw6Node.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
-    <ClCompile Include="Node.c" />
-    <ClCompile Include="NodeTest.c" />
+    <ClCompile Include="List.c" />
+    <ClCompile Include="ListTest.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="NodeTest.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
