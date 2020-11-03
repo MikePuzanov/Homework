@@ -144,10 +144,12 @@
     <ClCompile Include="hw6Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
+    <ClCompile Include="UsefullFunctionForList.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\hw6Node\hw6Node\List.h" />
     <ClInclude Include="..\..\hw6Node\hw6Node\ListTest.h" />
+    <ClInclude Include="UsefullFunctionForList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
