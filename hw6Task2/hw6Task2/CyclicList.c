@@ -1,22 +1,22 @@
-#include "CyclicNode.h"
-#include "../../hw6Node/hw6Node/Node.h"
+#include "CyclicList.h"
+#include "../../hw6Node/hw6Node/List.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void init(Node* head)
+void init(List* head)
 {
     head->next = head;
 }
 
-void popFor(Node** head)
+void popFor(List** head)
 {
     if (head == NULL)
     {
         exit(-1);
     }
-    Node* prev = *head;
-    Node* delete = prev->next;
+    List* prev = *head;
+    List* delete = prev->next;
     int val = delete->value;
     prev->next = delete->next;
     free(delete);

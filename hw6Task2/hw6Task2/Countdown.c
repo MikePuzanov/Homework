@@ -1,5 +1,5 @@
-#include "CyclicNode.h"
-#include "../../hw6Node/hw6Node/Node.h"
+#include "CyclicList.h"
+#include "../../hw6Node/hw6Node/List.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,8 +14,8 @@ int countdown(int n, int m)
     {
         return 0;
     }
-    Node first;
-    Node* head = &first;
+    List first;
+    List* head = &first;
     head->value = -1;
     init(head);
     for (int i = 0; i < n; ++i)

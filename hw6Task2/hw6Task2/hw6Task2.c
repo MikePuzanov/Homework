@@ -1,6 +1,6 @@
-﻿#include "../../hw6Node/hw6Node/Node.h"
-#include "../../hw6Node/hw6Node/NodeTest.h"
-#include "CyclicNode.h"
+﻿#include "../../hw6Node/hw6Node/List.h"
+#include "../../hw6Node/hw6Node/ListTest.h"
+#include "CyclicList.h"
 #include "Countdown.h"
 #include "TestTask.h"
 
@@ -12,7 +12,7 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    if (!testTask() && !testNode())
+    if (!testTask() && !testList())
     {
         printf("Тест не пройден!");
         return 5;
@@ -20,7 +20,7 @@ int main()
     printf("Тест пройден!\n\n");
     int n = 0;
     int m = 0;
-    printf("Введите число n((количество войнов) - ");
+    printf("Введите число n(количество войнов) - ");
     scanf("%i", &n);
     printf("Введите число m(убивают каждого m-го) - ");
     scanf("%i", &m);
