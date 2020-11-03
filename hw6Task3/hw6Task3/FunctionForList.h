@@ -1,17 +1,25 @@
 #pragma once
 
-//
+#include <stdbool.h>
+
+// Структура
 typedef struct List {
-    int value;
+    long value;
     char name[20];
     struct List* next;
 } List;
 
-//
-void pushList(List** head, char name[20], int element);
+// Добавление в список
+void pushList(List** head, char name[20], long element);
 
-//
+// распечатать телефоннную книжку
 void printPhonebook(List* head);
 
-//
+// считывае с файла
 void scanfFromFile(char file[], List** head);
+
+// проверка на пустоту
+bool isEmpty(List* head);
+
+// удаление списка
+void deleteList(List** head)

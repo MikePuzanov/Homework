@@ -24,6 +24,9 @@
     <ClCompile Include="Sort.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="TaskTest.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FunctionForList.h">
@@ -32,9 +35,15 @@
     <ClInclude Include="Sort.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="TaskTest.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Phonebook.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="PhonebookTest.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

@@ -139,18 +139,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FunctionForList.c" />
+    <ClCompile Include="FunctionForList.c">
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
+    </ClCompile>
     <ClCompile Include="hw6Task3.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
     <ClCompile Include="Sort.c" />
+    <ClCompile Include="TaskTest.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FunctionForList.h" />
     <ClInclude Include="Sort.h" />
+    <ClInclude Include="TaskTest.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Phonebook.txt" />
+    <Text Include="PhonebookTest.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

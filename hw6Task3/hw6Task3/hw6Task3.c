@@ -1,14 +1,22 @@
 ﻿#include "FunctionForList.h"
 #include "Sort.h"
+#include "TaskTest.h"
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include <locale.h>
 
 int main()
 {
     setlocale(LC_ALL, "Rus");
+    if (!testTask())
+    {
+        printf("Тест не пройден!");
+        return 1;
+    }
+    printf("Тест пройден!\n");
     List* head = NULL;
     scanfFromFile("Phonebook.txt", &head);
     bool key = true;
@@ -42,5 +50,9 @@ int main()
             printf("Попробуйте еще раз:)\n");
             break;
         }
+    }
+    if (!isEmpty(head))
+    {
+        deleteList(&head);
     }
 }
