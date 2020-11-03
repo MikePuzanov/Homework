@@ -142,10 +142,10 @@ int deleteNth(List** head, int n)
 
 void deleteList(List** head)
 {
-    while ((*head)->next)
+    while ((*head) != NULL)
     {
         pop(head);
-        *head = (*head)->next;
+        //*head = (*head)->next;
     }
     free(*head);
 }
