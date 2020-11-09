@@ -1,5 +1,5 @@
 #include "Stack.h"
-#include "testStack.h"
+#include "TestStack.h"
 
 #include <stdio.h>
 #include <stdbool.h>
