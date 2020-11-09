@@ -5,12 +5,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-struct StackElement
-{
-	int value;
-	struct StackElement* next;
-};
-
 bool testStack()
 {
 	struct StackElement* head = NULL;
