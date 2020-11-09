@@ -1,5 +1,4 @@
 #include "Stack.h"
-#include "testStack.h"
 
 #include <stdio.h>
 #include <stdlib.h>
