@@ -13,7 +13,7 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    if (!test())
+    if (!test() || !testStack())
     {
         printf("Тесты не пройдены!");
         return 1;
