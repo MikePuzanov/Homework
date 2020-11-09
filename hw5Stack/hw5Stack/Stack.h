@@ -3,7 +3,11 @@
 #include <stdbool.h>
 
 // Обьявление структуры
-struct StackElement;
+struct StackElement
+{
+    int value;
+    struct StackElement* next;
+};
 
 // Функция добавление элемента в стек
 struct StackElement* push(struct StackElement* head, int element);
