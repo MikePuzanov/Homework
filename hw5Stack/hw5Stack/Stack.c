@@ -1,15 +1,8 @@
 #include "Stack.h"
-#include "testStack.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
-struct StackElement
-{
-    int value;
-    struct StackElement* next;
-};
 
 struct StackElement* push(struct StackElement* head, int element)
 {

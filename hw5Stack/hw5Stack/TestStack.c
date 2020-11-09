@@ -1,15 +1,9 @@
 #include "Stack.h"
-#include "testStack.h"
+#include "TestStack.h"
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-
-struct StackElement
-{
-	int value;
-	struct StackElement* next;
-};
 
 bool testStack()
 {
@@ -22,6 +16,13 @@ bool testStack()
 	if (pop(&head) != 6)
 	{
 		return false;
+	}
+	head = push(head, 6);
+	head = push(head, 6);
+	head = push(head, 6);
+	for (int i = 0; i < 3; ++i)
+	{
+		pop(&head);
 	}
 	deleteStack(&head);
 	return isEmpty(head);
