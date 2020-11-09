@@ -28,9 +28,5 @@ int main()
         return 1;
     }
     deleteStack(&head);
-    if (!isEmpty(head))
-    {
-        return 2;
-    }
     printf("\nВерно!\n");
 }
