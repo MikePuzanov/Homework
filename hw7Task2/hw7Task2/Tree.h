@@ -11,4 +11,4 @@ typedef struct
 // создание главного корня
 Node* expressionMath(char line[], int* low, int high);
 
-char printTree(Node* root);
+char printTree(Node* root, char line[], int* index);

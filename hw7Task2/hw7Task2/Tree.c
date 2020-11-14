@@ -71,27 +71,89 @@ Node* expressionMath(char line[],int* low, int high)
 	return root;
 }
 
-char printTree(Node* root)
+char printTree(Node* root, char line[], int* index)
 {
-	char line[30];
-	int index = 0;
-	Node* rootCopy = root;
-	while (root->left != NULL)
+	if (root->symbol == '+' || root->symbol == '-' || root->symbol == '*' || root->symbol == '/')
 	{
-		if (rootCopy->symbol == '+' || rootCopy->symbol == '-' || rootCopy->symbol == '*' || rootCopy->symbol == '/')
-		{
-			line[index] = '(';
-			index++;
-			line[index] = ' ';
-			index++;
-			line[index] = rootCopy->symbol;
-			index++;
-		}
-		else
-		{
-			line[index = rootCopy->left; ]
-			line[index = ; ]
-		}
-		rootCopy = rootCopy->left;
+		line[*index] = '(';
+		(*index)++;
+		line[*index] = ' ';
+		(*index)++;
+		line[*index] = root->symbol;
+		(*index)++;
+		line[*index] = ' ';
+		(*index)++;
+		int index1 = *index;
+		printTree(root->left, line, &index1);
+		printTree(root->right, line, &index1);
+		*index = index1;
+		line[*index] = ')';
+		(*index)++;
+		line[*index] = ' ';
+		(*index)++;
+		exit;
 	}
+	else
+	{
+		int key = root->key;
+		if (key < 0)
+		{
+			line[*index] = '-';
+			(*index)++;
+		}
+		if (key == 0)
+		{
+			line[*index] = '-';
+			(*index)++;
+		}
+		int devider = 1;
+		while (key / devider > 9)
+		{
+			devider *= 10;
+		}
+		while (key > 0)
+		{
+			int mod = key / devider;
+			switch (mod)
+			{
+			case 0:
+				line[*index] = '0';
+			break;
+			case 1:
+				line[*index] = '1';
+			break;
+			case 2:
+				line[*index] = '2';
+			break;
+			case 3:
+				line[*index] = '3';
+			break;
+			case 4:
+				line[*index] = '4';
+			break;
+			case 5:
+				line[*index] = '5';
+			break;
+			case 6:
+				line[*index] = '6';
+			break;
+			case 7:
+				line[*index] = '7';
+			break;
+			case 8:
+				line[*index] = '8';
+			break;
+			case 9:
+				line[*index] = '9';
+			break;
+			}
+			key %= devider;
+			devider /= 10;
+			(*index)++;
+		}
+		line[*index] = ' ';
+		(*index)++;
+		exit;
+	}
+	return line;
 }

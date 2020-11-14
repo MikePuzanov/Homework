@@ -23,4 +23,11 @@ int main()
     Node* root = NULL;
     root = expressionMath(line, &low, size);
     root = root->left;
+    char answer[30];
+    int i = 0;
+    printTree(root, answer, &i);
+    for (int index = 0; index < i; index++)
+    {
+        printf("%c", answer[index]);
+    }
 }
