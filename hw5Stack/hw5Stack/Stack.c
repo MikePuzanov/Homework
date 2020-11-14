@@ -13,8 +13,7 @@ struct StackElement* push(struct StackElement* head, int element)
     }
     newElement->value = element;
     newElement->next = head;
-    head = newElement;
-    return head;
+    return newElement;
 }
 
 int pop(struct StackElement** head)
