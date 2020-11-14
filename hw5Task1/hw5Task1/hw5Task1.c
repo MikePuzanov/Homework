@@ -6,9 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <locale.h>
-#include <ctype.h>
 
 int main()
 {
@@ -23,46 +21,17 @@ int main()
     char element[100];
     printf("\nВведите ваш пример в постфиксной форме: ");
     scanf("%99[^\n]", element);
-    for (int i = 0; i < strlen(element); ++i)
+    bool isCorrect = true;
+    int answer = reversePolish(element, head, &isCorrect);
+    if (!isCorrect)
     {
-        if (element[i] == ' ')
-        {
-            continue;
-        }
-        int low = i;
-        if (!isdigit(element[i]) && isdigit(element[i + 1]) && i < strlen(element) -3)
-        {
-            ++i;
-            while (isdigit(element[i]))
-            {
-                ++i;
-            }
-            head = push(head, translateToInt(element, low, i));
-        }
-        else if (isdigit(element[i]))
-        {
-            while (isdigit(element[i]))
-            {
-                ++i;
-            }
-            head = push(head, translateToInt(element, low, i));
-        }
-        else
-        {
-            int second = pop(&head);
-            int first = pop(&head);
-            if (second == 0 && element[i] == '/')
-            {
-                printf("На ноль делить нельзя!");
-                return 2;
-            }
-            head = push(head, calculator(element[i], first, second));
-        }
+        printf("Пример записан некорректно! ");
+        return 3;
     }
-    printf("\nОтвет: %i.", pop(&head));
+    printf("\nОтвет: %i.", answer);
     deleteStack(&head);
     if (!isEmpty(head))
     {
         return 2;
     }
-}
+ }

@@ -2,43 +2,30 @@
 #include "TestForTask.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 bool testForTask()
 {
-    if (translateToInt("12", 0, 2) != 12)
+    struct StackElement* head = NULL;
+    bool isCorrect = true;
+    int answer = reversePolish("1 1 +", &head, &isCorrect);
+    if (!isCorrect || answer != 2)
     {
         return false;
     }
-    if (translateToInt("31", 0, 2) != 31)
+    answer = reversePolish("2 1 + 4 1 - *", head, &isCorrect);
+    if (!isCorrect || answer != 9)
     {
         return false;
     }
-    if (translateToInt("0", 0, 1) != 0)
+    answer = reversePolish("5 3 * 3 - 3 /", head, &isCorrect);
+    if (!isCorrect || answer != 4)
     {
         return false;
     }
-    if (translateToInt("-5", 0, 2) != -5)
-    {
-        return false;
-    }
-    if (calculator('+', 5, 10) != 15)
-    {
-        return false;
-    }
-    if (calculator('-', 10, 5) != 5)
-    {
-        return false;
-    }
-    if (calculator('*', 5, 10) != 50)
-    {
-        return false;
-    }
-    if (calculator('/', 10, 5) != 2)
-    {
-        return false;
-    }
-    if (calculator('-', 5, 10) != -5)
+    answer = reversePolish("1 -", head, &isCorrect);
+    if (isCorrect)
     {
         return false;
     }
