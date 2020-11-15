@@ -4,10 +4,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <locale.h>
-#include <string.h>
 
 int main()
 {
+    setlocale(LC_ALL, "Rus");
+    if (!test())
+    {
+        return 1;
+    }
     char line[30];
     int size = 0;
     char symbol = ' ';
@@ -19,15 +23,27 @@ int main()
     }
     fclose(expression);
     int high = size;
-    int* low = 0;
+    int low = 0;
     Node* root = NULL;
-    root = expressionMath(line, &low, size);
-    root = root->left;
-    char answer[30];
-    int i = 0;
-    printTree(root, answer, &i);
-    for (int index = 0; index < i; index++)
+    root = buildTree(line, &low, size);
+    root = checkTree(root);
+    char answerLine[30];
+    size = 0;
+    printTree(root, answerLine, &size);
+    printf("Печать дерева: ");
+    for (int index = 0; index < size; index++)
     {
-        printf("%c", answer[index]);
+        printf("%c", answerLine[index]);
     }
+    bool correctExpression = true;
+    int answer = countTree(root, &correctExpression);
+    if (!correctExpression)
+    {
+        printf("\n\nНа ноль делить нельзя!");
+        deleteTree(root);
+         return 6;
+    }
+    printf("\nОтвет: %i.", answer);
+    deleteTree(root);
+    printf("hyrhrh");
 }

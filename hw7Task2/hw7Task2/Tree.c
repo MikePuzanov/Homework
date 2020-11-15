@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <string.h>
 
-Node* expressionMath(char line[],int* low, int high)
+Node* buildTree(char line[],int* low, int high)
 {
 	char symbol = ' ';
 	char sign = ' ';
@@ -20,7 +20,7 @@ Node* expressionMath(char line[],int* low, int high)
 			Node* son = malloc(sizeof(Node));
 			(*low)++;
 			int low1 = *low;
-			son = expressionMath(line, &low1, high);
+			son = buildTree(line, &low1, high);
 			*low = low1;
 			if (root->left == NULL)
 			{
@@ -33,8 +33,7 @@ Node* expressionMath(char line[],int* low, int high)
 		}
 		if ((line[*low] == '+' || line[*low] == '-' || line[*low] == '*' || line[*low] == '/') && line[*low + 1] == ' ')
 		{
-			symbol = line[*low];
-			root->symbol = symbol;
+			root->symbol = line[*low];
 		}
 		if (line[*low] == '-' && isdigit(line[*low + 1]) || isdigit(line[*low]))
 		{
@@ -45,6 +44,7 @@ Node* expressionMath(char line[],int* low, int high)
 			if (line[*low] == '-')
 			{
 				minus = -1;
+				(*low)++;
 			}
 			int power = 1;
 			int number = 0;
@@ -67,6 +67,18 @@ Node* expressionMath(char line[],int* low, int high)
 			}
 		}
 		(*low)++;
+	}
+	return root;
+}
+
+Node* checkTree(Node* root)
+{
+	Node* mainRoot = root;
+	if (root->symbol != '/' && root->symbol != '*' && root->symbol != '-' && root->symbol != '+')
+	{
+		mainRoot = root->left;
+		free(root);
+		return mainRoot;
 	}
 	return root;
 }
@@ -100,10 +112,11 @@ char printTree(Node* root, char line[], int* index)
 		{
 			line[*index] = '-';
 			(*index)++;
+			key *= -1;
 		}
 		if (key == 0)
 		{
-			line[*index] = '-';
+			line[*index] = '0';
 			(*index)++;
 		}
 		int devider = 1;
@@ -156,4 +169,122 @@ char printTree(Node* root, char line[], int* index)
 		exit;
 	}
 	return line;
+}
+
+int countTree(Node* root, bool* qualityExpression)
+{
+	bool correct = *qualityExpression;
+	int number1 = 0;
+	int number2 = 0;
+	if (root->symbol != '/' && root->symbol != '*' && root->symbol != '-' && root->symbol != '+')
+	{
+		return root->key;
+	}
+	switch (root->symbol)
+	{
+	case '+':
+		number1 = countTree(root->left, &correct);
+		number2 = countTree(root->right, &correct);
+		*qualityExpression = correct;
+		return number1 + number2;
+	case '-':
+		number1 = countTree(root->left, &correct);
+		number2 = countTree(root->right, &correct);
+		*qualityExpression = correct;
+		return number1 - number2;
+	case '*':
+		number1 = countTree(root->left, &correct);
+		number2 = countTree(root->right, &correct);
+		*qualityExpression = correct;
+		return number1 * number2;
+	case '/':
+		number1 = countTree(root->left, &correct);
+		number2 = countTree(root->right, &correct);
+		*qualityExpression = correct;
+		if (number2 == 0)
+		{
+			*qualityExpression = false;
+			return 0;
+		}
+		return number1 / number2;
+	}
+}
+
+void deleteTree(Node* root)
+{
+
+	if (root->left != NULL)
+	{
+		deleteTree(root->left);
+	}
+	if (root->right != NULL)
+	{
+		deleteTree(root->right);
+	}
+	free(root);
+}
+
+bool test()
+{
+	char line1[30];
+	int size = 0;
+	char symbol = ' ';
+	FILE* expression1 = fopen("Test1.txt", "r");
+	while ((fscanf(expression1, "%c", &symbol)) != EOF)
+	{
+		line1[size] = symbol;
+		++size;
+	}
+	fclose(expression1);
+	Node* root = NULL;
+	int low = 0;
+	root = buildTree(line1, &low, size);
+	root = checkTree(root);
+	char answerLine1[30];
+	size = 0;
+	char test1[18] = "( * ( + 3 -1 ) 2 )";
+	printTree(root, answerLine1, &size);
+	for (int i = 0; i < size - 1; ++i)
+	{
+		if (test1[i] != answerLine1[i])
+		{
+			return false;
+		}
+	};
+	bool correct = true;
+	if (countTree(root, &correct) != 4 || !correct)
+	{
+		return false;
+	}
+	char line2[30];
+	size = 0;
+	deleteTree(root);
+	FILE* expression2 = fopen("Test2.txt", "r");
+	while ((fscanf(expression2, "%c", &symbol)) != EOF)
+	{
+		line2[size] = symbol;
+		++size;
+	}
+	fclose(expression2);
+	root = NULL;
+	low = 0;
+	root = buildTree(line2, &low, size);
+	root = checkTree(root);
+	char answerLine[30];
+	size = 0;
+	char test2[18] = "( / ( + 1 1 ) 0 )";
+	printTree(root, answerLine, &size);
+	for (int i = 0; i < size - 1; ++i)
+	{
+		if (test2[i] != answerLine[i])
+		{
+			return false;
+		}
+	}
+	correct = true;
+	if (countTree(root, &correct) != 0 || correct)
+	{
+		return false;
+	}
+	return true;
 }
