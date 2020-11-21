@@ -18,30 +18,24 @@
     <ClCompile Include="hw6Task1.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\hw6Node\hw6Node\List.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\hw6Node\hw6Node\ListTest.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="UsefullFunctionForList.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="TaskTest.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="SortList.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\hw6Node\hw6Node\List.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\hw6Node\hw6Node\ListTest.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="UsefullFunctionForList.h">
+    <ClInclude Include="TaskTest.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="TaskTest.h">
+    <ClInclude Include="SortList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

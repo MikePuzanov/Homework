@@ -1,8 +1,13 @@
-#include "List.h"
+#include "SortList.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+typedef struct List {
+    int value;
+    struct List* next;
+} List;
 
 void push(List** head, int element)
 {
@@ -11,7 +16,7 @@ void push(List** head, int element)
     newNode->next = (*head);
     (*head) = newNode;
 }
- 
+
 int pop(List** head)
 {
     List* delete = NULL;
@@ -80,7 +85,7 @@ List* getLastButOne(List* head)
 int popBack(List** head)
 {
     List* lastButOne = NULL;
-    if (!head) 
+    if (!head)
     {
         exit(-1);
     }
@@ -101,24 +106,6 @@ int popBack(List** head)
     return number;
 }
 
-void insert(List* head, int position, int value)
-{
-    int i = 0;
-    List* newNode = NULL;
-    head = getNth(head, position);
-    newNode = (List*)malloc(sizeof(List));
-    newNode->value = value;
-    if (head->next)
-    {
-        newNode->next = head->next;
-    }
-    else
-    {
-        newNode->next = NULL;
-    }
-    head->next = newNode;
-}
-
 int deleteNth(List** head, int position)
 {
     if (position == 0)
@@ -128,6 +115,10 @@ int deleteNth(List** head, int position)
     else
     {
         List* prev = getNth(*head, position - 1);
+        if (prev == NULL)
+        {
+            exit(-1);
+        }
         List* element = prev->next;
         int value = element->value;
         prev->next = element->next;
@@ -145,7 +136,52 @@ void deleteList(List** head)
     free(*head);
 }
 
+void insert(List* head, int position, int value)
+{
+    int i = 0;
+    List* newNode = NULL;
+    head = getNth(head, position);
+    newNode = (List*)malloc(sizeof(List));
+    newNode->value = value;
+    if (head->next)
+    {
+        newNode->next = head->next;
+    }
+    else
+    {
+        newNode->next = NULL;
+    }
+    head->next = newNode;
+} 
+
 bool isEmpty(List* head)
 {
     return head == NULL;
+}
+
+int findN(List* head, int value)
+{
+    int index = 0;
+    while (head->next != NULL && head->value < value)
+    {
+        index++;
+        head = head->next;
+    }
+    return index - 1;
+}
+
+bool checkValue(List* head, int value)
+{
+    List* prev = getNth(head, findN(head, value) + 1);
+    return value == prev->value;
+}
+
+void printList(List* head)
+{
+    while (head)
+    {
+        printf("%d ", head->value);
+        head = head->next;
+    }
+    printf("\n");
 }

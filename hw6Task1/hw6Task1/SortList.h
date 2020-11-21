@@ -1,20 +1,18 @@
 #pragma once
+
 #include <stdbool.h>
 
-// Струкутра списка
-typedef struct List {
-    int value;
-    struct List* next;
-} List;
+//
+typedef struct List List;
 
 // Функция добавление в список
 void push(List** head, int element);
 
-// функция удаления из списка
+//
 int pop(List** head);
 
-// Функция для получение n-ого элемента в списке
-List* getNth(List* head, int n);
+//
+List* getNth(List* head, int position);
 
 // Функция для получение последнего элемента в списке
 List* getLast(List* head);
@@ -28,14 +26,23 @@ List* getLastButOne(List* head);
 // Функция для удаления последнего элемента в списке
 int popBack(List** head);
 
-// Функция для добавление элемента в список за n-ый элемент 
-void insert(List* head, int n, int val);
-
 // Функция удаление n-ого элемента
 int deleteNth(List** head, int n);
 
 // Удаление списка
 void deleteList(List** head);
 
+//
+void insert(List* head, int position, int value);
+
 // Проверка на пустоту списка
 bool isEmpty(List* head);
+
+// Находит номер n-ого элемента в списке
+int findN(head, element);
+
+// Проверяет есть ли у кого-то узла в списке такое значение
+bool checkValue(List* head, int val);
+
+// Печатает список
+void printList(List* head);

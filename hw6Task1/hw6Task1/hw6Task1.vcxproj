@@ -139,19 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\hw6Node\hw6Node\List.c" />
     <ClCompile Include="..\..\hw6Node\hw6Node\ListTest.c" />
     <ClCompile Include="hw6Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
     <ClCompile Include="TaskTest.c" />
-    <ClCompile Include="UsefullFunctionForList.c" />
+    <ClCompile Include="SortList.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\hw6Node\hw6Node\List.h" />
     <ClInclude Include="..\..\hw6Node\hw6Node\ListTest.h" />
     <ClInclude Include="TaskTest.h" />
-    <ClInclude Include="UsefullFunctionForList.h" />
+    <ClInclude Include="SortList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

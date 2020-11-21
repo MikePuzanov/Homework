@@ -1,6 +1,4 @@
-﻿#include "../../hw6Node/hw6Node/List.h"
-#include "../../hw6Node/hw6Node/ListTest.h"
-#include "UsefullFunctionForList.h"
+﻿#include "SortList.h"
 #include "TaskTest.h"
 
 #include <stdio.h>
@@ -11,7 +9,7 @@
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-	if (!testList() && !testTask())
+	if (!testTask())
 	{
 		printf("Тест не пройден!\n");
 		return 1;
