@@ -1,4 +1,5 @@
-﻿#include "AvlTree.h"
+﻿#include "AvlTreeDictionary.h"
+#include "TestAvlDictionary.h"
 
 #include <stdio.h>
 #include <locale.h>
@@ -7,8 +8,13 @@
 
 int main()
 {
-    printf("\n0 - Выход.");
-    printf("\1 - nДобавить значение по заданному ключу в словарь.\n");
+    setlocale(LC_ALL, "Rus");
+    if (!test())
+    {
+        return 1;
+    }
+    printf("0 - Выход.\n");
+    printf("1 - Добавить значение по заданному ключу в словарь.\n");
     printf("2 - Получить значение по заданному ключу из словаря.\n");
     printf("3 - Проверить наличие заданного ключа.\n");
     printf("4 - Удалить заданный ключ и связанное с ним значение из словаря.\n");
@@ -19,6 +25,7 @@ int main()
     while (result)
     {
         int key = 0;
+        printf("Выберите дейсвтие - ");
         scanf("%i", &key);
         switch (key)
         {
@@ -30,30 +37,41 @@ int main()
             scanf("%s", &word);
             printf("\nВведите ключ - ");
             scanf("%i", &key);
-            insert(root, key, word);
+            root = insert(root, key, word);
             break;
         case 2:
             printf("\nВведите ключ - ");
             scanf("%i", &key);
-            Node* nodeInTree = getNode(root, key);
-            if (getNode == NULL)
+            if (getNode(root, key) == NULL)
             {
                 printf("\nПо данному ключу слова не найдено!\n");
             }
             else
             {
-                printf("\nПо данному ключу слова найдено - %s", nodeInTree->word);
+                char word[15];
+                printf("\nПо данному ключу слова найдено - ");
+                printWord(root);
             }
             break;
         case 3:
-
+            printf("\nВведите ключ - ");
+            scanf("%i", &key);
+            if (isKeyExist(root, key))
+            {
+                printf("\nТакой ключ есть!");
+                break;
+            }
+                printf("\nТакого ключ нет!");
             break;
         case 4:
-
+            printf("\nВведите ключ - ");
+            scanf("%i", &key);
+            root = deleteNode(root, key);
             break;
         default:
             printf("Повторите ввод.");
             break;
         }
     }
+    root = deleteTree(root);
 }

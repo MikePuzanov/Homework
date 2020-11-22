@@ -18,12 +18,18 @@
     <ClCompile Include="hw8Task1.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AvlTree.c">
+    <ClCompile Include="TestAvlDictionary.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="AvlTreeDictionary.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AvlTree.h">
+    <ClInclude Include="TestAvlDictionary.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="AvlTreeDictionary.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

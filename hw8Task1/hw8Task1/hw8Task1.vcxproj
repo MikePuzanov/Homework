@@ -139,13 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AvlTree.c" />
+    <ClCompile Include="AvlTreeDictionary.c">
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
+    </ClCompile>
     <ClCompile Include="hw8Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
+    <ClCompile Include="TestAvlDictionary.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AvlTree.h" />
+    <ClInclude Include="AvlTreeDictionary.h" />
+    <ClInclude Include="TestAvlDictionary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
