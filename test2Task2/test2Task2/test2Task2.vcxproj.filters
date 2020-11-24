@@ -21,6 +21,9 @@
     <ClCompile Include="Graph.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Test.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h">
@@ -32,6 +35,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GraphFile.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="Answer.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

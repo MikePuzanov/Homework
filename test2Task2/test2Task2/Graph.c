@@ -1,10 +1,8 @@
 #include "Graph.h"
-#include "../../Queue/Queue/Queue.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 
 typedef struct Graph
 {
@@ -66,14 +64,15 @@ void deleteGraph(Graph** graph)
 	*graph = NULL;
 }
 
-void printGraph(Graph* graph)
+void printGraph(Graph* graph, char fileName[])
 {
+	FILE* file = fopen(fileName, "w");
 	for (int i = 0; i < graph->count; ++i)
 	{
 		for (int j = 0; j < graph->count; ++j)
 		{
-			printf("%i ", graph->matrix[i][j]);
+			fprintf(file, "%i ", graph->matrix[i][j]);
 		}
-		printf("\n");
+		fprintf(file,"\n");
 	}
 }
