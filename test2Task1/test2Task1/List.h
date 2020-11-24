@@ -4,7 +4,7 @@
 // Струкутра списка
 typedef struct List List;
 
-//
+// создание списка
 void makeList(List** head, char fileName[], int* size);
 
 // Функция добавление в список
