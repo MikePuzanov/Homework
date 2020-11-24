@@ -20,4 +20,13 @@ bool test()
 		}
 		size--;
 	}
+	if (!isEmpty(head1))
+	{
+		deleteList(&head1);
+	}
+	if (!isEmpty(head2))
+	{
+		deleteList(&head2);
+	}
+	return true;
 }
