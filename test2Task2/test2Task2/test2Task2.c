@@ -8,4 +8,5 @@ int main()
     printf("\n");
     graph = floyd(graph);
     printGraph(graph, "Answer.txt");
+    deleteGraph(&graph);
 }
