@@ -12,60 +12,131 @@ typedef struct Node
 {
 	Node* next;
 	char* word;
-}
-Node;
+} Node;
+
+typedef struct Hash
+{
+	Node** hashTable;
+	int length;
+	int notEmpty;
+} Hash;
 
 int hashFunction(char* value) 
 {
 	int result = 0;
 	for (int index = 0; value[index] != '\0'; ++index)
 	{
-		result = (result + value[index]) % SIZE; // hashSize == 256;
+		result = (result * 17 + value[index]) % SIZE;
 	}
-	result = abs(result);
-	if (result > 255)
-	{
-		return result % 256;
-	}
-	return abs(result);
+	return abs(result) % SIZE;
 }
 
-Node* insert(char* word, Node** hashTable)
+
+Hash* insert(char* word, Hash* hashTable)
 {
-	Node* mainNode;
-	Node* newNode = malloc(sizeof(Node));
 	int index = hashFunction(word);
-	mainNode = hashTable[index];
-	hashTable[index] = newNode;
+	Node* mainNode = hashTable->hashTable[index];
+	if (mainNode == NULL)
+	{
+		hashTable->notEmpty++;
+	}
+	Node* newNode = malloc(sizeof(Node));
 	newNode->next = mainNode;
 	char* newWord = malloc(25 * sizeof(char));
 	strcpy(newWord, word);
 	newNode->word = newWord;
-	return newNode;
+	hashTable->hashTable[index] = newNode;
+	return hashTable;
 }
 
-Node** createHashTable(const char fileName[], Node*** hashTable)
+Node* createList()
+{
+	Node* node = NULL;
+	return node;
+}
+
+Hash* createHashTable()
+{
+	Hash* table = malloc(sizeof(Hash));
+	if (table == NULL)
+	{
+		return NULL;	
+	}
+	table->length = SIZE;
+	table->notEmpty = 0;
+	table->hashTable = malloc(SIZE * sizeof(Node*));
+	if (table->hashTable == NULL)
+	{
+		return NULL;
+	}
+	for (int i = 0; i < SIZE; ++i)
+	{
+		table->hashTable[i] = createList();
+	}
+	return table;
+}
+
+int frequency(Hash* hash, int index, char word[])
+{
+	int count = 0;
+	Node* node = hash->hashTable[index];
+	while (node != NULL)
+	{
+		if (strcmp(word, node->word) == 0)
+		{
+			count++;
+		}
+		node = node->next;
+	}
+	return count;
+}
+
+void printFrequency(Hash* hashTable, char fileName[])
 {
 	FILE* file = fopen(fileName, "r");
 	while (!feof(file))
 	{
-		char word[15];
+		char word[25];
 		char symbol = fgetc(file);
-		if (symbol == " ")
+		if (symbol == ' ' || symbol == '\n')
 		{
 			continue;
 		}
 		int i = 0;
-		while (!feof(file) && symbol != '.' && symbol != '-' && symbol != ',' && symbol != ':' && symbol != ';' && symbol != ' ')
+		while (!feof(file) && symbol != '.' && symbol != '\n' && symbol != '-' && symbol != ',' && symbol != ':' && symbol != ';' && symbol != ' ')
 		{
 			word[i] = symbol;
 			symbol = fgetc(file);
 			++i;
 		}
 		word[i] = '\0';
-		//fscanf(file, "%s", &word);
 		int index = hashFunction(&word);
-		*hashTable[index] = insert(&word, hashTable);
+		printf("%s - %i раз.\n", word, frequency(hashTable, index, word));
 	}
 	fclose(file);
+}
+
+float fillFactor(Hash* hashTable)
+{
+	return (float)hashTable->notEmpty / hashTable->length;
+}
+
+void listLenght(Hash* hashTable, int* max, float* mid)
+{
+	for (int i = 0; i < SIZE; ++i)
+	{
+		Node* node = hashTable->hashTable[i];
+		int count = 0;
+		while (node != NULL)
+		{
+			count++;
+			node = node->next;
+		}
+		if (count > *max)
+		{
+			*max = count;
+		}
+		*mid += count;
+	}
+	*mid = (float)*mid / hashTable->notEmpty;
 }

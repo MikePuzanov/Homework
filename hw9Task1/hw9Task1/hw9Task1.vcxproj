@@ -145,12 +145,15 @@
     <ClCompile Include="hw9Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
+    <ClCompile Include="Test.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="File.txt" />
+    <Text Include="Test.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashTable.h" />
+    <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
