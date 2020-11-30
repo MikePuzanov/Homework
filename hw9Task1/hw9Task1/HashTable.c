@@ -60,6 +60,11 @@ int hashFunction(char* value, int hashSize)
 	return abs(result) % hashSize;
 }
 
+int getHashSize(Hash* hashTable)
+{
+	return hashTable->length;
+}
+
 Hash* insert(char* word, Hash* hashTable)
 {
 	int index = hashFunction(word, hashTable->length);
@@ -103,10 +108,9 @@ void pop(Node** head)
 
 void deleteRowNode(Node** head)
 {
-	while ((*head)->next)
+	while ((*head))
 	{
 		pop(head);
-		*head = (*head)->next;
 	}
 	free(*head);
 }
@@ -190,29 +194,44 @@ int frequency(Hash* hash, int index, char word[])
 	return count;
 }
 
-void printFrequency(Hash* hashTable, char fileName[])
+bool checkWord(Node* head, int index, char word[])
 {
-	FILE* file = fopen(fileName, "r");
-	while (!feof(file))
+	if (index < 1)
 	{
-		char word[25];
-		char symbol = fgetc(file);
-		if (symbol == ' ' || symbol == '\n')
-		{
-			continue;
-		}
-		int i = 0;
-		while (!feof(file) && symbol != '.' && symbol != '\n' && symbol != '-' && symbol != ',' && symbol != ':' && symbol != ';' && symbol != ' ')
-		{
-			word[i] = symbol;
-			symbol = fgetc(file);
-			++i;
-		}
-		word[i] = '\0';
-		int index = hashFunction(&word, hashTable->length);
-		printf("%s - %i раз.\n", word, frequency(hashTable, index, word));
+		return true;
 	}
-	fclose(file);
+	for (int i = 0; i < index; ++i)
+	{
+		if (strcmp(head->word, word) == 0)
+		{
+			return false;
+		}
+		head = head->next;
+	}
+	return true;
+}
+
+void printFrequency(Hash* hashTable)
+{
+	for (int i = 0; i < hashTable->length; ++i)
+	{
+		Node* node = hashTable->hashTable[i];
+		int countIndex = 0;
+		while (node)
+		{
+			countIndex++;
+			char word[25];
+			strcpy(word, node->word);
+			if (!checkWord(hashTable->hashTable[i], countIndex - 1, word))
+			{
+				node = node->next;
+				continue;
+			}
+			int index = hashFunction(&word, hashTable->length);
+			printf("%s - %i раз.\n", word, frequency(hashTable, index, word));
+			node = node->next;
+		}
+	}
 }
 
 float fillFactor(Hash* hashTable)
@@ -222,7 +241,7 @@ float fillFactor(Hash* hashTable)
 
 void listLenght(Hash* hashTable, int* max, float* mid)
 {
-	for (int i = 0; i < SIZE; ++i)
+	for (int i = 0; i < hashTable->length; ++i)
 	{
 		Node* node = hashTable->hashTable[i];
 		int count = 0;
@@ -238,4 +257,14 @@ void listLenght(Hash* hashTable, int* max, float* mid)
 		*mid += count;
 	}
 	*mid = (float)*mid / hashTable->notEmpty;
+}
+
+void deleteHashTable(Hash** hashTable)
+{
+	for (int i = 0; i < (*hashTable)->length; ++i)
+	{
+		deleteRowNode(&(*hashTable)->hashTable[i]);
+	}
+	free((*hashTable)->hashTable);
+	free(*hashTable);
 }
