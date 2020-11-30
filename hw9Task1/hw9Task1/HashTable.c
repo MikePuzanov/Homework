@@ -6,7 +6,7 @@
 #include <string.h>
 #include <math.h>
 
-#define SIZE 256
+#define SIZE 25
 
 typedef struct Node
 {
@@ -21,20 +21,48 @@ typedef struct Hash
 	int notEmpty;
 } Hash;
 
-int hashFunction(char* value) 
+Node* createList()
 {
-	int result = 0;
-	for (int index = 0; value[index] != '\0'; ++index)
-	{
-		result = (result * 17 + value[index]) % SIZE;
-	}
-	return abs(result) % SIZE;
+	Node* node = NULL;
+	return node;
 }
 
+Hash* createHashTable()
+{
+	Hash* table = malloc(sizeof(Hash));
+	if (table == NULL)
+	{
+		return NULL;
+	}
+	table->length = SIZE;
+	table->notEmpty = 0;
+	table->hashTable = malloc(SIZE * sizeof(Node*));
+	if (table->hashTable == NULL)
+	{
+		return NULL;
+	}
+	for (int i = 0; i < SIZE; ++i)
+	{
+		table->hashTable[i] = createList();
+	}
+	return table;
+}
+
+int hashFunction(char* value, int hashSize) 
+{
+	int result = 0;
+	int power = 1;
+	for (int index = 0; value[index] != '\0'; ++index)
+	{
+		result = (result * power + (int)value[index]);
+		power = power * 2 + 1;
+	}
+	return abs(result) % hashSize;
+}
 
 Hash* insert(char* word, Hash* hashTable)
 {
-	int index = hashFunction(word);
+	int index = hashFunction(word, hashTable->length);
 	Node* mainNode = hashTable->hashTable[index];
 	if (mainNode == NULL)
 	{
@@ -49,31 +77,102 @@ Hash* insert(char* word, Hash* hashTable)
 	return hashTable;
 }
 
-Node* createList()
+void push(Node** head, char* word)
 {
-	Node* node = NULL;
-	return node;
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	char* newWord = malloc(25 * sizeof(char));
+	strcpy(newWord, word);
+	newNode->word = newWord;
+	newNode->next = (*head);
+	(*head) = newNode;
 }
 
-Hash* createHashTable()
+void pop(Node** head)
 {
-	Hash* table = malloc(sizeof(Hash));
-	if (table == NULL)
+	Node* delete = NULL;
+	if (head == NULL)
 	{
-		return NULL;	
+		return;
 	}
-	table->length = SIZE;
-	table->notEmpty = 0;
-	table->hashTable = malloc(SIZE * sizeof(Node*));
-	if (table->hashTable == NULL)
+	delete = (*head);
+	free((*head)->word);
+	(*head) = (*head)->next;
+	free(delete);
+	return;
+}
+
+void deleteRowNode(Node** head)
+{
+	while ((*head)->next)
 	{
-		return NULL;
+		pop(head);
+		*head = (*head)->next;
 	}
-	for (int i = 0; i < SIZE; ++i)
+	free(*head);
+}
+
+bool rehash(Hash* hashTable)
+{
+	Node** newHashTable = malloc(hashTable->length * 2 * sizeof(Node*));
+	if (newHashTable == NULL)
 	{
-		table->hashTable[i] = createList();
+		return false;
 	}
-	return table;
+	for (int i = 0; i < (hashTable->length * 2); i++)
+	{
+		newHashTable[i] = createList();
+	}
+	hashTable->notEmpty = 0;
+	for (int i = 0; i < hashTable->length; i++)
+	{
+		while (hashTable->hashTable[i] != NULL)
+		{
+			char* word = hashTable->hashTable[i]->word;
+			int key = hashFunction(word, hashTable->length * 2);
+			if (newHashTable[key] == NULL)
+			{
+				hashTable->notEmpty++;
+			}
+			push(&newHashTable[key], word);
+			pop(&(hashTable->hashTable[i]));
+		}
+		free(hashTable->hashTable[i]);
+	}
+	hashTable->length *= 2;
+	free(hashTable->hashTable);
+	hashTable->hashTable = newHashTable;
+	return true;
+}
+
+
+Hash* readFromFile(Hash* hashTable, char fileName[])
+{
+	FILE* file = fopen(fileName, "r");
+	while (!feof(file))
+	{
+		char word[25];
+		char symbol = fgetc(file);
+		if (symbol == ' ' || symbol == '\n')
+		{
+			continue;
+		}
+		int i = 0;
+		while (!feof(file) && symbol != '.' && symbol != '\n' && symbol != '-' && symbol != ',' && symbol != ':' && symbol != ';' && symbol != ' ')
+		{
+			word[i] = symbol;
+			symbol = fgetc(file);
+			++i;
+		}
+		word[i] = '\0';
+		if ((hashTable->length - hashTable->notEmpty) < 10 )
+		{
+			rehash(hashTable);
+		}
+		int index = hashFunction(&word, hashTable->length);
+		hashTable = insert(word, hashTable);
+	}
+	fclose(file);
+	return hashTable;
 }
 
 int frequency(Hash* hash, int index, char word[])
@@ -110,7 +209,7 @@ void printFrequency(Hash* hashTable, char fileName[])
 			++i;
 		}
 		word[i] = '\0';
-		int index = hashFunction(&word);
+		int index = hashFunction(&word, hashTable->length);
 		printf("%s - %i раз.\n", word, frequency(hashTable, index, word));
 	}
 	fclose(file);

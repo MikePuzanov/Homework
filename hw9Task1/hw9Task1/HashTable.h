@@ -5,14 +5,17 @@ typedef struct Node Node;
 // cтруктура хэш-таблицы
 typedef struct Hash Hash;
 
+// создание таблицы
+Hash* createHashTable();
+
 // хэш-функция
-int hashFunction(char* value);
+int hashFunction(char* value, int hashSize);
 
 // добавление узла в таблицу
 Hash* insert(char* word, Hash* hashTable);
 
-// создание таблицы
-Hash* createHashTable();
+//
+Hash* readFromFile(Hash* hashTable, char fileName[]);
 
 // частота элемента 
 int frequency(Hash* hash, int index, char word[]);
