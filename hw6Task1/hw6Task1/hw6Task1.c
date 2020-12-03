@@ -21,11 +21,6 @@ int main()
 	printf("3 – распечатать список\n");
 	int key = -1;
 	int element = 0;
-	int min = 0;
-	int max = 0;
-	int max2 = 0;
-	int min2 = 0;
-	int size = 0;
 	List* head = NULL;
 	while (key != 0)
 	{
@@ -39,27 +34,7 @@ int main()
 		case 1:
 			printf("\nВведите значение, которое хотите добавить в список - ");
 			scanf("%i", &element);
-			size++;
-			if (size == 1)
-			{
-				min = element;
-				max = element;
-				push(&head, element);
-				break;
-			}
-			if (element < min)
-			{
-				min = element;
-				push(&head, element);
-				break;
-			}
-			if (element > max)
-			{
-				max = element;
-				pushBack(head, element);
-				break;
-			}
-			insert(head, findN(head, element), element);
+			pushtoList(&head, element);
 			break;
 		case 2:
 			printf("\nВведите значение, которое вы хотите удалить из списка - ");
@@ -69,11 +44,7 @@ int main()
 				printf("Список пуст!\n");
 				break;
 			}
-			while (checkValue(head, element))
-			{
-				deleteNth(&head, findN(head, element) + 1);
-				size--;
-			}
+			head = deleteNode(head, element);
 			break;
 		case 3:
 			printList(head);
@@ -83,12 +54,5 @@ int main()
 			break;
 		}
 	}
-	if (!isEmpty(head))
-	{
-		deleteList(&head);
-	}
-	if (!isEmpty(head))
-	{
-		return 2;
-	}
+	deleteList(&head);
 }

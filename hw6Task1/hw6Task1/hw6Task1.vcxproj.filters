@@ -18,9 +18,6 @@
     <ClCompile Include="hw6Task1.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\hw6Node\hw6Node\ListTest.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="TaskTest.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -29,9 +26,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\hw6Node\hw6Node\ListTest.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="TaskTest.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

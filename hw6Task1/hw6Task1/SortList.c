@@ -42,70 +42,6 @@ List* getNth(List* head, int position)
     return head;
 }
 
-List* getLast(List* head)
-{
-    if (head == NULL)
-    {
-        return NULL;
-    }
-    while (head->next)
-    {
-        head = head->next;
-    }
-    return head;
-}
-
-void pushBack(List* head, int value)
-{
-    List* last = getLast(head);
-    List* newNode = (List*)malloc(sizeof(List));
-    newNode->value = value;
-    newNode->next = NULL;
-    last->next = newNode;
-}
-
-List* getLastButOne(List* head)
-{
-    if (head == NULL)
-    {
-        exit(-2);
-    }
-    if (head->next == NULL)
-    {
-        return NULL;
-    }
-    while (head->next->next)
-    {
-        head = head->next;
-    }
-    return head;
-}
-
-
-int popBack(List** head)
-{
-    List* lastButOne = NULL;
-    if (!head)
-    {
-        exit(-1);
-    }
-    if (!(*head))
-    {
-        exit(-1);
-    }
-    lastButOne = getLastButOne(*head);
-    if (lastButOne == NULL)
-    {
-        free(*head);
-        *head = NULL;
-        return NULL;
-    }
-    int number = lastButOne->next->value;
-    free(lastButOne->next);
-    lastButOne->next = NULL;
-    return number;
-}
-
 int deleteNth(List** head, int position)
 {
     if (position == 0)
@@ -127,6 +63,11 @@ int deleteNth(List** head, int position)
     }
 }
 
+bool isEmpty(List* head)
+{
+    return head == NULL;
+}
+
 void deleteList(List** head)
 {
     while ((*head)->next)
@@ -134,29 +75,7 @@ void deleteList(List** head)
         pop(head);
     }
     free(*head);
-}
-
-void insert(List* head, int position, int value)
-{
-    int i = 0;
-    List* newNode = NULL;
-    head = getNth(head, position);
-    newNode = (List*)malloc(sizeof(List));
-    newNode->value = value;
-    if (head->next)
-    {
-        newNode->next = head->next;
-    }
-    else
-    {
-        newNode->next = NULL;
-    }
-    head->next = newNode;
-} 
-
-bool isEmpty(List* head)
-{
-    return head == NULL;
+    *head = NULL;
 }
 
 int findN(List* head, int value)
@@ -170,10 +89,49 @@ int findN(List* head, int value)
     return index - 1;
 }
 
+void pushtoList(List** head,int element)
+{
+    List* node = *head;
+    List* newNode = malloc(sizeof(List));
+    if (newNode == NULL)
+    {
+        return;
+    }
+    if (node == NULL)
+    {
+        push(head, element);
+        return;
+    }
+    int index = 0;
+    while (node->next != NULL && node->next->value < element)
+    {
+        node = node->next;
+        index++;
+    }
+    newNode->value = element;
+    if (node == *head && element < node->value)
+    {
+        newNode->next = *head;
+        *head = newNode;
+        return;
+    }
+    newNode->next = node->next;
+    node->next = newNode;
+}
+
 bool checkValue(List* head, int value)
 {
     List* prev = getNth(head, findN(head, value) + 1);
     return value == prev->value;
+}
+
+List* deleteNode(List* head, int element)
+{
+    while (checkValue(head, element))
+    {
+        deleteNth(&head, findN(head, element) + 1);
+    }
+    return head;
 }
 
 void printList(List* head)
