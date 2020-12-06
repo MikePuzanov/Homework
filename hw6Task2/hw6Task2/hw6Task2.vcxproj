@@ -139,20 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\hw6Node\hw6Node\List.c" />
-    <ClCompile Include="..\..\hw6Node\hw6Node\ListTest.c" />
     <ClCompile Include="Countdown.c" />
     <ClCompile Include="CyclicList.c" />
+    <ClCompile Include="CyclicListTest.c" />
     <ClCompile Include="hw6Task2.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
     <ClCompile Include="TestTask.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\hw6Node\hw6Node\List.h" />
-    <ClInclude Include="..\..\hw6Node\hw6Node\ListTest.h" />
     <ClInclude Include="Countdown.h" />
     <ClInclude Include="CyclicList.h" />
+    <ClInclude Include="CyclicListTest.h" />
     <ClInclude Include="TestTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

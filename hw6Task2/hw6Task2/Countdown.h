@@ -1,4 +1,6 @@
 #pragma once
 
+#include "CyclicList.h"
+
 // Функция считалочки которая возвращает позицию война, который останется живым
-int countdown(int n, int m);
+int countdown(int warriors, int numberDeadWarrior, List* head);

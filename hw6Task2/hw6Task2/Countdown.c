@@ -1,10 +1,10 @@
 #include "CyclicList.h"
-#include "../../hw6Node/hw6Node/List.h"
+#include "Countdown.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int countdown(int n, int m)
+int countdown(int n, int m, List* head)
 {
     if (n < 1)
     {
@@ -14,13 +14,11 @@ int countdown(int n, int m)
     {
         return 0;
     }
-    List first;
-    List* head = &first;
     head->value = -1;
     init(head);
     for (int i = 0; i < n; ++i)
     {
-        insert(head, i, i);
+        insert(head, 0, n - 1 - i);
     }
     int counter = 0;
     while (head->value != head->next->next->value)

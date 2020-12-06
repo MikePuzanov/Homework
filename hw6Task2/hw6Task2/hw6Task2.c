@@ -1,6 +1,4 @@
-﻿#include "../../hw6Node/hw6Node/List.h"
-#include "../../hw6Node/hw6Node/ListTest.h"
-#include "CyclicList.h"
+﻿#include "CyclicList.h"
 #include "Countdown.h"
 #include "TestTask.h"
 
@@ -12,7 +10,7 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    if (!testTask() && !testList())
+    if (!testTask())
     {
         printf("Тест не пройден!");
         return 5;
@@ -20,11 +18,17 @@ int main()
     printf("Тест пройден!\n\n");
     int n = 0;
     int m = 0;
-    printf("Введите число n(количество войнов) - ");
+    printf("Введите число n (количество войнов) - ");
     scanf("%i", &n);
-    printf("Введите число m(убивают каждого m-го) - ");
+    printf("Введите число m (убивают каждого m-го) - ");
     scanf("%i", &m);
-    int answer = countdown(n, m);
+    List* head;
+    init(head);
+    for (int i = 0; i < n; ++i)
+    {
+        insert(head, 0, n - 1 - i);
+    }
+    int answer = countdown(n, m, head);
     if (answer == -1)
     {
         printf("\nВы ввели некорректные данные!");
