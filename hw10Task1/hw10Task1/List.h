@@ -5,16 +5,19 @@
 typedef struct List List;
 
 // Функция добавление в список
-void push(List** head, int element);
+void push(List** head, int element, int road);
 
 // функция удаления из списка
-int pop(List** head);
+void pop(List** head);
 
-// получить н-ый узел в списке
-List* getNth(List* head, int n);
+// перейти к следующему элементу в списке
+List* getNextNode(List* head);
 
-// получить значение узла
-int getValue(List* head);
+// получить растояние
+int getRoad(List* head);
+
+// получить город
+int getCity(List* head);
 
 // Удаление списка
 void deleteList(List** head);

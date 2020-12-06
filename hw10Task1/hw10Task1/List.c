@@ -6,19 +6,21 @@
 
 typedef struct List
 {
-    int value;
+    int city;
+    int road;
     struct List* next;
 } List;
 
-void push(List** head, int element)
+void push(List** head, int element, int road)
 {
     List* newNode = (List*)malloc(sizeof(List));
-    newNode->value = element;
+    newNode->city = element;
+    newNode->road = road;
     newNode->next = (*head);
     (*head) = newNode;
 }
 
-int pop(List** head)
+void pop(List** head)
 {
     List* delete = NULL;
     if (head == NULL)
@@ -26,26 +28,24 @@ int pop(List** head)
         exit(-1);
     }
     delete = (*head);
-    int element = delete->value;
+    int element = delete->city;
     (*head) = (*head)->next;
     free(delete);
-    return element;
 }
 
-List* getNth(List* head, int n)
+List* getNextNode(List* head)
 {
-    int counter = 0;
-    while (counter < n && head)
-    {
-        head = head->next;
-        counter++;
-    }
-    return head;
+    return head ? head->next : head;
 }
 
-int getValue(List* head)
+int getRoad(List* head)
 {
-    return head->value;
+    return head->road;
+}
+
+int getCity(List* head)
+{
+    return head->city;
 }
 
 void deleteList(List** head)
@@ -53,9 +53,9 @@ void deleteList(List** head)
     while ((*head)->next)
     {
         pop(head);
-        *head = (*head)->next;
     }
     free(*head);
+    *head = NULL;
 }
 
 bool isEmpty(List* head)

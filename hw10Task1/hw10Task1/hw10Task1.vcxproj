@@ -139,18 +139,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuildCounties.c">
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
+    </ClCompile>
     <ClCompile Include="Graph.c" />
     <ClCompile Include="hw10Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
     <ClCompile Include="List.c" />
+    <ClCompile Include="ListTest.c" />
+    <ClCompile Include="TaskTest.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuildCounties.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="ListTest.h" />
+    <ClInclude Include="TaskTest.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Task.txt" />
+    <Text Include="Test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

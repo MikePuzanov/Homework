@@ -1,4 +1,5 @@
 #include "Graph.h"
+#include "List.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +7,7 @@
 
 typedef struct Graph
 {
-	int** matrix;
+	List** matrix;
 	int count;
 }Graph;
 
@@ -18,18 +19,19 @@ Graph* createGraph(int count)
 		return NULL;
 	}
 	newGraph->count = count;
-	newGraph->matrix = calloc(count, sizeof(int*));
-	for (int i = 0; i < count; ++i)
-	{
-		newGraph->matrix[i] = calloc(count, sizeof(int));
-	}
+	newGraph->matrix = calloc(count, sizeof(List*));
 	return newGraph;
+}
+
+List* getList(Graph* graph, int i)
+{
+	return graph->matrix[i];
 }
 
 void fillGraph(Graph* graph, int i, int j, int len)
 {
-	graph->matrix[i][j] = len;
-	graph->matrix[j][i] = len;
+	push(&(graph->matrix[i]), j, len);
+	push(&(graph->matrix[j]), i, len);
 }
 
 int getCount(Graph* graph)
@@ -39,11 +41,12 @@ int getCount(Graph* graph)
 
 int getLen(Graph* graph, int i, int j)
 {
-	if (j < 0 || j > graph->count || i < 0 || i > graph->count)
+	List* node = graph->matrix[i];
+	while (getCity(node) != j && node)
 	{
-		return -1;
+		node = getNextNode(graph->matrix[i]);
 	}
-	return graph->matrix[i][j];
+	return node ? getRoad(node) : 0;
 }
 
 void deleteGraph(Graph** graph)
