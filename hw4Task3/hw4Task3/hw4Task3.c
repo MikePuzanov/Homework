@@ -8,28 +8,6 @@
 
 bool test()
 {
-<<<<<<< HEAD
-    struct PhoneBook tests[6] = { {"Eva", "258"}, {"Adam", "147"}, {"Jesus", "369"}, {"Adam", "369"} };
-    char name[30];
-    char phone[30];
-    if (!checkNumberOfPerson(8))
-    {
-        return false;
-    }
-    if (checkNumberOfPerson(100))
-    {
-        return false;
-    }
-    if (!checkName(tests, "Adam", 3))
-    {
-        return false;
-    }
-    if (!checkPhone(tests, "369", 3))
-    {
-        return false;
-    }
-    int indexHelp = 0;
-=======
     struct PhoneBook test[3];
     FILE* phoneBook = fopen("Test.txt", "w");
     fprintf(phoneBook, "Eva - 258\n");
@@ -66,7 +44,6 @@ bool test()
         return false;
     }
     indexHelp = 0;
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
     if (phoneSearchByName(tests, 3, "Jesus", &indexHelp))
     {
         if (strcmp(&tests[indexHelp].phone, "369") != 0)
@@ -92,10 +69,6 @@ bool test()
     printInFile(tests, 3, "Test.txt");
     bool check = true;
     FILE* phoneBook1 = fopen("Test.txt", "r");
-<<<<<<< HEAD
-    char hyphen = "-";
-=======
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
     for (int i = 3; i < 6; ++i)
     {
         fscanf(phoneBook1, "%s %c", &tests[i].name, &hyphen);
@@ -117,25 +90,16 @@ int main()
         printf("Тест не пройден!");
         return 1;
     }
-<<<<<<< HEAD
-    printf("Тест пройден!\n\n");
-=======
     printf("Тест пройден!\n\n");  
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
     printf("0 - выйти\n");
     printf("1 - добавить запись (имя и телефон)\n");
     printf("2 - распечатать все имеющиеся записи\n");
     printf("3 - найти телефон по имени\n");
     printf("4 - найти имя по телефону\n");
     printf("5 - сохранить текущие данные в файл\n");
-<<<<<<< HEAD
-    struct PhoneBook person[100];
-    int index = 0;
-=======
     int index = 0;
     struct PhoneBook person[100];
     readFromFile(person, &index, "namePhone.txt");
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
     int indexHelp = -1;
     int decide = 0;
     char name[30];
@@ -149,22 +113,14 @@ int main()
             case 0:
                 return 0;
             case 1:
-<<<<<<< HEAD
-                if (!checkNumberOfPerson(index))
-=======
                 if (!isPhonebookFull(index))
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
                 {
                     printf("\nТелефонная книжка переполнена!\n");
                     break;
                 }
                 printf("\nВведите имя нового контакта: ");
                 scanf("%s", &name);
-<<<<<<< HEAD
-                if (!checkName(person, name, index))
-=======
                 if (!doesNameExist(person, name, index))
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
                 {
                     printf("\nКонтакт уже существует!");
                     break;
@@ -172,11 +128,7 @@ int main()
                 strcpy(person[index].name, name);
                 printf("\nВведите номер нового контакта - ");
                 scanf("%s", &phone);
-<<<<<<< HEAD
-                if (!checkPhone(person, phone, index))
-=======
                 if (!doesPhoneExist(person, phone, index))
->>>>>>> 842dbac9b8c196227204ee25f50bcd4f2e90a675
                 {
                     printf("\nКонтакт уже существует!");
                     break;
