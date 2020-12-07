@@ -11,10 +11,12 @@ bool testStack()
 	head = push(head, 6);
 	if (push(head, 6)->value != 6)
 	{
+		deleteStack(&head);
 		return false;
 	}
 	if (pop(&head) != 6)
 	{
+		deleteStack(&head);
 		return false;
 	}
 	head = push(head, 5);
@@ -22,19 +24,23 @@ bool testStack()
 	head = push(head, 1);
 	if (isEmpty(head))
 	{
+		deleteStack(&head);
 		return false;
 	}
 	for (int i = 0; i < 3; ++i)
 	{
+		deleteStack(&head);
 		pop(&head);
 	}
 	if (!isEmpty(head))
 	{
+		deleteStack(&head);
 		return false;
 	}
 	deleteStack(&head);
 	if (!isEmpty(head))
 	{
+		deleteStack(&head);
 		return false;
 	}
 	return true;
