@@ -4,52 +4,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int countdown(int n, int m, List* head)
+int countdown(int warriors, int numberDeadWarrior)
 {
-    if (n < 1)
+    if (warriors < 1)
     {
         return -1;
     }
-    if (n == 1)
+    if (warriors == 1)
     {
         return 0;
     }
-    head->value = -1;
-    init(head);
-    for (int i = 0; i < n; ++i)
+    List* head = init(-1);
+    for (int i = 0; i < warriors; ++i)
     {
-        insert(head, 0, n - 1 - i);
+        insert(head, 0, warriors - 1 - i);
     }
     int counter = 0;
-    while (head->value != head->next->next->value)
+    while (getValue(head) != getValue(getNext(getNext(head))))
     {
-        if (head->value == -1)
+        if (getValue(head) == -1)
         {
-            head = head->next;
+            head = getNext(head);
         }
         counter = 0;
-        while (counter != m - 2)
+        while (counter != numberDeadWarrior - 2)
         {
-            if (head->next->value == -1)
+            if (getValue(getNext(head)) == -1)
             {
-                head = head->next;
+                head = getNext(head);
                 continue;
             }
-            head = head->next;
+            head = getNext(head);
             counter++;
         }
-        if (head->next->value == -1)
+        if (getValue(getNext(head)) == -1)
         {
-            head = head->next;
+            head = getNext(head);
         }
         popFor(&head);
-        head = head->next;
+        head = getNext(head);
     }
-    if (head->value == -1)
+    if (getValue(head) == -1)
     {
-        head = head->next;
+        head = getNext(head);
     }
-    int answer = head->value;
-    popFor(&(head->next));
+    int answer = getValue(head);
+    deleteList(&head);
     return answer;
 }

@@ -2,36 +2,45 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct List {
     int value;
     struct List* next;
 } List;
 
-void init(List* head)
+List* init(int value)
 {
+    List* head = malloc(sizeof(List));
+    if (head == NULL) {
+        return NULL;
+    }
+    head->value = value;
     head->next = head;
+    return head;
 }
 
-void push(List** head, int element)
+List* getNext(List* head)
 {
-    List* newNode = (List*)malloc(sizeof(List));
-    newNode->value = element;
-    newNode->next = (*head);
-    (*head) = newNode;
+    return head->next;
 }
 
-void insert(List* head, int n, int val)
+int getValue(List* head)
+{
+    return head->value;
+}
+
+void insert(List* head, int index, int value)
 {
     int i = 0;
     List* newNode = NULL;
-    while (i < n && head->next)
+    while (i < index && head->next)
     {
         head = head->next;
         i++;
     }
     newNode = (List*)malloc(sizeof(List));
-    newNode->value = val;
+    newNode->value = value;
     if (head->next)
     {
         newNode->next = head->next;
@@ -53,5 +62,26 @@ void popFor(List** head)
     List* delete = prev->next;
     int val = delete->value;
     prev->next = delete->next;
+    if (prev == delete)
+    {
+        free(delete);
+        *head = NULL;
+        return;
+    }
     free(delete);
+}
+
+bool isEmpty(List* head)
+{
+    return head == NULL;
+}
+
+void deleteList(List** head)
+{
+    while (!isEmpty(*head))
+    {
+        popFor(head);
+    }
+    free(*head);
+    *head = NULL;
 }

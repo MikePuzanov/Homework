@@ -1,6 +1,7 @@
 ﻿#include "CyclicList.h"
 #include "Countdown.h"
 #include "TestTask.h"
+#include "CyclicListTest.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,25 +11,19 @@
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    if (!testTask())
+    if (!testTask() || !testList())
     {
         printf("Тест не пройден!");
         return 5;
     }
     printf("Тест пройден!\n\n");
-    int n = 0;
-    int m = 0;
+    int warriors = 0;
+    int numberDeadWarrior = 0;
     printf("Введите число n (количество войнов) - ");
-    scanf("%i", &n);
+    scanf("%i", &warriors);
     printf("Введите число m (убивают каждого m-го) - ");
-    scanf("%i", &m);
-    List* head;
-    init(head);
-    for (int i = 0; i < n; ++i)
-    {
-        insert(head, 0, n - 1 - i);
-    }
-    int answer = countdown(n, m, head);
+    scanf("%i", &numberDeadWarrior);
+    int answer = countdown(warriors, numberDeadWarrior);
     if (answer == -1)
     {
         printf("\nВы ввели некорректные данные!");
