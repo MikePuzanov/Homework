@@ -5,17 +5,32 @@
 #include <stdbool.h>
 #include <string.h>
 
-Node* createRoot()
+typedef struct
+{
+	int key;
+	char* word;
+	struct Node* left;
+	struct Node* right;
+} Node;
+
+Node* createRoot(int key, const char word)
 {
 	Node* root = malloc(sizeof(Node));
 	if (root == NULL)
 	{
 		return NULL;
 	}
-	root->key = 50;
-	root->word = NULL;
+	root->key = key;
 	root->left = NULL;
 	root->right = NULL;
+	if (word != NULL)
+	{
+		char* newWord = malloc(sizeof(char) * strlen(word) + 1);
+		strcpy(newWord, word);
+		root->word = newWord;
+		return root;
+	}
+	root->word = NULL;
 	return root;
 }
 
@@ -46,27 +61,18 @@ Node* findRoot(Node* root, int key)
 	}
 }
 
-void pushToTree(char word[], int key, Node* root)
+void pushToTree(const char word[], int key, Node* root)
 {
-	root = findRoot(root, key);
-	Node* newNode = malloc(sizeof(Node));
-	if (newNode == NULL)
+	if (root->key == NULL)
 	{
-		return NULL;
-	}
-	if (key == 50)
-	{
-		char* newWord = malloc(sizeof(char) * 14);
+		char* newWord = malloc(sizeof(char) * strlen(word) + 1);
 		strcpy(newWord, word);
+		root->key = key;
 		root->word = newWord;
 		return;
 	}
-	char* newWord = malloc(sizeof(char) * 14);
-	strcpy(newWord, word);
-	newNode->word = newWord;
-	newNode->key = key;
-	newNode->left = NULL;
-	newNode->right = NULL;
+	root = findRoot(root, key);
+	Node* newNode = createRoot(key, word);
 	if (key > root->key)
 	{
 		root->right = newNode;
@@ -89,7 +95,7 @@ Node* findCurrentNode(Node* root, int key)
 		{
 			if (root->right != NULL)
 			{
-				root = root->right;;
+				root = root->right;
 			}
 			else
 			{
@@ -149,27 +155,13 @@ Node* parent(Node* root, int key)
 Node* findSwapNode(Node* current)
 {
 	int leftHeight = 0;
-	int rightHeight = 0;
 	Node* left = current->left;
 	while (left->right != NULL)
 	{
 		leftHeight++;
 		left = left->right;
 	}
-	Node* right = current->right;
-	while (right->left != NULL)
-	{
-		rightHeight++;
-		right = right->left;
-	}
-	if (leftHeight > rightHeight)
-	{
-		return left;
-	}
-	else
-	{
-		return right;
-	}
+	return left;
 }
 
 void deleteNode(Node* root, int key)
@@ -177,23 +169,22 @@ void deleteNode(Node* root, int key)
 	Node* delete = findCurrentNode(root, key);
 	Node* previous = parent(root, key);
 	char* word[1];
-	if (key == 50)
-	{
-		*word = root->word;
-		free(*word);
-		root->word == NULL;
-		return;
-	}
 	if (delete == NULL)
 	{
 		return;
 	}
 	if (delete->right == NULL && delete->left == NULL)
 	{
-		previous->left = NULL;
-		previous->right = NULL;
+		if (previous->left == delete)
+		{
+			previous->left = NULL;
+		}
+		else
+		{
+			previous->right = NULL;
+		}
 		*word = delete->word;
-		free(*word);
+		free(root->word);
 		free(delete);
 		return;
 	}
@@ -203,7 +194,7 @@ void deleteNode(Node* root, int key)
 		{
 			previous->left = delete->right;
 			*word = delete->word;
-			free(*word);
+			free(root->word);
 			free(delete);
 			return;
 		}
@@ -211,7 +202,7 @@ void deleteNode(Node* root, int key)
 		{
 			previous->right = delete->right;
 			*word = delete->word;
-			free(*word);
+			free(root->word);
 			free(delete);
 			return;
 		}
@@ -222,7 +213,7 @@ void deleteNode(Node* root, int key)
 		{
 			previous->left = delete->left;
 			*word = delete->word;
-			free(*word);
+			free(root->word);
 			free(delete);
 			return;
 		}
@@ -230,7 +221,7 @@ void deleteNode(Node* root, int key)
 		{
 			previous->right = delete->left;
 			*word = delete->word;
-			free(*word);
+			free(root->word);
 			free(delete);
 			return;
 		}
@@ -242,7 +233,7 @@ void deleteNode(Node* root, int key)
 		swapNode->right = delete->right;
 		swapNode->left = delete->left;
 		*word = delete->word;
-		free(*word);
+		free(root->word);
 		free(delete);
 		return;
 	}
@@ -250,7 +241,6 @@ void deleteNode(Node* root, int key)
 
 void deleteTree(Node* root)
 {
-
 	if (root->left != NULL)
 	{
 		deleteTree(root->left);
@@ -266,7 +256,7 @@ void deleteTree(Node* root)
 	}
 	char* word[1];
 	*word = root->word;
-	free(*word);
+	free(root->word);
 	free(root);
 	root = NULL;
 }
