@@ -24,3 +24,6 @@ void deleteList(List** head);
 
 // Проверка на пустоту списка
 bool isEmpty(List* head);
+
+// Функция для получение последнего элемента в списке
+List* getLast(List* head);

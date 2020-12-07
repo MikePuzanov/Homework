@@ -3,4 +3,4 @@
 #include "List.h"
 
 // формирует государства
-List** countriesDesigner(char fileName[]);
+List** countriesDesigner(char fileName[], int* countries);

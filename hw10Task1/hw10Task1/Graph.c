@@ -44,7 +44,7 @@ int getLen(Graph* graph, int i, int j)
 	List* node = graph->matrix[i];
 	while (getCity(node) != j && node)
 	{
-		node = getNextNode(graph->matrix[i]);
+		node = getNextNode(node);
 	}
 	return node ? getRoad(node) : 0;
 }
@@ -53,7 +53,7 @@ void deleteGraph(Graph** graph)
 {
 	for (int i = 0; i < (*graph)->count; ++i)
 	{
-		free((*graph)->matrix[i]);
+		deleteList(&(*graph)->matrix[i]);
 	}
 	free((*graph)->matrix);
 	free(*graph);

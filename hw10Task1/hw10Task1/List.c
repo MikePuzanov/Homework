@@ -62,3 +62,16 @@ bool isEmpty(List* head)
 {
     return head == NULL;
 }
+
+List* getLast(List* head)
+{
+    if (head == NULL)
+    {
+        return NULL;
+    }
+    while (head->next)
+    {
+        head = head->next;
+    }
+    return head;
+}

@@ -49,7 +49,7 @@ void fillCountries(Graph* graph, List** list, int countries, bool isCityInCountr
 	}
 }
 
-List** countriesDesigner(char fileName[])
+List** countriesDesigner(char fileName[], int* countries)
 {
 	FILE* file = fopen(fileName, "r");
 	int cities = 0;
@@ -65,10 +65,9 @@ List** countriesDesigner(char fileName[])
 		fscanf(file, "%i %i %i", &cityFirst, &citySecond, &len);
 		fillGraph(graph, cityFirst - 1, citySecond - 1, len);
 	}
-	int countries = 0;
-	fscanf(file, "%i", &countries);
-	List** list = calloc(countries, sizeof(List*));
-	for (int i = 0; i < countries; ++i)
+	fscanf(file, "%i", &(*countries));
+	List** list = calloc(*countries, sizeof(List*));
+	for (int i = 0; i < *countries; ++i)
 	{
 		list[i] = NULL;
 		int capital = 0;
@@ -77,7 +76,7 @@ List** countriesDesigner(char fileName[])
 		isCityInCountry[capital - 1] = true;
 	}
 	fclose(file);
-	fillCountries(graph, list, countries, isCityInCountry, cities - countries);
+	fillCountries(graph, list, *countries, isCityInCountry, cities - *countries);
 	free(isCityInCountry);
 	deleteGraph(&graph);
 	return list;

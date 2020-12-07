@@ -33,6 +33,14 @@ bool testList()
 		deleteList(&head);
 		return false;
 	}
+	push(&head, 2, 11);
+	push(&head, 2, 11);
+	push(&head, 2, 11);
+	if (getCity(getLast(head)) != 5 && getRoad(getLast(head)) != 1)
+	{
+		deleteList(&head);
+		return false;
+	}
 	if (isEmpty(head))
 	{
 		deleteList(&head);

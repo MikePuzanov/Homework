@@ -143,6 +143,9 @@
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
     <ClCompile Include="Graph.c" />
+    <ClCompile Include="GraphTest.c">
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
+    </ClCompile>
     <ClCompile Include="hw10Task1.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
@@ -153,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="BuildCounties.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="GraphTest.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListTest.h" />
     <ClInclude Include="TaskTest.h" />
