@@ -50,9 +50,5 @@ bool testTask()
 		return false;
 	}
 	deleteList(&head);
-	if (!isEmpty(head))
-	{
-		return false;
-	}
-	return true;
+	return isEmpty(&head);
 }
