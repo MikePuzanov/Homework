@@ -144,13 +144,13 @@
     <ClCompile Include="hw5Task2.c">
       <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SDLCheck>
     </ClCompile>
-    <ClCompile Include="readParentheses.c" />
+    <ClCompile Include="ReadParentheses.c" />
     <ClCompile Include="TestForTask.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\hw5Stack\hw5Stack\Stack.h" />
     <ClInclude Include="..\..\hw5Stack\hw5Stack\TestStack.h" />
-    <ClInclude Include="readParentheses.h" />
+    <ClInclude Include="ReadParentheses.h" />
     <ClInclude Include="TestForTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

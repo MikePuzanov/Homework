@@ -1,4 +1,4 @@
-#include "readParentheses.h"
+#include "ReadParentheses.h"
 #include "../../hw5Stack/hw5Stack/Stack.h"
 
 #include <stdbool.h>
@@ -6,27 +6,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool checkParentheses(struct StackElement* head, char line[])
+bool checkParentheses(char line[])
 {
+    struct StackElement* head = NULL;
     for (int i = 0; i < strlen(line); i++)
     {
         if (line[i] == '(' || line[i] == '[' || line[i] == '{')
         {
             head = push(head, (int)line[i]);
         }
-        if (line[i] == ')' || line[i] ==']' || line[i] == '}')
+        if (line[i] == ')' || line[i] == ']' || line[i] == '}')
         {
             int idInStack = pop(&head);
             switch (idInStack)
             {
-            case 40:
-                idInStack = 41;
+            case '(':
+                idInStack = ')';
                 break;
-            case 91:
-                idInStack = 93;
+            case '[':
+                idInStack = ']';
                 break;
-            case 123:
-                idInStack = 125;
+            case '{':
+                idInStack = '}';
                 break;
             }
             if (idInStack != (int)line[i])
@@ -35,5 +36,10 @@ bool checkParentheses(struct StackElement* head, char line[])
             }
         }
     }
-    return head == NULL;
+    if (!isEmpty(head))
+    {
+        deleteStack(&head);
+        return false;
+    }
+    return true;
 }

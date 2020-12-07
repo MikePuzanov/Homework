@@ -1,6 +1,6 @@
 ﻿#include "../../hw5Stack/hw5Stack/Stack.h"
 #include "../../hw5Stack/hw5Stack/TestStack.h"
-#include "readParentheses.h"
+#include "ReadParentheses.h"
 #include "TestForTask.h"
 
 #include <stdio.h>
@@ -21,12 +21,10 @@ int main()
     char line[100];
     printf("\nВведите вашу строку скобок: ");
     scanf("%s", &line);
-    struct StackElement* head = NULL;
-    if (!checkParentheses(head, line))
+    if (!checkParentheses(line))
     {
         printf("\nСтрока введена некорректно!\n");
         return 1;
     }
-    deleteStack(&head);
     printf("\nВерно!\n");
 }

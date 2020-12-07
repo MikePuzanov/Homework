@@ -1,5 +1,5 @@
 #include "TestForTask.h"
-#include"readParentheses.h"
+#include"ReadParentheses.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -7,24 +7,23 @@
 
 bool testForTask()
 {
-    struct StackElement* head = NULL;
-    if (!checkParentheses(head, "(())"))
+    if (!checkParentheses("(())"))
     {
         return false;
     }
-    if (!checkParentheses(head, "({[]})"))
+    if (!checkParentheses("({[]})"))
     {
         return false;
     }
-    if (checkParentheses(head, "}{"))
+    if (checkParentheses("}{"))
     {
         return false;
     }
-    if (checkParentheses(head, "({)}"))
+    if (checkParentheses("({)}"))
     {
         return false;
     }
-    if (checkParentheses(head, "]["))
+    if (checkParentheses("]["))
     {
         return false;
     }
