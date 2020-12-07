@@ -17,21 +17,15 @@ int main()
         return 1;
     }
     printf("Тест пройден!\n");
-    struct StackElement* head = NULL;
     char element[100];
     printf("\nВведите ваш пример в постфиксной форме: ");
     scanf("%99[^\n]", element);
     bool isCorrect = true;
-    int answer = reversePolish(element, head, &isCorrect);
+    int answer = reversePolish(element, &isCorrect);
     if (!isCorrect)
     {
         printf("Пример записан некорректно! ");
         return 3;
     }
     printf("\nОтвет: %i.", answer);
-    deleteStack(&head);
-    if (!isEmpty(head))
-    {
-        return 2;
-    }
  }

@@ -44,8 +44,9 @@ int translateToInt(char element[], int low, int high)
     return number;
 }
 
-int reversePolish(char element[], struct StackElement* head, bool* isCorrect)
+int reversePolish(char element[], bool* isCorrect)
 {
+    struct StackElement* head = NULL;
     int countNumberInStack = 0;
     for (int i = 0; i < strlen(element); ++i)
     {
@@ -92,5 +93,10 @@ int reversePolish(char element[], struct StackElement* head, bool* isCorrect)
             countNumberInStack++;
         }
     }
-    return pop(&head);
+    int answer = pop(&head);
+    if (!isEmpty(head))
+    {
+        deleteStack(head);
+    }
+    return answer;
 }

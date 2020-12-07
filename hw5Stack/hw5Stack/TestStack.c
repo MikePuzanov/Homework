@@ -9,12 +9,14 @@ bool testStack()
 {
 	struct StackElement* head = NULL;
 	head = push(head, 6);
-	if (push(head, 6)->value != 6)
+	if (head->value != 6)
 	{
+		deleteStack(&head);
 		return false;
 	}
 	if (pop(&head) != 6)
 	{
+		deleteStack(&head);
 		return false;
 	}
 	head = push(head, 5);
