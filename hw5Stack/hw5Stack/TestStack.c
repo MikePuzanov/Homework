@@ -29,7 +29,6 @@ bool testStack()
 	}
 	for (int i = 0; i < 3; ++i)
 	{
-		deleteStack(&head);
 		pop(&head);
 	}
 	if (!isEmpty(head))
