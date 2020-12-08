@@ -8,27 +8,31 @@
 
 bool testTask()
 {
-	Node* root = createRoot();
-	pushToTree("word", 22, root);
-	pushToTree("lemon", 35, root);
-	pushToTree("pie", 65, root);
-	if (strcmp(findCurrentNode(root, 22)->word, "word") != 0)
+Node* root = createRoot(NULL, NULL);
+	pushToTree("word", 22, &root);
+	pushToTree("lemon", 35, &root);
+	pushToTree("pie", 65, &root);
+	if (strcmp(getWord(root, 22), "word") != 0)
 	{
+		deleteTree(&root);
 		return false;
 	}
-	if (findCurrentNode(root, 242) != NULL)
+	if (getWord(root, 242) != NULL)
 	{
+		deleteTree(&root);
 		return false;
 	}
-	deleteNode(root, 22);
-	if (findCurrentNode(root, 22) != NULL)
+	if (getKey(findRoot(root, 65)) != 65)
 	{
+		deleteTree(&root);
 		return false;
 	}
-	deleteTree(root);
-	if (root->key == 50)
+	deleteNode(&root, 22);
+	if (getWord(root, 22) != NULL)
 	{
+		deleteTree(&root);
 		return false;
 	}
+	deleteTree(&root);
 	return true;
 }

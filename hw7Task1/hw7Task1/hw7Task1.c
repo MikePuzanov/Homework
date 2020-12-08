@@ -22,7 +22,7 @@ int main()
     printf("3 - Проверить наличие заданного ключа в словаре.\n");
     printf("4 - Удалить заданный ключ и связанное с ним значение из словаря.\n");
     bool isExit = true;
-    Node* root = createRoot();
+    Node* root = createRoot(NULL, NULL);
     while (isExit)
     {
         int key = 0;
@@ -41,22 +41,17 @@ int main()
             scanf("%s", &word);
             printf("Введите ключ - ");
             scanf("%i", &key);
-            pushToTree(word, key, root);
+            pushToTree(word, key, &root);
             break;
         case 2:
             printf("\nВведите ключ - ");
             scanf("%i", &key);
-            if (findCurrentNode(root, key) != NULL)
-            {
-                printf("Найденное слоово - %s\n", findCurrentNode(root, key)->word);
-                break;
-            }
-            printf("NULL");
+            printf("Найденное слоово - %s\n", getWord(root, key));
             break;
         case 3:
             printf("\nВведите ключ - ");
             scanf("%i", &key);
-            if (checkWordInTree(root, key))
+            if (getKey(findRoot(root, key)) == key)
             {
                 printf("\nСлово с таким ключом есть!\n");
                 break;
@@ -66,7 +61,7 @@ int main()
         case 4:
             printf("\nВведите ключ - ");
             scanf("%i", &key);
-            deleteNode(root, key);
+            deleteNode(&root, key);
             break;
         default:
             printf("\nВы ввели номер действия, которого нет в меню!");
@@ -74,6 +69,6 @@ int main()
             break;
         }
     }
-    deleteTree(root);
+    deleteTree(&root);
     printf("");
 }

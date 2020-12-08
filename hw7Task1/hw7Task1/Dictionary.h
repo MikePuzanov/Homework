@@ -6,19 +6,22 @@
 typedef struct Node Node;
 
 // создание главного корня
-Node* createRoot(int key, const char word);
+Node* createRoot(int key, const char word[]);
+
+// возвращает ключ узла
+int getKey(Node* root);
+
+// находит узел по ключу
+Node* findRoot(Node* root, int key);
 
 // добавление узла в дерево
-void pushToTree(char word[], int key, Node* root);
+void pushToTree(char word[], int key, Node** root);
 
-// наход узла по его ключу
-Node* findCurrentNode(Node* root, int key);
+// возвращает слово по ключу
+char* getWord(Node* root, int key);
 
 // удаление заданного узла
-void deleteNode(Node* root, int key);
+void deleteNode(Node** root, int key);
 
 // удаление дерева
-void deleteTree(Node* root);
-
-// проверка слова по ключу
-bool checkWordInTree(Node* root, int key);
+void deleteTree(Node** root);
