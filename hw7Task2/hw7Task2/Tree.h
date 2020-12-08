@@ -1,15 +1,9 @@
 #pragma once
 
-#include <stdbool.h>
+#include <stdbool.h> 
 
 // обьявление структуры
-typedef struct
-{
-	int key;
-	char symbol;
-	struct Node* left;
-	struct Node* right;
-} Node;
+typedef struct Node Node;
 
 // создание дерева
 Node* buildTree(char line[], int* low, int high);
@@ -25,6 +19,3 @@ int countTree(Node* root, bool* correctExpression);
 
 // удаление дерева
 void deleteTree(Node* root);
-
-// тесты
-bool test();

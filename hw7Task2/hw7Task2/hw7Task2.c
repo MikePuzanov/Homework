@@ -1,4 +1,5 @@
 ﻿#include "Tree.h"
+#include "Test.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +13,7 @@ int main()
     {
         return 1;
     }
+    printf("Тест пройден!\n\n");
     char line[30];
     int size = 0;
     char symbol = ' ';
@@ -24,8 +26,7 @@ int main()
     fclose(expression);
     int high = size;
     int low = 0;
-    Node* root = NULL;
-    root = buildTree(line, &low, size);
+    Node* root = buildTree(line, &low, size);
     root = checkTree(root);
     char answerLine[30];
     size = 0;
@@ -41,9 +42,8 @@ int main()
     {
         printf("\n\nНа ноль делить нельзя!");
         deleteTree(root);
-         return 6;
+        return 6;
     }
     printf("\nОтвет: %i.", answer);
     deleteTree(root);
-    printf("hyrhrh");
 }

@@ -6,7 +6,41 @@
 #include <ctype.h>
 #include <string.h>
 
-Node* buildTree(char line[],int* low, int high)
+typedef struct Node
+{
+	int key;
+	char symbol;
+	struct Node* left;
+	struct Node* right;
+} Node;
+
+bool isOperator(char symbol)
+{
+	return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+}
+
+int readNumber(char line[], int* index)
+{
+	int minus = 1;
+	if (line[*index] == '-')
+	{
+		minus = -1;
+		(*index)++;
+	}
+	int power = 1;
+	int number = 0;
+	while (isdigit(line[*index]))
+	{
+		number += number * power + ((int)line[*index] - '0');
+		power *= 10;
+		(*index)++;
+	}
+	(*index)--;
+	number *= minus;
+	return number;
+}
+
+Node* buildTree(char line[], int* low, int high)
 {
 	char symbol = ' ';
 	char sign = ' ';
@@ -19,9 +53,7 @@ Node* buildTree(char line[],int* low, int high)
 		{
 			Node* son = malloc(sizeof(Node));
 			(*low)++;
-			int low1 = *low;
-			son = buildTree(line, &low1, high);
-			*low = low1;
+			son = buildTree(line, low, high);
 			if (root->left == NULL)
 			{
 				root->left = son;
@@ -31,7 +63,8 @@ Node* buildTree(char line[],int* low, int high)
 				root->right = son;
 			}
 		}
-		if ((line[*low] == '+' || line[*low] == '-' || line[*low] == '*' || line[*low] == '/') && line[*low + 1] == ' ')
+		
+		if (isOperator(line[*low]) && line[*low + 1] == ' ')
 		{
 			root->symbol = line[*low];
 		}
@@ -40,23 +73,7 @@ Node* buildTree(char line[],int* low, int high)
 			Node* son = malloc(sizeof(Node));
 			son->left = NULL;
 			son->right = NULL;
-			int minus = 1;
-			if (line[*low] == '-')
-			{
-				minus = -1;
-				(*low)++;
-			}
-			int power = 1;
-			int number = 0;
-			while (isdigit(line[*low]))
-			{
-				number += number * power + ((int)line[*low] - 48);
-				power *= 10;
-				(*low)++;
-			}
-			(*low)--;
-			number *= minus;
-			son->key = number;
+			son->key = readNumber(line, low);
 			if (root->left == NULL)
 			{
 				root->left = son;
@@ -74,7 +91,7 @@ Node* buildTree(char line[],int* low, int high)
 Node* checkTree(Node* root)
 {
 	Node* mainRoot = root;
-	if (root->symbol != '/' && root->symbol != '*' && root->symbol != '-' && root->symbol != '+')
+	if (!isOperator(root->symbol))
 	{
 		mainRoot = root->left;
 		free(root);
@@ -83,9 +100,39 @@ Node* checkTree(Node* root)
 	return root;
 }
 
+void printNumber(char line[], int key, int* index)
+{
+	if (key < 0)
+	{
+		line[*index] = '-';
+		(*index)++;
+		key *= -1;
+	}
+	if (key == 0)
+	{
+		line[*index] = '0';
+		(*index)++;
+	}
+	int divider = 1;
+	while (key / divider > 9)
+	{
+		divider *= 10;
+	}
+	while (key > 0)
+	{
+		int mod = key / divider + '0';
+		line[*index] = mod;
+		key %= divider;
+		divider /= 10;
+		(*index)++;
+	}
+	line[*index] = ' ';
+	(*index)++;
+}
+
 char printTree(Node* root, char line[], int* index)
 {
-	if (root->symbol == '+' || root->symbol == '-' || root->symbol == '*' || root->symbol == '/')
+	if (isOperator(root->symbol))
 	{
 		line[*index] = '(';
 		(*index)++;
@@ -107,66 +154,7 @@ char printTree(Node* root, char line[], int* index)
 	}
 	else
 	{
-		int key = root->key;
-		if (key < 0)
-		{
-			line[*index] = '-';
-			(*index)++;
-			key *= -1;
-		}
-		if (key == 0)
-		{
-			line[*index] = '0';
-			(*index)++;
-		}
-		int devider = 1;
-		while (key / devider > 9)
-		{
-			devider *= 10;
-		}
-		while (key > 0)
-		{
-			int mod = key / devider;
-			switch (mod)
-			{
-			case 0:
-				line[*index] = '0';
-			break;
-			case 1:
-				line[*index] = '1';
-			break;
-			case 2:
-				line[*index] = '2';
-			break;
-			case 3:
-				line[*index] = '3';
-			break;
-			case 4:
-				line[*index] = '4';
-			break;
-			case 5:
-				line[*index] = '5';
-			break;
-			case 6:
-				line[*index] = '6';
-			break;
-			case 7:
-				line[*index] = '7';
-			break;
-			case 8:
-				line[*index] = '8';
-			break;
-			case 9:
-				line[*index] = '9';
-			break;
-			}
-			key %= devider;
-			devider /= 10;
-			(*index)++;
-		}
-		line[*index] = ' ';
-		(*index)++;
-		exit;
+		printNumber(line, root->key, index);
 	}
 	return line;
 }
@@ -174,12 +162,12 @@ char printTree(Node* root, char line[], int* index)
 int countTree(Node* root, bool* qualityExpression)
 {
 	bool correct = *qualityExpression;
-	int number1 = 0;
-	int number2 = 0;
 	if (root->symbol != '/' && root->symbol != '*' && root->symbol != '-' && root->symbol != '+')
 	{
 		return root->key;
 	}
+	int number1 = 0;
+	int number2 = 0;
 	switch (root->symbol)
 	{
 	case '+':
@@ -212,7 +200,10 @@ int countTree(Node* root, bool* qualityExpression)
 
 void deleteTree(Node* root)
 {
-
+	if (root == NULL)
+	{
+		return;
+	}
 	if (root->left != NULL)
 	{
 		deleteTree(root->left);
@@ -222,69 +213,4 @@ void deleteTree(Node* root)
 		deleteTree(root->right);
 	}
 	free(root);
-}
-
-bool test()
-{
-	char line1[30];
-	int size = 0;
-	char symbol = ' ';
-	FILE* expression1 = fopen("Test1.txt", "r");
-	while ((fscanf(expression1, "%c", &symbol)) != EOF)
-	{
-		line1[size] = symbol;
-		++size;
-	}
-	fclose(expression1);
-	Node* root = NULL;
-	int low = 0;
-	root = buildTree(line1, &low, size);
-	root = checkTree(root);
-	char answerLine1[30];
-	size = 0;
-	char test1[18] = "( * ( + 3 -1 ) 2 )";
-	printTree(root, answerLine1, &size);
-	for (int i = 0; i < size - 1; ++i)
-	{
-		if (test1[i] != answerLine1[i])
-		{
-			return false;
-		}
-	};
-	bool correct = true;
-	if (countTree(root, &correct) != 4 || !correct)
-	{
-		return false;
-	}
-	char line2[30];
-	size = 0;
-	deleteTree(root);
-	FILE* expression2 = fopen("Test2.txt", "r");
-	while ((fscanf(expression2, "%c", &symbol)) != EOF)
-	{
-		line2[size] = symbol;
-		++size;
-	}
-	fclose(expression2);
-	root = NULL;
-	low = 0;
-	root = buildTree(line2, &low, size);
-	root = checkTree(root);
-	char answerLine[30];
-	size = 0;
-	char test2[18] = "( / ( + 1 1 ) 0 )";
-	printTree(root, answerLine, &size);
-	for (int i = 0; i < size - 1; ++i)
-	{
-		if (test2[i] != answerLine[i])
-		{
-			return false;
-		}
-	}
-	correct = true;
-	if (countTree(root, &correct) != 0 || correct)
-	{
-		return false;
-	}
-	return true;
 }

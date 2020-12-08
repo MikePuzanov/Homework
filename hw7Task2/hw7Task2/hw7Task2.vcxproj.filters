@@ -21,9 +21,15 @@
     <ClCompile Include="Tree.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Test.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tree.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
