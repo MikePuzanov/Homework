@@ -231,7 +231,6 @@ void printWord(Dictionary* root)
 
 Dictionary* deleteTree(Dictionary* root)
 {
-
 	if (root->left != NULL)
 	{
 		deleteTree(root->left);
