@@ -7,7 +7,7 @@
 
 bool test()
 {
-	Node* root = NULL;
+	Dictionary* root = NULL;
 	root = insert(root, 4, "abc");
 	root = insert(root, 1, "abc");
 	root = insert(root, 2, "abc");

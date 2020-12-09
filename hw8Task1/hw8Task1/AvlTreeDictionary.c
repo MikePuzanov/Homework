@@ -5,16 +5,16 @@
 #include <stdbool.h>
 #include <string.h>
 
-typedef struct Node
+typedef struct Dictionary
 {
-	int key;
+	char* key;
 	char* word;
 	unsigned char height;
-	Node* left;
-	Node* right;
-}Node;
+	Dictionary* left;
+	Dictionary* right;
+} Dictionary;
 
-unsigned char height(Node* root)
+unsigned char height(Dictionary* root)
 {
 	if (root)
 	{
@@ -23,12 +23,12 @@ unsigned char height(Node* root)
 	return 0;
 }
 
-int balanceFactor(Node* root)
+int balanceFactor(Dictionary* root)
 {
 	return height(root->right) - height(root->left);
 }
 
-void fixHeight(Node* root)
+void fixHeight(Dictionary* root)
 {
 	unsigned char heightLeft = height(root->left);
 	unsigned char heightRight = height(root->right);
@@ -42,9 +42,9 @@ void fixHeight(Node* root)
 	}
 }
 
-Node* turnRight(Node* parent)
+Dictionary* turnRight(Dictionary* parent)
 {
-	Node* newParent = parent->left;
+	Dictionary* newParent = parent->left;
 	parent->left = newParent->right;
 	newParent->right = parent;
 	fixHeight(parent);
@@ -52,9 +52,9 @@ Node* turnRight(Node* parent)
 	return newParent;
 }
 
-Node* turnLeft(Node* parent)
+Dictionary* turnLeft(Dictionary* parent)
 {
-	Node* newParent = parent->right;
+	Dictionary* newParent = parent->right;
 	parent->right = newParent->left;
 	newParent->left = parent;
 	fixHeight(parent);
@@ -62,7 +62,7 @@ Node* turnLeft(Node* parent)
 	return newParent;
 }
 
-Node* balance(Node* parent)
+Dictionary* balance(Dictionary* parent)
 {
 	fixHeight(parent);
 	if (balanceFactor(parent) == 2)
@@ -84,13 +84,15 @@ Node* balance(Node* parent)
 	return parent;
 }
 
-Node* insert(Node* root, int key, char word[])
+Dictionary* insert(Dictionary* root, char key[], char word[])
 {
 	if (root == NULL)
 	{
-		Node* newNode = malloc(sizeof(Node));
-		newNode->key = key;
-		char* newWord = malloc(sizeof(char) * 14);
+		Dictionary* newNode = malloc(sizeof(Dictionary));
+		char* newKey = malloc(sizeof(char) * (strlen(key) + 1));
+		strcpy(newKey, key);
+		newNode->key = newKey;
+		char* newWord = malloc(sizeof(char) * (strlen(word) + 1));
 		newNode->height = 1;
 		strcpy(newWord, word);
 		newNode->word = newWord;
@@ -99,7 +101,31 @@ Node* insert(Node* root, int key, char word[])
 		root = newNode;
 		return root;
 	}
-	if (key < root->key)
+	if (strlen(key) == strlen(root->key))
+	{
+		if (strcmp(key, root->key) < 0)
+		{
+			root->left = insert(root->left, key, word);
+		}
+		else if (strcmp(key, root->key) > 0)
+		{
+			root->right = insert(root->right, key, word);
+		}
+		else
+		{
+			strcpy(root->word, word);
+			return root;
+		}
+	}
+	else if (strlen(key) < strlen(root->key))
+	{
+		root->left = insert(root->left, key, word);
+	}
+	else
+	{
+		root->right = insert(root->right, key, word);
+	}
+	/*if (key < root->key)
 	{ 
 		root->left = insert(root->left, key, word);
 	}
@@ -111,16 +137,16 @@ Node* insert(Node* root, int key, char word[])
 	{
 		strcpy(root->word, word);
 		return root;
-	}
+	}*/
 	return balance(root);
 }
 
-Node* findSwapNode(Node* root)
+Dictionary* findSwapNode(Dictionary* root)
 {
 	return root->left ? findSwapNode(root->left) : root;
 }
 
-Node* removeSwap(Node* root) 
+Dictionary* removeSwap(Dictionary* root) 
 {
 	if (root->left == 0)
 	{
@@ -130,9 +156,9 @@ Node* removeSwap(Node* root)
 	return balance(root);
 }
 
-bool isKeyExist(Node* root, int key)
+bool isKeyExist(Dictionary* root, char key[])
 {
-	while (key != root->key)
+	while (strcmp(key, root->key) != 0) /*key != root->key)*/
 	{
 		if (key < root->key)
 		{
@@ -154,7 +180,7 @@ bool isKeyExist(Node* root, int key)
 	return true;
 }
 
-Node* removeNode(Node* root, int key) // удаление ключа k из дерева p
+Dictionary* removeNode(Dictionary* root, char key[]) // удаление ключа k из дерева p
 {
 	if (root == NULL)
 	{
@@ -170,8 +196,8 @@ Node* removeNode(Node* root, int key) // удаление ключа k из дерева p
 	}
 	else //  k == p->key 
 	{
-		Node* leftNode = root->left;
-		Node* rightNode = root->right;
+		Dictionary* leftNode = root->left;
+		Dictionary* rightNode = root->right;
 		char* word[1];
 		*word = root->word;
 		free(*word);
@@ -180,7 +206,7 @@ Node* removeNode(Node* root, int key) // удаление ключа k из дерева p
 		{
 			return leftNode;
 		}
-		Node* min = findSwapNode(rightNode);
+		Dictionary* min = findSwapNode(rightNode);
 		min->right = removeSwap(rightNode);
 		min->left = leftNode;
 		return balance(min);
@@ -188,7 +214,7 @@ Node* removeNode(Node* root, int key) // удаление ключа k из дерева p
 	return balance(root);
 }
 
-Node* deleteNode(Node* root, int key)
+Dictionary* deleteNode(Dictionary* root, char key[])
 {
 	if (isKeyExist(root, key))
 	{
@@ -197,7 +223,7 @@ Node* deleteNode(Node* root, int key)
 	return root;
 }
 
-Node* getNode(Node* root, int key)
+Dictionary* getNode(Dictionary* root, char key[])
 {
 	while (key != root->key && root->left != NULL && root->right != NULL)
 	{
@@ -221,7 +247,7 @@ Node* getNode(Node* root, int key)
 	return root;
 }
 
-void printWord(Node* root)
+void printWord(Dictionary* root)
 {
 	char word[15];
 	strcpy(word, root->word);
@@ -231,7 +257,7 @@ void printWord(Node* root)
 	}
 }
 
-Node* deleteTree(Node* root)
+Dictionary* deleteTree(Dictionary* root)
 {
 
 	if (root->left != NULL)
@@ -255,7 +281,7 @@ Node* deleteTree(Node* root)
 	root = NULL;
 }
 
-bool isEmpty(Node* root)
+bool isEmpty(Dictionary* root)
 {
 	return root == NULL;
 }

@@ -19,9 +19,9 @@ int main()
     printf("3 - Проверить наличие заданного ключа.\n");
     printf("4 - Удалить заданный ключ и связанное с ним значение из словаря.\n");
     bool result = true;
-    int key = 0;
-    char word[15];
-    Node* root = NULL;
+    char key[13];
+    char word[30];
+    Dictionary* root = NULL;
     while (result)
     {
         int key = 0;
@@ -36,7 +36,7 @@ int main()
             printf("\nВведите слово - ");
             scanf("%s", &word);
             printf("\nВведите ключ - ");
-            scanf("%i", &key);
+            scanf("%S", &key);
             root = insert(root, key, word);
             break;
         case 2:

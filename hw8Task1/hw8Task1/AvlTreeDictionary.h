@@ -3,25 +3,25 @@
 #include <stdbool.h>
 
 // структура
-typedef struct Node Node;
+typedef struct Dictionary Dictionary;
 
 // вставка ключа
-Node* insert(Node* root, int key, char word[]);
+Dictionary* insert(Dictionary* root, char key[], char word[]);
 
 // проверка ключа в дерева
-bool isKeyExist(Node* root, int key);
+bool isKeyExist(Dictionary* root, char key[]);
 
 // удаление узла
-Node* deleteNode(Node* root, int key);
+Dictionary* deleteNode(Dictionary* root, char key[]);
 
 // получить узел по ключу
-Node* getNode(Node* root, int key);
+Dictionary* getNode(Dictionary* root, char key[]);
 
 // печать слово в узле 
-void printWord(Node* root);
+void printWord(Dictionary* root);
 
 //
-Node* deleteTree(Node* root);
+Dictionary* deleteTree(Dictionary* root);
 
 //
-bool isEmpty(Node* root);
+bool isEmpty(Dictionary* root);
