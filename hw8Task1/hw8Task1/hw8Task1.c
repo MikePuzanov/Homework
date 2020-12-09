@@ -24,10 +24,10 @@ int main()
     Dictionary* root = NULL;
     while (result)
     {
-        int key = 0;
+        int decide = 0;
         printf("Выберите дейсвтие - ");
-        scanf("%i", &key);
-        switch (key)
+        scanf("%i", &decide);
+        switch (decide)
         {
         case 0:
             result = false;
@@ -36,42 +36,42 @@ int main()
             printf("\nВведите слово - ");
             scanf("%s", &word);
             printf("\nВведите ключ - ");
-            scanf("%S", &key);
+            scanf("%s", &key);
             root = insert(root, key, word);
             break;
         case 2:
             printf("\nВведите ключ - ");
-            scanf("%i", &key);
-            if (getNode(root, key) == NULL)
+            scanf("%s", &key);
+            if (isKeyExist(root, key) == NULL)
             {
                 printf("\nПо данному ключу слова не найдено!\n");
             }
             else
             {
-                char word[15];
                 printf("\nПо данному ключу слова найдено - ");
                 printWord(root);
+                printf("\n");
             }
             break;
         case 3:
             printf("\nВведите ключ - ");
-            scanf("%i", &key);
-            if (isKeyExist(root, key))
+            scanf("%s", &key);
+            if (isKeyExist(root, key) != NULL)
             {
-                printf("\nТакой ключ есть!");
+                printf("\nТакой ключ есть!\n");
                 break;
             }
-                printf("\nТакого ключ нет!");
+                printf("\nТакого ключ нет!\n");
             break;
         case 4:
             printf("\nВведите ключ - ");
-            scanf("%i", &key);
-            root = deleteNode(root, key);
+            scanf("%s", &key);
+            root = deleteElement(root, key);
             break;
         default:
-            printf("Повторите ввод.");
+            printf("\nПовторите ввод.\n");
             break;
         }
     }
-    root = deleteTree(root);
+    deleteTree(&root);
 }

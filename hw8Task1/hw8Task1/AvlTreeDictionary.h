@@ -9,19 +9,16 @@ typedef struct Dictionary Dictionary;
 Dictionary* insert(Dictionary* root, char key[], char word[]);
 
 // проверка ключа в дерева
-bool isKeyExist(Dictionary* root, char key[]);
+Dictionary* isKeyExist(Dictionary* root, char key[]);
 
 // удаление узла
-Dictionary* deleteNode(Dictionary* root, char key[]);
-
-// получить узел по ключу
-Dictionary* getNode(Dictionary* root, char key[]);
+Dictionary* deleteElement(Dictionary* root, char key[]);
 
 // печать слово в узле 
 void printWord(Dictionary* root);
 
-//
+// удаление дерева
 Dictionary* deleteTree(Dictionary* root);
 
-//
+// проверка на пустоту
 bool isEmpty(Dictionary* root);

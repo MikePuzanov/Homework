@@ -16,11 +16,7 @@ typedef struct Dictionary
 
 unsigned char height(Dictionary* root)
 {
-	if (root)
-	{
-		return root->height;
-	}
-	return 0;
+	return root ? root->height : 0;
 }
 
 int balanceFactor(Dictionary* root)
@@ -32,14 +28,7 @@ void fixHeight(Dictionary* root)
 {
 	unsigned char heightLeft = height(root->left);
 	unsigned char heightRight = height(root->right);
-	if (heightLeft > heightRight)
-	{
-		root->height = heightLeft + 1;
-	}
-	else
-	{
-		root->height = heightRight + 1;
-	}
+	root->height = heightLeft > heightRight ? heightLeft + 1 : heightRight + 1;
 }
 
 Dictionary* turnRight(Dictionary* parent)
@@ -125,19 +114,6 @@ Dictionary* insert(Dictionary* root, char key[], char word[])
 	{
 		root->right = insert(root->right, key, word);
 	}
-	/*if (key < root->key)
-	{ 
-		root->left = insert(root->left, key, word);
-	}
-	else if (key > root->key)
-	{
-		root->right = insert(root->right, key, word);
-	}
-	else
-	{
-		strcpy(root->word, word);
-		return root;
-	}*/
 	return balance(root);
 }
 
@@ -156,105 +132,101 @@ Dictionary* removeSwap(Dictionary* root)
 	return balance(root);
 }
 
-bool isKeyExist(Dictionary* root, char key[])
+Dictionary* isKeyExist(Dictionary* root, char key[])
 {
-	while (strcmp(key, root->key) != 0) /*key != root->key)*/
+	while (strcmp(key, root->key) != 0 && root->left != NULL && root->right != NULL)
 	{
-		if (key < root->key)
+		if (strlen(key) == strlen(root->key))
+		{
+			if (strcmp(key, root->key) < 0)
+			{
+				root = root->left;
+				if (root == NULL)
+				{
+					return NULL;
+				}
+			}
+			else
+			{
+				root = root->right;
+				if (root == NULL)
+				{
+					return NULL;
+				}
+			}
+		}
+		else if (strlen(key) < strlen(root->key))
 		{
 			root = root->left;
 			if (root == NULL)
 			{
-				return false;
+				return NULL;
 			}
 		}
 		else
 		{
-			root = root->right;
+			root = root->left;
 			if (root == NULL)
 			{
-				return false;
+				return NULL;
 			}
 		}
 	}
-	return true;
+	return strcmp(root->key, key) == 0 ? root : NULL;
 }
 
-Dictionary* removeNode(Dictionary* root, char key[]) // удаление ключа k из дерева p
+Dictionary* removeNode(Dictionary* root, char key[])
 {
 	if (root == NULL)
 	{
 		return 0;
 	}
-	if (key < root->key)
+	if (strlen(key) == strlen(root->key))
+	{
+		if (strcmp(key, root->key) < 0)
+		{
+			root->left = removeNode(root->left, key);
+		}
+		else if (strcmp(key, root->key) > 0)
+		{
+			root->right = removeNode(root->right, key);
+		}
+		else
+		{
+			Dictionary* leftNode = root->left;
+			Dictionary* rightNode = root->right;
+			free(root->key);
+			free(root->word);
+			free(root);
+			if (rightNode == NULL)
+			{
+				return leftNode;
+			}
+			Dictionary* min = findSwapNode(rightNode);
+			min->right = removeSwap(rightNode);
+			min->left = leftNode;
+			return balance(min);
+		}
+	}
+	else if (strlen(key) < strlen(root->key))
 	{
 		root->left = removeNode(root->left, key);
 	}
-	else if (key > root->key)
+	else
 	{
 		root->right = removeNode(root->right, key);
-	}
-	else //  k == p->key 
-	{
-		Dictionary* leftNode = root->left;
-		Dictionary* rightNode = root->right;
-		char* word[1];
-		*word = root->word;
-		free(*word);
-		free(root);
-		if (rightNode == NULL)
-		{
-			return leftNode;
-		}
-		Dictionary* min = findSwapNode(rightNode);
-		min->right = removeSwap(rightNode);
-		min->left = leftNode;
-		return balance(min);
 	}
 	return balance(root);
 }
 
-Dictionary* deleteNode(Dictionary* root, char key[])
+Dictionary* deleteElement(Dictionary* root, char key[])
 {
-	if (isKeyExist(root, key))
-	{
-		return removeNode(root, key);
-	}
-	return root;
-}
-
-Dictionary* getNode(Dictionary* root, char key[])
-{
-	while (key != root->key && root->left != NULL && root->right != NULL)
-	{
-		if (key < root->key)
-		{
-			root = root->left;
-			if (root == NULL)
-			{
-				return NULL;
-			}
-		}
-		else
-		{
-			root = root->right;
-			if (root == NULL)
-			{
-				return NULL;
-			}
-		}
-	}
-	return root;
+	return isKeyExist != NULL ? removeNode(root, key) : root;
 }
 
 void printWord(Dictionary* root)
 {
-	char word[15];
-	strcpy(word, root->word);
-	for (int i = 0; i < strlen(word); ++i)
-	{
-		printf("%c", word[i]);
-	}
+		printf("%s", root->word);
 }
 
 Dictionary* deleteTree(Dictionary* root)
@@ -271,14 +243,12 @@ Dictionary* deleteTree(Dictionary* root)
 	if (root->word == NULL)
 	{
 		free(root);
-		root = NULL;
-		return;
+		return NULL;
 	}
-	char* word[1];
-	*word = root->word;
-	free(*word);
+	free(root->key);
+	free(root->word);
 	free(root);
-	root = NULL;
+	return NULL;
 }
 
 bool isEmpty(Dictionary* root)
