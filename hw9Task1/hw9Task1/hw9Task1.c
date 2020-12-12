@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <locale.h>
 
-#define SIZE 256
-
 int main()
 {
 	setlocale(LC_ALL, "Rus");
@@ -16,14 +14,13 @@ int main()
 		return 1;
 	}
 	printf("Тест пройден!\n");
-    Hash* hashTable = createHashTable();
+	Hash* hashTable = createHashTable();
 	hashTable = readFromFile(hashTable, "File.txt");
 	printFrequency(hashTable);
-	printf("\nКоэфицент заполняемости - %f", fillFactor(hashTable));
+	printf("\nКоэффициент заполняемости - %f", fillFactor(hashTable));
 	float mid = 0;
 	int max = 0;
-	listLenght(hashTable, &max, &mid);
+	listLength(hashTable, &max, &mid);
 	printf("\nМаксимальная длина - %i\nСредняя длина - %f", max, mid);
 	deleteHashTable(&hashTable);
-	printf(" ");
 }

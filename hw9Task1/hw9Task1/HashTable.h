@@ -8,20 +8,17 @@ typedef struct Hash Hash;
 // создание таблицы
 Hash* createHashTable();
 
-// хэш-функция
-int hashFunction(char* value, int hashSize);
-
-//
+// получить размер таблицы
 int getHashSize(Hash* hashTable);
 
 // добавление узла в таблицу
-Hash* insert(char* word, Hash* hashTable);
+Node* insert(const char* word, Hash* hashTable, const int index);
 
 // чтение с файла
-Hash* readFromFile(Hash* hashTable, char fileName[]);
+Hash* readFromFile(Hash* hashTable, const char* fileName);
 
 // частота элемента 
-int frequency(Hash* hash, int index, char word[]);
+int frequency(Hash* hash, const char* word);
 
 // печать частот в таблице
 void printFrequency(Hash* hashTable);
@@ -30,7 +27,7 @@ void printFrequency(Hash* hashTable);
 float fillFactor(Hash* hashTable);
 
 // нахождение максимальной и средней длины списка в сегменте таблицы
-void listLenght(Hash* hashTable, int* max, float* mid);
+void listLength(Hash* hashTable, int* max, float* mid);
 
-//
+// удаление таблицы
 void deleteHashTable(Hash** hashTable);

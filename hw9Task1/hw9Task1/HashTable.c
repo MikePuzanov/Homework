@@ -6,10 +6,11 @@
 #include <string.h>
 #include <math.h>
 
-#define SIZE 25
+#define SIZE 10
 
 typedef struct Node
 {
+	int frequency;
 	Node* next;
 	char* word;
 } Node;
@@ -18,13 +19,13 @@ typedef struct Hash
 {
 	Node** hashTable;
 	int length;
-	int notEmpty;
+	int element;
+	float fillFactor;
 } Hash;
 
 Node* createList()
 {
-	Node* node = NULL;
-	return node;
+	return NULL;
 }
 
 Hash* createHashTable()
@@ -35,7 +36,8 @@ Hash* createHashTable()
 		return NULL;
 	}
 	table->length = SIZE;
-	table->notEmpty = 0;
+	table->element = 0;
+	table->fillFactor = 0.0f;
 	table->hashTable = malloc(SIZE * sizeof(Node*));
 	if (table->hashTable == NULL)
 	{
@@ -48,7 +50,7 @@ Hash* createHashTable()
 	return table;
 }
 
-int hashFunction(char* value, int hashSize) 
+int hashFunction(const char* value, const int hashSize) 
 {
 	int result = 0;
 	int power = 1;
@@ -62,43 +64,50 @@ int hashFunction(char* value, int hashSize)
 
 int getHashSize(Hash* hashTable)
 {
-	return hashTable->length;
+	return hashTable == NULL ? 0 : hashTable->length;
 }
 
-Hash* insert(char* word, Hash* hashTable)
-{
-	int index = hashFunction(word, hashTable->length);
-	Node* mainNode = hashTable->hashTable[index];
-	if (mainNode == NULL)
-	{
-		hashTable->notEmpty++;
-	}
-	Node* newNode = malloc(sizeof(Node));
-	newNode->next = mainNode;
-	char* newWord = malloc(25 * sizeof(char));
-	strcpy(newWord, word);
-	newNode->word = newWord;
-	hashTable->hashTable[index] = newNode;
-	return hashTable;
-}
-
-void push(Node** head, char* word)
+void push(Node** head, const char* word)
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
-	char* newWord = malloc(25 * sizeof(char));
+	if (newNode == NULL)
+	{
+		return NULL;
+	}
+	char* newWord = malloc((strlen(word) + 1) * sizeof(char));
 	strcpy(newWord, word);
+	newNode->frequency = 1;
 	newNode->word = newWord;
 	newNode->next = (*head);
 	(*head) = newNode;
 }
 
+Node* insert(const char* word, Hash* hashTable, const int index)
+{
+	Node* mainNode = hashTable->hashTable[index];
+	Node* checkNode = mainNode;
+	while (checkNode != NULL)
+	{
+		if (strcmp(word, checkNode->word) == 0)
+		{
+			checkNode->frequency++;
+			return mainNode;
+		}
+		checkNode = checkNode->next;
+	}
+	push(&mainNode, word);
+	hashTable->element++;
+	hashTable->fillFactor = (float)hashTable->element / hashTable->length;
+	return mainNode;
+}
+
 void pop(Node** head)
 {
-	Node* delete = NULL;
 	if (head == NULL)
 	{
 		return;
 	}
+	Node* delete = NULL;
 	delete = (*head);
 	free((*head)->word);
 	(*head) = (*head)->next;
@@ -113,6 +122,22 @@ void deleteRowNode(Node** head)
 		pop(head);
 	}
 	free(*head);
+	*head = NULL;
+}
+
+void rePush(Node** newHead, Node* oldHead)
+{
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	if (newNode == NULL)
+	{
+		return NULL;
+	}
+	char* newWord = malloc((strlen(oldHead->word) + 1) * sizeof(char));
+	strcpy(newWord, oldHead->word);
+	newNode->frequency = oldHead->frequency;
+	newNode->word = newWord;
+	newNode->next = (*newHead);
+	(*newHead) = newNode;
 }
 
 bool rehash(Hash* hashTable)
@@ -126,80 +151,75 @@ bool rehash(Hash* hashTable)
 	{
 		newHashTable[i] = createList();
 	}
-	hashTable->notEmpty = 0;
 	for (int i = 0; i < hashTable->length; i++)
 	{
 		while (hashTable->hashTable[i] != NULL)
 		{
-			char* word = hashTable->hashTable[i]->word;
+
+			const char* word = hashTable->hashTable[i]->word;
 			int key = hashFunction(word, hashTable->length * 2);
-			if (newHashTable[key] == NULL)
-			{
-				hashTable->notEmpty++;
-			}
-			push(&newHashTable[key], word);
+			rePush(&newHashTable[key], hashTable->hashTable[i]);
 			pop(&(hashTable->hashTable[i]));
 		}
 		free(hashTable->hashTable[i]);
 	}
-	hashTable->length *= 2;
 	free(hashTable->hashTable);
+	hashTable->length *= 2;
 	hashTable->hashTable = newHashTable;
+	hashTable->fillFactor = (float)hashTable->element / hashTable->length;
 	return true;
 }
 
-
-Hash* readFromFile(Hash* hashTable, char fileName[])
+Hash* readFromFile(Hash* hashTable, const char* fileName)
 {
 	FILE* file = fopen(fileName, "r");
 	while (!feof(file))
 	{
-		char word[25];
+		char word[50];
 		char symbol = fgetc(file);
 		if (symbol == ' ' || symbol == '\n')
 		{
 			continue;
 		}
 		int i = 0;
-		while (!feof(file) && symbol != '.' && symbol != '\n' && symbol != '-' && symbol != ',' && symbol != ':' && symbol != ';' && symbol != ' ')
+		while (!feof(file) && symbol != '.' && i < 50 && symbol != '\n' && symbol != '-' && symbol != ',' && symbol != ':' && symbol != ';' && symbol != ' ')
 		{
 			word[i] = symbol;
 			symbol = fgetc(file);
 			++i;
 		}
 		word[i] = '\0';
-		if ((hashTable->length - hashTable->notEmpty) < 10 )
+		if (hashTable->fillFactor > 0.8f )
 		{
-			rehash(hashTable);
+			if (!rehash(hashTable))
+			{
+				return NULL;
+			}
 		}
-		int index = hashFunction(&word, hashTable->length);
-		hashTable = insert(word, hashTable);
+		int index = hashFunction(word, hashTable->length);
+		hashTable->hashTable[index] = insert(word, hashTable, index);
 	}
 	fclose(file);
 	return hashTable;
 }
 
-int frequency(Hash* hash, int index, char word[])
+int frequency(Hash* hash, const char* word)
 {
-	int count = 0;
+	const int index = hashFunction(word, hash->length);
 	Node* node = hash->hashTable[index];
 	while (node != NULL)
 	{
-		if (strcmp(word, node->word) == 0)
+		if (strcmp(node->word, word) == 0)
 		{
-			count++;
+			return node->frequency;
 		}
 		node = node->next;
 	}
-	return count;
+	return 0;
 }
 
-bool checkWord(Node* head, int index, char word[])
+bool checkWord(Node* head, const int index, const char* word)
 {
-	if (index < 1)
-	{
-		return true;
-	}
 	for (int i = 0; i < index; ++i)
 	{
 		if (strcmp(head->word, word) == 0)
@@ -220,15 +240,14 @@ void printFrequency(Hash* hashTable)
 		while (node)
 		{
 			countIndex++;
-			char word[25];
+			char word[50];
 			strcpy(word, node->word);
 			if (!checkWord(hashTable->hashTable[i], countIndex - 1, word))
 			{
 				node = node->next;
 				continue;
 			}
-			int index = hashFunction(&word, hashTable->length);
-			printf("%s - %i раз.\n", word, frequency(hashTable, index, word));
+			printf("%s - %i раз.\n", word, frequency(hashTable, word));
 			node = node->next;
 		}
 	}
@@ -236,10 +255,10 @@ void printFrequency(Hash* hashTable)
 
 float fillFactor(Hash* hashTable)
 {
-	return (float)hashTable->notEmpty / hashTable->length;
+	return hashTable == NULL ? 0 : hashTable->fillFactor;
 }
 
-void listLenght(Hash* hashTable, int* max, float* mid)
+void listLength(Hash* hashTable, int* max, float* mid)
 {
 	for (int i = 0; i < hashTable->length; ++i)
 	{
@@ -256,7 +275,7 @@ void listLenght(Hash* hashTable, int* max, float* mid)
 		}
 		*mid += count;
 	}
-	*mid = (float)*mid / hashTable->notEmpty;
+	*mid = (float)*mid / hashTable->length;
 }
 
 void deleteHashTable(Hash** hashTable)
@@ -267,4 +286,5 @@ void deleteHashTable(Hash** hashTable)
 	}
 	free((*hashTable)->hashTable);
 	free(*hashTable);
+	*hashTable = NULL;
 }
