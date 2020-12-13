@@ -5,20 +5,62 @@
 #include <stdbool.h>
 #include <string.h>
 
-void pushList(List** head, char name[20], long element)
+typedef struct List {
+    char phone[20];
+    char name[20];
+    struct List* next;
+} List;
+
+void pushList(List** head, const char* name, const char* phone)
 {
     List* newNode = (List*)malloc(sizeof(List));
+    if (newNode == NULL)
+    {
+        return NULL;
+    }
     strcpy(newNode->name, name);
-    newNode->value = element;
+    strcpy(newNode->phone, phone);
     newNode->next = (*head);
     (*head) = newNode;
+}
+
+void pop(List** head)
+{
+    List* delete = NULL;
+    if (head == NULL)
+    {
+        exit(-1);
+    }
+    delete = (*head);
+    (*head) = (*head)->next;
+    free(delete);
+}
+
+void nextToNext(List** head, List* node)
+{
+    (*head)->next = node;
+}
+
+char getPhone(List* head)
+{
+    return head != NULL ? head->phone : NULL;
+}
+
+char getName(List* head)
+{
+    return head != NULL ? head->name : NULL;
+}
+
+List* getNext(List* head)
+{
+    return head != NULL ? head->next : NULL;
 }
 
 void printPhonebook(List* head)
 {
     while (head != NULL)
     {
-        printf("\n%s - %i", head->name, head->value);
+        printf("\n%s - %s", head->name, head->phone);
         head = head->next;
     }
     printf("\n");
@@ -27,12 +69,10 @@ void printPhonebook(List* head)
 void scanfFromFile(char file[], List** head)
 {
     FILE* phoneBook = fopen(file, "r");
-    char hyphen = "-";
     char name[20];
-    long phone = 0;
-    while ((fscanf(phoneBook, "%s - %i", &name, &phone)) != EOF)
+    char phone[20] = 0;
+    while ((fscanf(phoneBook, "%s - %s", &name, &phone)) != EOF)
     {
-
         pushList(head, name, phone);
     }
     fclose(phoneBook);

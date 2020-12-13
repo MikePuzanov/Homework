@@ -3,14 +3,25 @@
 #include <stdbool.h>
 
 // Структура
-typedef struct List {
-    long value;
-    char name[20];
-    struct List* next;
-} List;
+typedef struct List List;
 
 // Добавление в список
-void pushList(List** head, char name[20], long element);
+void pushList(List** head, const char* name, const char* phone);
+
+//
+void pop(List** head);
+
+//
+void nextToNext(List** head, List* node);
+
+//
+char getPhone(List* head);
+
+//
+char getName(List* head);
+
+//
+List* getNext(List* head);
 
 // распечатать телефоннную книжку
 void printPhonebook(List* head);
@@ -22,4 +33,4 @@ void scanfFromFile(char file[], List** head);
 bool isEmpty(List* head);
 
 // удаление списка
-void deleteList(List** head)
+void deleteList(List** head);

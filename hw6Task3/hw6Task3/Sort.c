@@ -2,11 +2,12 @@
 #include "FunctionForList.h"
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 void merge(List* firstPart, List* secondPart, List** sort)
 {
-    List tmp;
+    List* mergedHead;
     *sort = NULL;
     if (firstPart == NULL)
     {
@@ -28,7 +29,7 @@ void merge(List* firstPart, List* secondPart, List** sort)
         *sort = secondPart;
         secondPart = secondPart->next;
     }
-    tmp.next = *sort;
+    mergedHead = *sort;
     while (firstPart && secondPart)
     {
         if (firstPart->value < secondPart->value)
@@ -45,53 +46,40 @@ void merge(List* firstPart, List* secondPart, List** sort)
     }
     if (firstPart)
     {
-        while (firstPart)
-        {
-            (*sort)->next = firstPart;
-            (*sort) = (*sort)->next;
-            firstPart = firstPart->next;
-        }
+        nextToNext(*sort, firstPart);
     }
     if (secondPart)
     {
-        while (secondPart)
-        {
-            (*sort)->next = secondPart;
-            (*sort) = (*sort)->next;
-            secondPart = secondPart->next;
-        }
+        nextToNext(*sort, secondPart);
     }
-    *sort = tmp.next;
+    *sort = mergedHead;
 }
 
-void split(List* src, List** low, List** high)
+void split(List* head, List** low, List** high)
 {
     List* fast = NULL;
     List* slow = NULL;
-
-    if (src == NULL || src->next == NULL)
+    if (head == NULL || getNext(head) == NULL)
     {
-        (*low) = src;
+        (*low) = head;
         (*high) = NULL;
         return;
     }
-
-    slow = src;
-    fast = src->next;
-
+    slow = head;
+    fast = getNext(head);
     while (fast != NULL)
     {
-        fast = fast->next;
+        fast = getNext(fast);
         if (fast != NULL)
         {
-            fast = fast->next;
-            slow = slow->next;
+            fast = getNext(fast);
+            slow = getNext(slow);
         }
     }
-
-    (*low) = src;
-    (*high) = slow->next;
-    slow->next = NULL;
+    (*low) = head;
+    (*high) = getNext(slow);
+    slow = getNext(slow);
+    slow = NULL;
 }
 
 void mergeSortPhone(List** head)
@@ -108,43 +96,9 @@ void mergeSortPhone(List** head)
     merge(low, high, head);
 }
 
-int compareString(char name1[], char name2[])
-{
-    int size = 0;
-    if (strlen(name1) >= strlen(name2))
-    {
-        size = strlen(name1);
-    }
-    else
-    {
-        size = strlen(name2);
-    }
-    for (int i = 0; i < size; ++i)
-    {
-        if (("%c", name1[i]) == ("%c", name2[i]))
-        {
-            continue;
-        }
-        if (("%c", name1[i]) > ("%c", name2[i]))
-        {
-            return 1;
-        }
-        else
-        {
-            return 2;
-        }
-    }
-    if (strlen(name1) >= strlen(name2))
-    {
-        return 1;
-    }
-    return 2;
-}
-
-
 void mergeName(List* firstPart, List* secondPart, List** sort)
 {
-    List tmp;
+    List* mergedHead;
     *sort = NULL;
     if (firstPart == NULL)
     {
@@ -156,57 +110,47 @@ void mergeName(List* firstPart, List* secondPart, List** sort)
         *sort = firstPart;
         return;
     }
-    if (compareString(firstPart->name, secondPart->name) == 2)
+    if (strcmp(getName(firstPart), getName(secondPart)) <= 0)
     {
         *sort = firstPart;
-        firstPart = firstPart->next;
+        firstPart = getNext(firstPart);
     }
     else
     {
         *sort = secondPart;
-        secondPart = secondPart->next;
+        secondPart = getNext(secondPart);
     }
-    tmp.next = *sort;
+    mergedHead = *sort;
     while (firstPart && secondPart)
     {
-        if (compareString(firstPart->name, secondPart->name) == 2)
+        if (strcmp(getName(firstPart), getName(secondPart)) <= 0)
         {
-            (*sort)->next = firstPart;
-            firstPart = firstPart->next;
+            nextToNext(*sort, firstPart);
+            firstPart = getNext(firstPart);
         }
         else
         {
-            (*sort)->next = secondPart;
-            secondPart = secondPart->next;
+            nextToNext(*sort, secondPart);
+            secondPart = getNext(secondPart);
         }
-        (*sort) = (*sort)->next;
+        (*sort) = getNext(*sort);
     }
     if (firstPart)
     {
-        while (firstPart)
-        {
-            (*sort)->next = firstPart;
-            (*sort) = (*sort)->next;
-            firstPart = firstPart->next;
-        }
+        nextToNext(*sort, firstPart);
     }
     if (secondPart)
     {
-        while (secondPart)
-        {
-            (*sort)->next = secondPart;
-            (*sort) = (*sort)->next;
-            secondPart = secondPart->next;
-        }
+        nextToNext(*sort, secondPart);
     }
-    *sort = tmp.next;
+    *sort = mergedHead;
 }
 
 void mergeSortName(List** head)
 {
     List* low = NULL;
     List* high = NULL;
-    if ((*head == NULL) || ((*head)->next == NULL))
+    if ((*head == NULL) || (getNext(*head) == NULL))
     {
         return;
     }

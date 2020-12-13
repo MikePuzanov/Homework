@@ -11,9 +11,6 @@ void split(List* src, List** low, List** high);
 // сортировка по номерам
 void mergeSortPhone(List** head);
 
-// сравнение имен
-int compareString(char name1[], char name2[]);
-
 // вспомогательная функция для сортировки имени
 void mergeName(List* firstPart, List* secondPart, List** sort);
 
