@@ -14,7 +14,7 @@ bool test()
     {
         return false;
     }
-    if (indexSymbol != 1 && indexString != 3)
+    if (indexSymbol != 1 || indexString != 3)
     {
         return false;
     }

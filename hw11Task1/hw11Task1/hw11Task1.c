@@ -14,16 +14,16 @@ int main()
         return 5;
     }
     printf("Тест пройден!\n");
-    char searchLine[100];
-    scanf("%99[^\n]", &searchLine);
+    char searchLine[150];
+    scanf("%149[^\n]", &searchLine);
     int indexSymbol = 1;
     int indexString = 1;
     if (algorithmKMP("File.txt", searchLine, &indexSymbol, &indexString))
     {
-        printf("Искомая строка первые встречается - %i предложение %i символ", indexString,indexSymbol);
+        printf("Искомая строка первые встречается - %i предложение %i символ", indexString, indexSymbol);
     }
     else
     {
-        printf("Искомая не встречается.");
+        printf("Искомая строка не встречается.");
     }
 }

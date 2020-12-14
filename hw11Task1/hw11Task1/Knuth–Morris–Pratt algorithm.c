@@ -30,8 +30,6 @@ void prefixFunction(char* string, int* pi, int size)
     }
 }
 
-
-
 bool findString(char* string, int* pi, const char* fileName, int* indexSymbol, int* indexStringLine)
 {
     FILE* file = fopen(fileName, "r");
