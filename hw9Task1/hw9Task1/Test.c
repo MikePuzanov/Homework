@@ -32,7 +32,7 @@ bool test()
 	{
 		return false;
 	}
-	if (mid - 1 > 0.0001)
+	if (mid - 0.5 > 0.1)
 	{
 		return false;
 	}

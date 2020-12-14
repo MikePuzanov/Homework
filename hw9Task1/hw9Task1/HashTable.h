@@ -1,5 +1,6 @@
 #pragma once
 
+// структура списка
 typedef struct Node Node;
 
 // cтруктура хэш-таблицы
