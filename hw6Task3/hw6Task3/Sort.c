@@ -5,7 +5,30 @@
 #include <string.h>
 #include <stdlib.h>
 
-void merge(List* firstPart, List* secondPart, List** sort)
+bool compareString(const char* string1, const char* string2, int key)
+{
+    if (key == 1)
+    {
+        if (strlen(string1) == strlen(string2))
+        {
+            return strcmp(string1, string2) < 0 ? true : false;
+        }
+        else if (strlen(string1) < strlen(string2))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return strcmp(string1, string2) < 0 ? true : false;
+    }
+}
+
+void merge(List* firstPart, List* secondPart, List** sort, int key)
 {
     List* mergedHead;
     *sort = NULL;
@@ -19,38 +42,60 @@ void merge(List* firstPart, List* secondPart, List** sort)
         *sort = firstPart;
         return;
     }
-    if (firstPart->value < secondPart->value)
+    char string1[20];
+    char string2[20];
+    if (key == 1)
+    {
+        getPhone(firstPart, string1);
+        getPhone(secondPart, string2);
+    }
+    else
+    {
+        getName(firstPart, string1);
+        getName(secondPart, string2);
+    }
+    if (compareString(string1, string2, key))
     {
         *sort = firstPart;
-        firstPart = firstPart->next;
+        firstPart = getNext(firstPart);
     }
     else
     {
         *sort = secondPart;
-        secondPart = secondPart->next;
+        secondPart = getNext(secondPart);
     }
     mergedHead = *sort;
     while (firstPart && secondPart)
     {
-        if (firstPart->value < secondPart->value)
+        if (key == 1)
         {
-            (*sort)->next = firstPart;
-            firstPart = firstPart->next;
+            getPhone(firstPart, string1);
+            getPhone(secondPart, string2);
         }
         else
         {
-            (*sort)->next = secondPart;
-            secondPart = secondPart->next;
+            getName(firstPart, string1);
+            getName(secondPart, string2);
         }
-        (*sort) = (*sort)->next;
+        if (compareString(string1, string2, key))
+        {
+            *sort = assignToNext(*sort, firstPart);
+            firstPart = getNext(firstPart);
+        }
+        else
+        {
+            *sort = assignToNext(*sort, secondPart);
+            secondPart = getNext(secondPart);
+        }
+        (*sort) = getNext(*sort);
     }
     if (firstPart)
     {
-        nextToNext(*sort, firstPart);
+        *sort = assignToNext(*sort, firstPart);
     }
     if (secondPart)
     {
-        nextToNext(*sort, secondPart);
+        *sort = assignToNext(*sort, secondPart);
     }
     *sort = mergedHead;
 }
@@ -59,7 +104,8 @@ void split(List* head, List** low, List** high)
 {
     List* fast = NULL;
     List* slow = NULL;
-    if (head == NULL || getNext(head) == NULL)
+    List* node = getNext(head);
+    if (head == NULL || node == NULL)
     {
         (*low) = head;
         (*high) = NULL;
@@ -78,84 +124,20 @@ void split(List* head, List** low, List** high)
     }
     (*low) = head;
     (*high) = getNext(slow);
-    slow = getNext(slow);
-    slow = NULL;
+    slow = assignNextNull(slow);
 }
 
-void mergeSortPhone(List** head)
+void mergeSort(List** head, int key)
 {
     List* low = NULL;
     List* high = NULL;
-    if ((*head == NULL) || ((*head)->next == NULL))
+    List* node = getNext(*head);
+    if ((*head == NULL) || (node == NULL))
     {
         return;
     }
     split(*head, &low, &high);
-    mergeSortPhone(&low);
-    mergeSortPhone(&high);
-    merge(low, high, head);
-}
-
-void mergeName(List* firstPart, List* secondPart, List** sort)
-{
-    List* mergedHead;
-    *sort = NULL;
-    if (firstPart == NULL)
-    {
-        *sort = secondPart;
-        return;
-    }
-    if (secondPart == NULL)
-    {
-        *sort = firstPart;
-        return;
-    }
-    if (strcmp(getName(firstPart), getName(secondPart)) <= 0)
-    {
-        *sort = firstPart;
-        firstPart = getNext(firstPart);
-    }
-    else
-    {
-        *sort = secondPart;
-        secondPart = getNext(secondPart);
-    }
-    mergedHead = *sort;
-    while (firstPart && secondPart)
-    {
-        if (strcmp(getName(firstPart), getName(secondPart)) <= 0)
-        {
-            nextToNext(*sort, firstPart);
-            firstPart = getNext(firstPart);
-        }
-        else
-        {
-            nextToNext(*sort, secondPart);
-            secondPart = getNext(secondPart);
-        }
-        (*sort) = getNext(*sort);
-    }
-    if (firstPart)
-    {
-        nextToNext(*sort, firstPart);
-    }
-    if (secondPart)
-    {
-        nextToNext(*sort, secondPart);
-    }
-    *sort = mergedHead;
-}
-
-void mergeSortName(List** head)
-{
-    List* low = NULL;
-    List* high = NULL;
-    if ((*head == NULL) || (getNext(*head) == NULL))
-    {
-        return;
-    }
-    split(*head, &low, &high);
-    mergeSortName(&low);
-    mergeSortName(&high);
-    mergeName(low, high, head);
+    mergeSort(&low, key);
+    mergeSort(&high, key);
+    merge(low, high, head, key);
 }

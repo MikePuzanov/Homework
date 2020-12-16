@@ -12,13 +12,17 @@ void pushList(List** head, const char* name, const char* phone);
 void pop(List** head);
 
 //
-void nextToNext(List** head, List* node);
+
+List* assignNextNull(List* head);
 
 //
-char getPhone(List* head);
+List* assignToNext(List* head, List* node);
 
 //
-char getName(List* head);
+void getPhone(List* head, char phone[]);
+
+//
+void getName(List* head, char name[]);
 
 //
 List* getNext(List* head);

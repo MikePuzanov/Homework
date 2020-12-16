@@ -36,19 +36,32 @@ void pop(List** head)
     free(delete);
 }
 
-void nextToNext(List** head, List* node)
+List* assignNextNull(List* head)
 {
-    (*head)->next = node;
+    head->next = NULL;
+    return head;
 }
 
-char getPhone(List* head)
+List* assignToNext(List* head, List* node)
 {
-    return head != NULL ? head->phone : NULL;
+    head->next = node;
+    return head;
 }
 
-char getName(List* head)
+void getPhone(List* head, char phone[])
 {
-    return head != NULL ? head->name : NULL;
+    if (head)
+    {
+        strcpy(phone, head->phone);
+    }
+}
+
+void getName(List* head, char name[])
+{
+    if (head)
+    {
+        strcpy(name, head->name);
+    }
 }
 
 List* getNext(List* head)
@@ -70,7 +83,7 @@ void scanfFromFile(char file[], List** head)
 {
     FILE* phoneBook = fopen(file, "r");
     char name[20];
-    char phone[20] = 0;
+    char phone[20];
     while ((fscanf(phoneBook, "%s - %s", &name, &phone)) != EOF)
     {
         pushList(head, name, phone);
