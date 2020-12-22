@@ -26,5 +26,5 @@ List* readFromFile(List* head, const char* fileName);
 // проверка на симметричность
 bool checkSymmetry(List* list);
 
-// Prints all list
+// печать списка
 void printList(List* list);

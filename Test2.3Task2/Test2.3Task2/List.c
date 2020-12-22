@@ -122,15 +122,14 @@ bool checkSymmetry(List* list)
 
 void printList(List* list)
 {
-	List listCopy = *list;
-	if (isEmpty(&listCopy))
+	ListElement* checkList = list->head;
+	if (isEmpty(checkList))
 	{
-		printf("List is empty\n");
 		return;
 	}
-	while (!isEmpty(&listCopy))
+	while (!isEmpty(checkList))
 	{
-		printf("%i ", listCopy.head->value);
-		listCopy.head = listCopy.head->next;
+		printf("%i ", checkList->value);
+		checkList = checkList->next;
 	}
 }
