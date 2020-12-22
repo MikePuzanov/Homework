@@ -2,5 +2,5 @@
 
 #include <stdbool.h>
 
-// test for task
+// тест
 bool test();
