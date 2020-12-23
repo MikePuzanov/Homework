@@ -19,7 +19,7 @@ int main()
 	}
 	printf("Тесты пройдены!\n\n");
 	int countOfCountries = 0;
-	List** countries = countriesDesigner("task.txt", &countOfCountries);
+	List** countries = designCountries("task.txt", &countOfCountries);
 	for (int i = 0; i < countOfCountries; i++)
 	{
 		printf("Государство %i\n", i + 1);

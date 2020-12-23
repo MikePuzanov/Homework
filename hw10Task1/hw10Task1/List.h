@@ -1,29 +1,29 @@
 #pragma once
 #include <stdbool.h>
 
-// Струкутра списка
+// струкутра списка
 typedef struct List List;
 
-// Функция добавление в список
-void push(List** head, int element, int road);
+// функция добавление в список
+void push(List** head, int element, int roadLength);
 
 // функция удаления из списка
-void pop(List** head);
+void removeFromHead(List** head);
 
 // перейти к следующему элементу в списке
 List* getNextNode(List* head);
 
 // получить растояние
-int getRoad(List* head);
+int getRoadLength(List* head);
 
 // получить город
 int getCity(List* head);
 
-// Удаление списка
+// удаление списка
 void deleteList(List** head);
 
-// Проверка на пустоту списка
+// проверка на пустоту списка
 bool isEmpty(List* head);
 
-// Функция для получение последнего элемента в списке
+// функция для получение последнего элемента в списке
 List* getLast(List* head);

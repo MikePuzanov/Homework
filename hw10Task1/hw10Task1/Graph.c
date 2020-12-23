@@ -46,7 +46,7 @@ int getLen(Graph* graph, int i, int j)
 	{
 		node = getNextNode(node);
 	}
-	return node ? getRoad(node) : 0;
+	return node ? getRoadLength(node) : 0;
 }
 
 void deleteGraph(Graph** graph)

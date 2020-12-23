@@ -7,7 +7,7 @@
 typedef struct List
 {
     int city;
-    int road;
+    int roadLenght;
     struct List* next;
 } List;
 
@@ -15,12 +15,12 @@ void push(List** head, int element, int road)
 {
     List* newNode = (List*)malloc(sizeof(List));
     newNode->city = element;
-    newNode->road = road;
+    newNode->roadLenght = road;
     newNode->next = (*head);
     (*head) = newNode;
 }
 
-void pop(List** head)
+void removeFromHead(List** head)
 {
     List* delete = NULL;
     if (head == NULL)
@@ -35,12 +35,12 @@ void pop(List** head)
 
 List* getNextNode(List* head)
 {
-    return head ? head->next : head;
+    return head ? head->next : NULL;
 }
 
-int getRoad(List* head)
+int getRoadLength(List* head)
 {
-    return head->road;
+    return head->roadLenght;
 }
 
 int getCity(List* head)
@@ -52,7 +52,7 @@ void deleteList(List** head)
 {
     while ((*head)->next)
     {
-        pop(head);
+        removeFromHead(head);
     }
     free(*head);
     *head = NULL;

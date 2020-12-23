@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool isCityAdd(Graph* graph, List** list, int country, bool isCityInCountry[])
+bool addCity(Graph* graph, List** list, int country, bool isCityInCountry[])
 {
 	int minLen = INT_MAX;
 	int idSwapCity = -1;
@@ -18,7 +18,7 @@ bool isCityAdd(Graph* graph, List** list, int country, bool isCityInCountry[])
 		while (roads)
 		{
 			int id = getCity(roads);
-			int len = getRoad(roads);
+			int len = getRoadLength(roads);
 			if (!isCityInCountry[id] && len > 0 && len < minLen)
 			{
 				minLen = len;
@@ -41,7 +41,7 @@ void fillCountries(Graph* graph, List** list, int countries, bool isCityInCountr
 	int countCounties = 0;
 	while (freeCities > 0)
 	{
-		if (isCityAdd(graph, list, countCounties, isCityInCountry))
+		if (addCity(graph, list, countCounties, isCityInCountry))
 		{
 			freeCities--;
  		}
@@ -49,7 +49,7 @@ void fillCountries(Graph* graph, List** list, int countries, bool isCityInCountr
 	}
 }
 
-List** countriesDesigner(char fileName[], int* countries)
+List** designCountries(char fileName[], int* countries)
 {
 	FILE* file = fopen(fileName, "r");
 	int cities = 0;

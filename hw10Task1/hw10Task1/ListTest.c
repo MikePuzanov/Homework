@@ -13,14 +13,14 @@ bool testList()
 		deleteList(&head);
 		return false;
 	}
-	if (getRoad(head) != 1)
+	if (getRoadLength(head) != 1)
 	{
 		deleteList(&head);
 		return false;
 	}
 	push(&head, 6, 3);
-	pop(&head);
-	if (getCity(head) != 5 && getRoad(head) != 1)
+	removeFromHead(&head);
+	if (getCity(head) != 5 && getRoadLength(head) != 1)
 	{
 		deleteList(&head);
 		return false;
@@ -28,7 +28,7 @@ bool testList()
 	push(&head, 2, 11);
 	List* node = head;
 	node = getNextNode(node);
-	if (getCity(node) != 5 && getRoad(node) != 1)
+	if (getCity(node) != 5 && getRoadLength(node) != 1)
 	{
 		deleteList(&head);
 		return false;
@@ -36,7 +36,7 @@ bool testList()
 	push(&head, 2, 11);
 	push(&head, 2, 11);
 	push(&head, 2, 11);
-	if (getCity(getLast(head)) != 5 && getRoad(getLast(head)) != 1)
+	if (getCity(getLast(head)) != 5 && getRoadLength(getLast(head)) != 1)
 	{
 		deleteList(&head);
 		return false;

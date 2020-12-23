@@ -7,7 +7,7 @@
 bool taskTest()
 {
 	int countOfCountries = 0;
-	List** countries = countriesDesigner("Test.txt", &countOfCountries);
+	List** countries = designCountries("Test.txt", &countOfCountries);
 	List* capital = getLast(countries[0]);
 	if (getCity(getLast(countries[0])) + 1 != 3 || getCity(getLast(countries[1])) + 1 != 4)
 	{
@@ -23,8 +23,8 @@ bool taskTest()
 		free(countries);
 		return false;
 	}
-	pop(&countries[1]);
-	pop(&countries[0]);
+	removeFromHead(&countries[1]);
+	removeFromHead(&countries[0]);
 	if (getCity(countries[0]) + 1 != 3 || getCity(countries[1]) + 1 != 4)
 	{
 		deleteList(&countries[0]);
