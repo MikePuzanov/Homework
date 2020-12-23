@@ -2,29 +2,26 @@
 
 #include <stdbool.h>
 
-// структура
+// структура сортированного списка
 typedef struct List List; 
 
-// Функция добавление в список(в начало)
-void push(List** head, int element);
-
-// удаление узла(head)
+// удаление узла (head)
 int pop(List** head);
 
-// Проверка на пустоту списка
+// проверка на пустоту списка
 bool isEmpty(List* head);
 
-// Удаление списка
+// удаление списка
 void deleteList(List** head);
 
 // добавление в список по сортиров
-void pushtoList(List** head, int element);
+void pushToList(List** head, int element);
 
-// Проверяет есть ли у кого-то узла в списке такое значение
+// проверяет есть ли у кого-то узла в списке такое значение
 bool checkValue(List* head, int value);
 
 // удаление узла по value
 List* deleteNode(List* head, int element);
 
-// Печатает список
+// печатает список
 void printList(List* head);

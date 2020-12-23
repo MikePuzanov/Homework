@@ -19,11 +19,11 @@ void push(List** head, int element)
 
 int pop(List** head)
 {
-    List* delete = NULL;
     if (head == NULL)
     {
         exit(-1);
     }
+    List* delete = NULL;
     delete = (*head);
     int element = delete->value;
     (*head) = (*head)->next;
@@ -89,17 +89,17 @@ int findN(List* head, int value)
     return index - 1;
 }
 
-void pushtoList(List** head,int element)
+void pushToList(List** head, int element)
 {
     List* node = *head;
-    List* newNode = malloc(sizeof(List));
-    if (newNode == NULL)
-    {
-        return;
-    }
     if (node == NULL)
     {
         push(head, element);
+        return;
+    }
+    List* newNode = malloc(sizeof(List));
+    if (newNode == NULL)
+    {
         return;
     }
     int index = 0;

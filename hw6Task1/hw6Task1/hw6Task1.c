@@ -34,7 +34,7 @@ int main()
 		case 1:
 			printf("\nВведите значение, которое хотите добавить в список - ");
 			scanf("%i", &element);
-			pushtoList(&head, element);
+			pushToList(&head, element);
 			break;
 		case 2:
 			printf("\nВведите значение, которое вы хотите удалить из списка - ");
