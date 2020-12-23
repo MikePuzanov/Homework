@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct List {
+typedef struct List
+{
     int value;
     struct List* next;
 } List;
@@ -12,7 +13,8 @@ typedef struct List {
 List* init(int value)
 {
     List* head = malloc(sizeof(List));
-    if (head == NULL) {
+    if (head == NULL)
+    {
         return NULL;
     }
     head->value = value;
@@ -33,13 +35,16 @@ int getValue(List* head)
 void insert(List* head, int index, int value)
 {
     int i = 0;
-    List* newNode = NULL;
     while (i < index && head->next)
     {
         head = head->next;
         i++;
     }
-    newNode = (List*)malloc(sizeof(List));
+    List* newNode = (List*)malloc(sizeof(List));
+    if (newNode == NULL)
+    {
+        return NULL;
+    }
     newNode->value = value;
     if (head->next)
     {
