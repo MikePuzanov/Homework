@@ -2,26 +2,23 @@
 
 #include <stdbool.h>
 
-// структура
+// структура словаря
 typedef struct Node Node;
-
-// создание главного корня
-Node* createRoot(int key, const char word[]);
 
 // возвращает ключ узла
 int getKey(Node* root);
 
 // находит узел по ключу
-Node* findRoot(Node* root, int key);
+Node* findRoot(Node* root, const int key);
 
 // добавление узла в дерево
-void pushToTree(char word[], int key, Node** root);
+void pushToTree(const char* word, const int key, Node** root);
 
 // возвращает слово по ключу
-char* getWord(Node* root, int key);
+char* getWord(Node* root, const int key);
 
 // удаление заданного узла
-void deleteNode(Node** root, int key);
+void deleteNode(Node** root, const int key);
 
 // удаление дерева
 void deleteTree(Node** root);

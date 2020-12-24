@@ -8,7 +8,7 @@
 
 bool testTask()
 {
-Node* root = createRoot(NULL, NULL);
+	Node* root = NULL;
 	pushToTree("word", 22, &root);
 	pushToTree("lemon", 35, &root);
 	pushToTree("pie", 65, &root);

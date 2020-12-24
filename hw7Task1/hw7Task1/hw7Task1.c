@@ -12,9 +12,10 @@ int main()
     setlocale(LC_ALL, "Rus");
     if (!testTask())
     {
-        printf("");
+        printf("Тест не пройден!");
         return 1;
     }
+    printf("Тест пройден!\n\n");
     printf("Меню выбора:\n");
     printf("0 - Выход.\n");
     printf("1 - Добавить значение по заданному ключу в словарь.\n");
@@ -22,7 +23,7 @@ int main()
     printf("3 - Проверить наличие заданного ключа в словаре.\n");
     printf("4 - Удалить заданный ключ и связанное с ним значение из словаря.\n");
     bool isExit = true;
-    Node* root = createRoot(NULL, NULL);
+    Node* root = NULL;
     while (isExit)
     {
         int key = 0;
@@ -70,5 +71,4 @@ int main()
         }
     }
     deleteTree(&root);
-    printf("");
 }
