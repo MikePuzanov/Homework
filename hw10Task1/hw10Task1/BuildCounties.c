@@ -18,7 +18,7 @@ bool addCity(Graph* graph, List** list, int country, bool isCityInCountry[])
 		while (roads)
 		{
 			int id = getCity(roads);
-			int len = getRoadLength(roads);
+			int len = getRoadLength(roads, );
 			if (!isCityInCountry[id] && len > 0 && len < minLen)
 			{
 				minLen = len;
@@ -69,10 +69,10 @@ List** designCountries(char fileName[], int* countries)
 	List** list = calloc(*countries, sizeof(List*));
 	for (int i = 0; i < *countries; ++i)
 	{
-		list[i] = NULL;
+		list[i] = createList();
 		int capital = 0;
 		fscanf(file, "%i", &capital);
-		push(&list[i], capital - 1, 0);
+		append(list[i], capital - 1, 0);
 		isCityInCountry[capital - 1] = true;
 	}
 	fclose(file);

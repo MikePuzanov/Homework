@@ -30,8 +30,8 @@ List* getList(Graph* graph, int i)
 
 void fillGraph(Graph* graph, int i, int j, int len)
 {
-	push(&(graph->matrix[i]), j, len);
-	push(&(graph->matrix[j]), i, len);
+	append(graph->matrix[i], j, len);
+	append(graph->matrix[j], i, len);
 }
 
 int getCount(Graph* graph)

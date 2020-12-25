@@ -1,29 +1,29 @@
-#pragma once
+п»ї#pragma once
 #include <stdbool.h>
 
-// струкутра списка
+// СЃС‚СЂСѓРєСѓС‚СЂР° СЃРїРёСЃРєР°
 typedef struct List List;
 
-// функция добавление в список
-void push(List** head, int element, int roadLength);
+// Г±Г®Г§Г¤Г Г­ГЁГҐ Г±ГЇГЁГ±ГЄГ 
+List* createList();
 
-// функция удаления из списка
-void removeFromHead(List** head);
+// С„СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёРµ РІ СЃРїРёСЃРѕРє
+void append(List* head, const int element, const int roadLength);
 
-// перейти к следующему элементу в списке
-List* getNextNode(List* head);
+// С„СѓРЅРєС†РёСЏ СѓРґР°Р»РµРЅРёСЏ РёР· СЃРїРёСЃРєР°
+bool deleteNode(List* list, int index);
 
-// получить растояние
-int getRoadLength(List* head);
+// РїРѕР»СѓС‡РёС‚СЊ СЂР°СЃС‚РѕСЏРЅРёРµ
+int getRoadLength(List* list, int index);
 
-// получить город
+// РїРѕР»СѓС‡РёС‚СЊ РіРѕСЂРѕРґ
 int getCity(List* head);
 
-// удаление списка
+// СѓРґР°Р»РµРЅРёРµ СЃРїРёСЃРєР°
 void deleteList(List** head);
 
-// проверка на пустоту списка
+// РїСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ СЃРїРёСЃРєР°
 bool isEmpty(List* head);
 
-// функция для получение последнего элемента в списке
+// С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ СЌР»РµРјРµРЅС‚Р° РІ СЃРїРёСЃРєРµ
 List* getLast(List* head);
