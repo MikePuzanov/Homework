@@ -73,46 +73,36 @@ Dictionary* balance(Dictionary* parent)
 	return parent;
 }
 
-Dictionary* insert(Dictionary* root, char key[], char word[])
+Dictionary* insert(Dictionary* root, const char* key, const char* word)
 {
 	if (root == NULL)
 	{
 		Dictionary* newNode = malloc(sizeof(Dictionary));
-		char* newKey = malloc(sizeof(char) * (strlen(key) + 1));
-		strcpy(newKey, key);
-		newNode->key = newKey;
-		char* newWord = malloc(sizeof(char) * (strlen(word) + 1));
+		if (newNode == NULL)
+		{
+			return NULL;
+		}
+		newNode->key = malloc(sizeof(char) * (strlen(key) + 1));
+		strcpy(newNode->key, key);
+		newNode->word = malloc(sizeof(char) * (strlen(word) + 1));
+		strcpy(newNode->word, word);
 		newNode->height = 1;
-		strcpy(newWord, word);
-		newNode->word = newWord;
 		newNode->left = NULL;
 		newNode->right = NULL;
-		root = newNode;
-		return root;
+		return newNode;
 	}
-	if (strlen(key) == strlen(root->key))
-	{
-		if (strcmp(key, root->key) < 0)
-		{
-			root->left = insert(root->left, key, word);
-		}
-		else if (strcmp(key, root->key) > 0)
-		{
-			root->right = insert(root->right, key, word);
-		}
-		else
-		{
-			strcpy(root->word, word);
-			return root;
-		}
-	}
-	else if (strlen(key) < strlen(root->key))
+	if (strcmp(key, root->key) < 0)
 	{
 		root->left = insert(root->left, key, word);
 	}
-	else
+	else if (strcmp(key, root->key) > 0)
 	{
 		root->right = insert(root->right, key, word);
+	}
+	else
+	{
+		strcpy(root->word, word);
+		return root;
 	}
 	return balance(root);
 }
@@ -132,30 +122,11 @@ Dictionary* removeSwap(Dictionary* root)
 	return balance(root);
 }
 
-Dictionary* isKeyExist(Dictionary* root, char key[])
+Dictionary* getNode(Dictionary* root, const char* key)
 {
 	while (strcmp(key, root->key) != 0 && root->left != NULL && root->right != NULL)
 	{
-		if (strlen(key) == strlen(root->key))
-		{
-			if (strcmp(key, root->key) < 0)
-			{
-				root = root->left;
-				if (root == NULL)
-				{
-					return NULL;
-				}
-			}
-			else
-			{
-				root = root->right;
-				if (root == NULL)
-				{
-					return NULL;
-				}
-			}
-		}
-		else if (strlen(key) < strlen(root->key))
+		if (strcmp(key, root->key) < 0)
 		{
 			root = root->left;
 			if (root == NULL)
@@ -165,7 +136,7 @@ Dictionary* isKeyExist(Dictionary* root, char key[])
 		}
 		else
 		{
-			root = root->left;
+			root = root->right;
 			if (root == NULL)
 			{
 				return NULL;
@@ -175,61 +146,55 @@ Dictionary* isKeyExist(Dictionary* root, char key[])
 	return strcmp(root->key, key) == 0 ? root : NULL;
 }
 
-Dictionary* removeNode(Dictionary* root, char key[])
+bool isKeyExist(Dictionary* root, const char* key)
+{
+	return getNode(root, key);
+}
+
+Dictionary* removeNode(Dictionary* root, const char* key)
 {
 	if (root == NULL)
 	{
 		return 0;
 	}
-	if (strlen(key) == strlen(root->key))
-	{
-		if (strcmp(key, root->key) < 0)
-		{
-			root->left = removeNode(root->left, key);
-		}
-		else if (strcmp(key, root->key) > 0)
-		{
-			root->right = removeNode(root->right, key);
-		}
-		else
-		{
-			Dictionary* leftNode = root->left;
-			Dictionary* rightNode = root->right;
-			free(root->key);
-			free(root->word);
-			free(root);
-			if (rightNode == NULL)
-			{
-				return leftNode;
-			}
-			Dictionary* min = findSwapNode(rightNode);
-			min->right = removeSwap(rightNode);
-			min->left = leftNode;
-			return balance(min);
-		}
-	}
-	else if (strlen(key) < strlen(root->key))
+	if (strcmp(key, root->key) < 0)
 	{
 		root->left = removeNode(root->left, key);
 	}
-	else
+	else if (strcmp(key, root->key) > 0)
 	{
 		root->right = removeNode(root->right, key);
+	}
+	else
+	{
+		Dictionary* leftNode = root->left;
+		Dictionary* rightNode = root->right;
+		free(root->key);
+		free(root->word);
+		free(root);
+		if (rightNode == NULL)
+		{
+			return leftNode;
+		}
+		Dictionary* min = findSwapNode(rightNode);
+		min->right = removeSwap(rightNode);
+		min->left = leftNode;
+		return balance(min);
 	}
 	return balance(root);
 }
 
-Dictionary* deleteElement(Dictionary* root, char key[])
+Dictionary* deleteElement(Dictionary* root, const char* key)
 {
-	return isKeyExist != NULL ? removeNode(root, key) : root;
+	return getNode(root, key) != NULL ? removeNode(root, key) : root;
 }
 
 void printWord(Dictionary* root)
 {
-		printf("%s", root->word);
+	printf("%s", root->word);
 }
 
-Dictionary* deleteTree(Dictionary* root)
+void deleteTree(Dictionary* root)
 {
 	if (root->left != NULL)
 	{
@@ -242,15 +207,10 @@ Dictionary* deleteTree(Dictionary* root)
 	if (root->word == NULL)
 	{
 		free(root);
-		return NULL;
+		return;
 	}
 	free(root->key);
 	free(root->word);
 	free(root);
-	return NULL;
-}
-
-bool isEmpty(Dictionary* root)
-{
-	return root == NULL;
+	return;
 }

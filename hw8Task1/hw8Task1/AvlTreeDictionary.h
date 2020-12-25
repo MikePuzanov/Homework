@@ -2,23 +2,23 @@
 
 #include <stdbool.h>
 
-// структура
+// структура словаря
 typedef struct Dictionary Dictionary;
 
 // вставка ключа
-Dictionary* insert(Dictionary* root, char key[], char word[]);
+Dictionary* insert(Dictionary* root, const char* key, const char* word);
+
+// получить узел по ключу
+Dictionary* getNode(Dictionary* root, const char* key);
 
 // проверка ключа в дерева
-Dictionary* isKeyExist(Dictionary* root, char key[]);
+bool isKeyExist(Dictionary* root, const char* key);
 
 // удаление узла
-Dictionary* deleteElement(Dictionary* root, char key[]);
+Dictionary* deleteElement(Dictionary* root, const char* key);
 
 // печать слово в узле 
 void printWord(Dictionary* root);
 
 // удаление дерева
-Dictionary* deleteTree(Dictionary* root);
-
-// проверка на пустоту
-bool isEmpty(Dictionary* root);
+void deleteTree(Dictionary* root);

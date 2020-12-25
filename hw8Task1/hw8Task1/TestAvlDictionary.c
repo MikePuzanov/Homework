@@ -19,33 +19,23 @@ bool test()
 	root = insert(root, "9", "abc");
 	root = insert(root, "10", "abc");
 	root = insert(root, "11", "abc");
-	if (root != isKeyExist(root, "4"))
+	if (root != getNode(root, "4"))
 	{
-		root = deleteTree(root);
+		deleteTree(root);
 		return false;
 	}
 	root = deleteElement(root, "4");
-	if (root != isKeyExist(root, "5"))
+	if (!isKeyExist(root, "5"))
 	{
-		root = deleteTree(root);
+		deleteTree(root);
 		return false;
 	}
 	root = deleteElement(root, "5");
-	if (root != isKeyExist(root, "6"))
+	if (root != getNode(root, "6"))
 	{
-		root = deleteTree(root);
+		deleteTree(root);
 		return false;
 	}
-	if (isEmpty(root))
-	{
-		root = deleteTree(root);
-		return false;
-	}
-	root = deleteTree(root);
-	if (!isEmpty(root))
-	{
-		root = deleteTree(root);
-		return false;
-	}
+	deleteTree(root);
 	return true;
 }

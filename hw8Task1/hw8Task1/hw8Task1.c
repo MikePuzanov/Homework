@@ -11,8 +11,10 @@ int main()
     setlocale(LC_ALL, "Rus");
     if (!test())
     {
+        printf("Тест не пройден!\n");
         return 1;
     }
+    printf("Тест пройден!\n\n");
     printf("0 - Выход.\n");
     printf("1 - Добавить значение по заданному ключу в словарь.\n");
     printf("2 - Получить значение по заданному ключу из словаря.\n");
@@ -42,7 +44,7 @@ int main()
         case 2:
             printf("\nВведите ключ - ");
             scanf("%s", &key);
-            if (isKeyExist(root, key) == NULL)
+            if (!isKeyExist(root, key))
             {
                 printf("\nПо данному ключу слова не найдено!\n");
             }
@@ -56,12 +58,12 @@ int main()
         case 3:
             printf("\nВведите ключ - ");
             scanf("%s", &key);
-            if (isKeyExist(root, key) != NULL)
+            if (getNode(root, key) != NULL)
             {
                 printf("\nТакой ключ есть!\n");
                 break;
             }
-                printf("\nТакого ключ нет!\n");
+            printf("\nТакого ключ нет!\n");
             break;
         case 4:
             printf("\nВведите ключ - ");
@@ -73,5 +75,5 @@ int main()
             break;
         }
     }
-    deleteTree(&root);
+    deleteTree(root);
 }
