@@ -5,32 +5,40 @@
 #include <string.h>
 #include <stdlib.h>
 
-bool compareString(const char* string1, const char* string2, int key)
+enum SortType
 {
-    if (key == 1)
+    byPhone,
+    byName
+};
+
+bool compareStruct(List* firstPart, List* secondPart, int key)
+{
+    char string1[20];
+    char string2[20];
+    if (key == byPhone)
     {
+        getPhone(firstPart, string1);
+        getPhone(secondPart, string2);
         if (strlen(string1) == strlen(string2))
         {
             return strcmp(string1, string2) < 0 ? true : false;
         }
-        else if (strlen(string1) < strlen(string2))
-        {
-            return true;
-        }
         else
         {
-            return false;
+            return strlen(string1) < strlen(string2);
         }
     }
     else
     {
-        return strcmp(string1, string2) < 0 ? true : false;
+        getName(firstPart, string1);
+        getName(secondPart, string2);
+        return strcmp(string1, string2) < 0;
     }
 }
 
 void merge(List* firstPart, List* secondPart, List** sort, int key)
 {
-    List* mergedHead;
+    enum SortType sortType = key;
     *sort = NULL;
     if (firstPart == NULL)
     {
@@ -42,19 +50,7 @@ void merge(List* firstPart, List* secondPart, List** sort, int key)
         *sort = firstPart;
         return;
     }
-    char string1[20];
-    char string2[20];
-    if (key == 1)
-    {
-        getPhone(firstPart, string1);
-        getPhone(secondPart, string2);
-    }
-    else
-    {
-        getName(firstPart, string1);
-        getName(secondPart, string2);
-    }
-    if (compareString(string1, string2, key))
+    if (compareStruct(firstPart, secondPart, sortType))
     {
         *sort = firstPart;
         firstPart = getNext(firstPart);
@@ -64,20 +60,10 @@ void merge(List* firstPart, List* secondPart, List** sort, int key)
         *sort = secondPart;
         secondPart = getNext(secondPart);
     }
-    mergedHead = *sort;
+    List* mergedHead = *sort;
     while (firstPart && secondPart)
     {
-        if (key == 1)
-        {
-            getPhone(firstPart, string1);
-            getPhone(secondPart, string2);
-        }
-        else
-        {
-            getName(firstPart, string1);
-            getName(secondPart, string2);
-        }
-        if (compareString(string1, string2, key))
+        if (compareStruct(firstPart, secondPart, sortType))
         {
             *sort = assignToNext(*sort, firstPart);
             firstPart = getNext(firstPart);

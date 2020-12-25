@@ -26,12 +26,11 @@ void pushList(List** head, const char* name, const char* phone)
 
 void pop(List** head)
 {
-    List* delete = NULL;
     if (head == NULL)
     {
         exit(-1);
     }
-    delete = (*head);
+    List* delete = (*head);
     (*head) = (*head)->next;
     free(delete);
 }
@@ -101,7 +100,5 @@ void deleteList(List** head)
     while ((*head) != NULL)
     {
         pop(head);
-        *head = (*head)->next;
     }
-    free(*head);
 }

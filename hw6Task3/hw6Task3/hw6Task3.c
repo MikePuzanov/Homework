@@ -37,10 +37,10 @@ int main()
             printf("\nВыход.\n");
             break;
         case 1:
-            mergeSort(&head, 1);
+            mergeSort(&head, 0);
             break;
         case 2:
-            mergeSort(&head, 2);
+            mergeSort(&head, 1);
             break;
         case 3:
             printPhonebook(head);
