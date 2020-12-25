@@ -1,8 +1,5 @@
 #pragma once
 
-// структура списка
-typedef struct Node Node;
-
 // cтруктура хэш-таблицы
 typedef struct Hash Hash;
 
@@ -12,14 +9,8 @@ Hash* createHashTable();
 // получить размер таблицы
 int getHashSize(Hash* hashTable);
 
-// добавление узла в таблицу
-Node* insert(const char* word, Hash* hashTable, const int index);
-
-// чтение с файла
-Hash* readFromFile(Hash* hashTable, const char* fileName);
-
-// частота элемента 
-int frequency(Hash* hash, const char* word);
+// добавление элемента в таблицу
+void add(Hash* hashTable, const char* word);
 
 // печать частот в таблице
 void printFrequency(Hash* hashTable);
