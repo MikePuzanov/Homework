@@ -2,10 +2,10 @@
 
 #include <stdbool.h>
 
-// —труктура списка
+// структура списка
 typedef struct List List;
 
-// ƒобавление в список
+// добавление в список
 void pushList(List** head, const char* name, const char* phone);
 
 // удаление

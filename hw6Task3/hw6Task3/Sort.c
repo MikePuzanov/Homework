@@ -21,7 +21,7 @@ bool compareStruct(List* firstPart, List* secondPart, int key)
         getPhone(secondPart, string2);
         if (strlen(string1) == strlen(string2))
         {
-            return strcmp(string1, string2) < 0 ? true : false;
+            return strcmp(string1, string2) < 0;
         }
         else
         {
