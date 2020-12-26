@@ -9,14 +9,14 @@ struct StackElement
     struct StackElement* next;
 };
 
-// Функция добавление элемента в стек
+// функция добавление элемента в стек
 struct StackElement* push(struct StackElement* head, int element);
 
-// Функция удаление элемента стека
+// функция удаление элемента стека
 int pop(struct StackElement** head);
 
-// Проверка очищенности элемента стека
+// проверка очищенности элемента стека
 bool isEmpty(struct StackElement* head);
 
-// Функция очистки стека
+// функция очистки стека
 void deleteStack(struct StackElement** head);
