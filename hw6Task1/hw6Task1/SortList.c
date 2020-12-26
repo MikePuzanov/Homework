@@ -12,12 +12,16 @@ typedef struct List {
 void push(List** head, int element)
 {
     List* newNode = (List*)malloc(sizeof(List));
+    if (newNode == NULL)
+    {
+        return;
+    }
     newNode->value = element;
     newNode->next = (*head);
     (*head) = newNode;
 }
 
-int pop(List** head)
+int removeFromHead(List** head)
 {
     if (head == NULL)
     {
@@ -46,7 +50,7 @@ int deleteNth(List** head, int position)
 {
     if (position == 0)
     {
-        return pop(head);
+        return removeFromHead(head);
     }
     else
     {
@@ -72,7 +76,7 @@ void deleteList(List** head)
 {
     while ((*head)->next)
     {
-        pop(head);
+        removeFromHead(head);
     }
     free(*head);
     *head = NULL;

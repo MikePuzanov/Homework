@@ -16,7 +16,7 @@ bool testTask()
 	pushToList(&head, 3);
 	for (int i = 1; i <= 6; ++i)
 	{
-		if (pop(&head) != i)
+		if (removeFromHead(&head) != i)
 		{
 			deleteList(&head);
 			return false;
