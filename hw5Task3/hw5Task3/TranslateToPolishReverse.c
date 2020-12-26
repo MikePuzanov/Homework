@@ -26,54 +26,12 @@ int priorityOperator(char symbol)
     }
 }
 
-int idOperator(char symbol)
-{
-    switch (symbol)
-    {
-    case '(':
-        return 40;
-    case ')':
-        return 41;
-    case '+':
-        return 43;
-    case '-':
-        return 45;
-    case '*':
-        return 42;
-    case '/':
-        return 47;
-    default:
-        return;
-    }
-}
-
-char fromIdToOpertor(int idSymbol)
-{
-    switch (idSymbol)
-    {
-    case 40:
-        return '(';
-    case 41:
-        return ')';
-    case 43:
-        return '+';
-    case 45:
-        return '-';
-    case 42:
-        return '*';
-    case 47:
-        return '/';
-    default:
-        return;
-    }
-}
-
 void translateToPolishReverse(struct StackElement* head, char line[], char expression[], int* index)
 {
     for (int i = 0; i < strlen(line); ++i)
     {
-        int ascii = idOperator(line[i]);
-        if (priorityOperator(line[i]) == 5 && i < strlen(line) - 1 && !isdigit(line[i]))
+        int ascii = (int)line[i];
+        if (priorityOperator(line[i]) == 5 && i != strlen(line) - 1 && !isdigit(line[i]))
         {
             continue;
         }
@@ -98,14 +56,14 @@ void translateToPolishReverse(struct StackElement* head, char line[], char expre
         {
             if (line[i] == '(')
             {
-                head = push(head, idOperator(line[i]));
+                head = push(head, (int)line[i]);
             }
             else if (line[i] == ')')
             {
                 operator = pop(&head);
                 while (operator != 40)
                 {
-                    expression[*index] = fromIdToOpertor(operator);
+                    expression[*index] = (char)operator;
                     (*index)++;
                     expression[*index] = ' ';
                     (*index)++;
@@ -120,26 +78,26 @@ void translateToPolishReverse(struct StackElement* head, char line[], char expre
                     head = push(head, lastOperator);
                     if (priorityOperator(line[i]) < priorityOperator(lastOperator))
                     {
-                        expression[*index] = fromIdToOpertor(pop(&head));
+                        expression[*index] = (char)pop(&head);
                         (*index)++;
                         expression[*index] = ' ';
                         (*index)++;
                     }
                     else
                     {
-                        head = push(head, idOperator(line[i]));
+                        head = push(head, (int)line[i]);
                     }
                 }
                 else
                 {
-                    head = push(head, idOperator(line[i]));
+                    head = push(head, (int)line[i]);
                 }
             }
         }
     }
     while (!isEmpty(head))
     {
-        expression[*index] = fromIdToOpertor(pop(&head));
+        expression[*index] = (char)pop(&head);
         (*index)++;
         expression[*index] = ' ';
         (*index)++;
