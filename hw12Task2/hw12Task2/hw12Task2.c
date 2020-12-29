@@ -20,12 +20,11 @@ int main()
 	{
 		return 1;
 	}
-	bool isInComment = false;
 	while (!feof(file))
 	{
 		char string[1000] = "";
 		fgets(string, 1000, file);
-		char* answer = DFA(string, &isInComment);
+		char* answer = DFA(string);
 		printf("%s\n", answer);
 		free(answer);
 	}

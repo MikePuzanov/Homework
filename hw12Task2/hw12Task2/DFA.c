@@ -5,8 +5,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define SLASH 1
-#define STAR 2
 #define STATES_NUMBER 5
 #define SYMBOLS_NUMBER 3
 
@@ -61,16 +59,9 @@ char* DFA(const char* string)
 	{
 		char token = string[index];
 		++index;
-		if (token == '/' && state == 0)
+		if (token == '*' && state == 1)
 		{
-			state = statesTable[state][SLASH];
-			continue;
-		}
-		else if (token == '*' && state == 1)
-		{
-			state = statesTable[state][STAR];
 			strcat(answer, "/*");
-			continue;
 		}
 		else if (state == 3 && token == '/')
 		{
