@@ -38,7 +38,7 @@ void deleteTable(int** statesTable)
 	free(statesTable);
 }
 
-int getSymbolIndex(char token)
+int getSymbolClass(char token)
 {
 	switch (token)
 	{
@@ -85,6 +85,6 @@ char* DFA(const char* string)
 			answer[strlen(answer) + 1] = '\0';
 			return answer;
 		}
-		state = statesTable[state][getSymbolIndex(token)];
+		state = statesTable[state][getSymbolClass(token)];
 	}
 }
