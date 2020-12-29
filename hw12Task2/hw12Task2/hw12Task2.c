@@ -15,7 +15,6 @@ int main()
 		return 5;
 	}
 	printf("Тест пройден!\n\n");
-	int** statesTable = readStateTable("StateTable.txt");
 	FILE* file = fopen("File.txt", "r");
 	if (file == NULL)
 	{
@@ -26,10 +25,9 @@ int main()
 	{
 		char string[1000] = "";
 		fgets(string, 1000, file);
-		char* answer = DFA(string, statesTable, &isInComment);
+		char* answer = DFA(string, &isInComment);
 		printf("%s\n", answer);
 		free(answer);
 	}
 	fclose(file);
-	deleteTable(statesTable);
 }
