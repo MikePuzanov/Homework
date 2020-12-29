@@ -4,6 +4,17 @@
 #include <ctype.h>
 #include <stdbool.h>
 
+enum States
+{
+	searchFirstDigit,
+	integerPart,
+	dot,
+	searchNumberEuler,
+	numberEuler,
+	checkDigit,
+	remainingNumber
+};
+
 bool isRealNumber(const char* line)
 {
 	int index = 0;
@@ -13,67 +24,72 @@ bool isRealNumber(const char* line)
 		char token = line[index];
 		switch (state)
 		{
-		case 0:
+		case searchFirstDigit:
 			if (isdigit(token))
 			{
-				state = 1;
+				state = integerPart;
 				break;
 			}
 			return false;
-		case 1:
+		case integerPart:
 			if (isdigit(token))
 			{
 				break;
 			}
 			else if (token == '.')
 			{
-				state = 2;
+				state = dot;
 				break;
 			}
 			else if (token == 'E')
 			{
-				state = 3;
+				state = numberEuler;
 				break;
 			}
-			return token == '\0' || token == '\n' ? true : false;
-		case 2:
+			return token == '\0' || token == '\n';
+		case dot:
 			if (isdigit(token))
 			{
-				state = 3;
+				state = searchNumberEuler;
 				break;
 			}
 			return false;
-		case 3:
+		case searchNumberEuler:
 			if (isdigit(token))
 			{
 				break;
 			} 
 			else if (token == 'E')
 			{
-				state = 4;
+				state = numberEuler;
 				break;
 			}
-			return token == '\0' || token == '\n' ? true : false;
-		case 4:
+			return token == '\0' || token == '\n';
+		case numberEuler:
 			if (token == '+' || token == '-')
 			{
-				state = 5;
+				state = checkDigit;
 				break;
 			}
 			else if (isdigit(token))
 			{
-				state = 5;
+				state = remainingNumber;
 				break;
 			}
 			return false;
-		case 5:
+		case checkDigit:
+			if (isdigit(token))
+			{
+				state = remainingNumber;
+				break;
+			}
+			return false;
+		case remainingNumber:
 			if (isdigit(token))
 			{
 				break;
 			}
-			return token == '\0' || token == '\n' ? true : false;
-		default:
-			break;
+			return token == '\0' || token == '\n';
 		}
 		++index;
 	}
