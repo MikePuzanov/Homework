@@ -18,7 +18,7 @@ int getValue(List* head);
 void insert(List* head, int index, int value);
 
 // функция удаление узла из циклического списка
-void popFor(List** head);
+void deleteNode(List** head);
 
 // проверка на пустоту
 bool isEmpty(List* head);

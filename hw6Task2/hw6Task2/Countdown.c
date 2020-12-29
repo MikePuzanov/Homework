@@ -12,43 +12,26 @@ int countdown(int warriors, int numberDeadWarrior)
     }
     if (warriors == 1)
     {
-        return 0;
+        return 1;
     }
-    List* head = init(-1);
-    for (int i = 0; i < warriors; ++i)
+    List* head = init(0);
+    for (int i = 0; i < warriors - 1; ++i)
     {
         insert(head, 0, warriors - 1 - i);
     }
     int counter = 0;
-    while (getValue(head) != getValue(getNext(getNext(head))))
+    while (getValue(head) != getValue(getNext(head)))
     {
-        if (getValue(head) == -1)
-        {
-            head = getNext(head);
-        }
         counter = 0;
         while (counter != numberDeadWarrior - 2)
         {
-            if (getValue(getNext(head)) == -1)
-            {
-                head = getNext(head);
-                continue;
-            }
             head = getNext(head);
             counter++;
         }
-        if (getValue(getNext(head)) == -1)
-        {
-            head = getNext(head);
-        }
-        popFor(&head);
+        deleteNode(&head);
         head = getNext(head);
     }
-    if (getValue(head) == -1)
-    {
-        head = getNext(head);
-    }
-    int answer = getValue(head);
+    int answer = getValue(head) + 1;
     deleteList(&head);
     return answer;
 }

@@ -22,7 +22,7 @@ bool testList()
         }
     head = getNext(head);
     }
-    popFor(&head);
+    deleteNode(&head);
     head = getNext(head);
     if (getValue(head) != 1)
     {

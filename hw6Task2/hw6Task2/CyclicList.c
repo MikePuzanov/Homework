@@ -35,7 +35,7 @@ int getValue(List* head)
 void insert(List* head, int index, int value)
 {
     int i = 0;
-    while (i < index && head->next)
+    while (i < index)
     {
         head = head->next;
         i++;
@@ -46,18 +46,11 @@ void insert(List* head, int index, int value)
         return NULL;
     }
     newNode->value = value;
-    if (head->next)
-    {
-        newNode->next = head->next;
-    }
-    else
-    {
-        newNode->next = NULL;
-    }
+    newNode->next = head->next;
     head->next = newNode;
 }
 
-void popFor(List** head)
+void deleteNode(List** head)
 {
     if (head == NULL)
     {
@@ -85,7 +78,7 @@ void deleteList(List** head)
 {
     while (!isEmpty(*head))
     {
-        popFor(head);
+        deleteNode(head);
     }
     free(*head);
     *head = NULL;

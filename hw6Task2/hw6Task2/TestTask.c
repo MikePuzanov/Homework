@@ -5,19 +5,19 @@
 
 bool testTask()
 {
-    if (countdown(8, 3) != 6)
+    if (countdown(8, 3) != 7)
     {
         return false;
     }
-    if (countdown(6, 3) != 0)
+    if (countdown(6, 3) != 1)
     {
         return false;
     }
-    if (countdown(4, 5) != 1)
+    if (countdown(4, 5) != 2)
     {
         return false;
     }
-    if (countdown(1, 5) != 0)
+    if (countdown(1, 5) != 1)
     {
         return false;
     }
