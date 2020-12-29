@@ -11,7 +11,7 @@ enum SortType
     byName
 };
 
-bool compareStruct(List* firstPart, List* secondPart, int key)
+bool compareStruct(List* firstPart, List* secondPart, enum SortType key)
 {
     char string1[20];
     char string2[20];
@@ -36,7 +36,7 @@ bool compareStruct(List* firstPart, List* secondPart, int key)
     }
 }
 
-void merge(List* firstPart, List* secondPart, List** sort, int key)
+void merge(List* firstPart, List* secondPart, List** sort, enum SortType key)
 {
     enum SortType sortType = key;
     *sort = NULL;

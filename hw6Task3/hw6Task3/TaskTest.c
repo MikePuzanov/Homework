@@ -24,7 +24,7 @@ bool testTask()
     if (strcmp(string1, "1") != 0 || strcmp(string2, "2") != 0 || strcmp(string3, "3") != 0)
     {
         deleteList(&head);
-       return false;
+        return false;
     }
     mergeSort(&head, 1);
     node1 = getNext(head);
