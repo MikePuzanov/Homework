@@ -69,4 +69,18 @@ void printInFile(struct PhoneBook person[], int size, char* file)
 		fprintf(phoneBook, "%s - %s\n", person[i].name, person[i].phone);
 	}
 	fclose(phoneBook);
+<<<<<<< HEAD
+=======
+}
+
+void readFromFile(struct PhoneBook person[], int* index, char* file)
+{
+	FILE* phoneBook = fopen(file, "r");
+	char hyphen = "-";
+	while ((fscanf(phoneBook, "%s %c %s", &person[*index].name, &hyphen, &person[*index].phone)) != EOF)
+	{
+		++(*index);
+	}
+	fclose(phoneBook);
+>>>>>>> master
 }

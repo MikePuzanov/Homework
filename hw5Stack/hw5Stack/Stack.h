@@ -2,7 +2,11 @@
 
 #include <stdbool.h>
 
+<<<<<<< HEAD
 // структура стека
+=======
+// Обьявление структуры
+>>>>>>> master
 struct StackElement
 {
     int value;
