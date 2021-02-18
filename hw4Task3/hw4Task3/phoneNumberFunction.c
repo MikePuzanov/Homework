@@ -49,7 +49,7 @@ bool doesNameExist(struct PhoneBook person[], char name[], int size)
 	return true;
 }
 
-bool doesPhoneExist(struct PhoneBook person[], char phone[], int size)
+bool checkPhone(struct PhoneBook person[], char phone[], int size)
 {
 	for (int i = 0; i < size; ++i)
 	{
