@@ -2,30 +2,42 @@
 
 #include <stdbool.h>
 
-// структура книжки контактов
+// Г±ГІГ°ГіГЄГІГіГ°Г  ГЄГ­ГЁГ¦ГЄГЁ ГЄГ®Г­ГІГ ГЄГІГ®Гў
 struct PhoneBook
 {
     char name[30];
     char phone[20];
 };
 
+<<<<<<< HEAD
+// ГЇГ°Г®ГўГҐГ°ГїГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г­Г®Г¬ГҐГ°Г®Гў Гў ГЎГ Г§ГҐ
+=======
 // проверяет количество номеров в базе
+>>>>>>> master
 bool isPhonebookFull(int index);
 
-// поиск имени по номеру телефона
+// ГЇГ®ГЁГ±ГЄ ГЁГ¬ГҐГ­ГЁ ГЇГ® Г­Г®Г¬ГҐГ°Гі ГІГҐГ«ГҐГґГ®Г­Г 
 bool nameSearchByPhone(struct PhoneBook person[], int index, char phone[], int* indexHelp);
 
-// поиск номера по имени
+// ГЇГ®ГЁГ±ГЄ Г­Г®Г¬ГҐГ°Г  ГЇГ® ГЁГ¬ГҐГ­ГЁ
 bool phoneSearchByName(struct PhoneBook person[], int index, char name[], int* indexHelp);
 
+<<<<<<< HEAD
+// ГЏГ°Г®ГўГҐГ°ГїГҐГІ ГҐГ±ГІГј Г«ГЁ ГўГўГҐГ¤ГҐГ­Г­Г®ГҐ ГЁГ¬Гї Гў ГЎГ Г§ГҐ
+=======
 // Проверяет есть ли введенное имя в базе
+>>>>>>> master
 bool doesNameExist(struct PhoneBook person[], char name[], int index);
 
-// Проверяет есть ли введенный телефон в базе
+// ГЏГ°Г®ГўГҐГ°ГїГҐГІ ГҐГ±ГІГј Г«ГЁ ГўГўГҐГ¤ГҐГ­Г­Г»Г© ГІГҐГ«ГҐГґГ®Г­ Гў ГЎГ Г§ГҐ
 bool doesPhoneExist(struct PhoneBook person[], char phone[], int index);
 
-// функция для добавления номеров в файл
+// ГґГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї Г­Г®Г¬ГҐГ°Г®Гў Гў ГґГ Г©Г«
 void printInFile(struct PhoneBook person[], int index, char* file);
 
+<<<<<<< HEAD
+// Г‡Г ГЈГ°ГіГ§ГЄГ  ГЁГ§ ГґГ Г©Г«Г 
+=======
 // Загрузка из файла
+>>>>>>> master
 void readFromFile(struct PhoneBook person[], int* index, char* file);
