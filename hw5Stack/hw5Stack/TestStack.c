@@ -8,16 +8,12 @@
 bool testStack()
 {
 	struct StackElement* head = NULL;
-<<<<<<< HEAD
-=======
 	head = push(head, 6);
->>>>>>> master
 	if (push(head, 6)->value != 6)
 	{
 		deleteStack(&head);
 		return false;
 	}
-	head = push(head, 6);
 	if (pop(&head) != 6)
 	{
 		deleteStack(&head);
@@ -31,12 +27,6 @@ bool testStack()
 		deleteStack(&head);
 		return false;
 	}
-<<<<<<< HEAD
-	head = push(head, 6);
-	head = push(head, 6);
-	head = push(head, 6);
-=======
->>>>>>> master
 	for (int i = 0; i < 3; ++i)
 	{
 		pop(&head);
@@ -53,8 +43,4 @@ bool testStack()
 		return false;
 	}
 	return true;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

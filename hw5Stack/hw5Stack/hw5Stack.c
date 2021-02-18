@@ -1,8 +1,11 @@
-﻿#include "TestStack.h"
+﻿#include "Stack.h"
+#include "TestStack.h"
+
+#include <stdio.h>
 
 int main()
 {
-	if (!testStack())
+	if (testStack())
 	{
 		return 1;
 	}
