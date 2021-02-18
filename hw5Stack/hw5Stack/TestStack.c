@@ -43,4 +43,8 @@ bool testStack()
 		return false;
 	}
 	return true;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
