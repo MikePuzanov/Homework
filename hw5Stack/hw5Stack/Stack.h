@@ -5,13 +5,8 @@
 // Обьявление структуры
 struct StackElement
 {
-<<<<<<< HEAD
-	int value;
-	struct StackElement* next;
-=======
     int value;
     struct StackElement* next;
->>>>>>> hw5Stack
 };
 
 // Функция добавление элемента в стек
